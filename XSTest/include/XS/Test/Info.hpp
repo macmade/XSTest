@@ -34,6 +34,7 @@
 #include <memory>
 #include <string>
 #include <vector>
+#include <XS/Test/Optional.hpp>
 
 namespace XS
 {
@@ -69,7 +70,7 @@ namespace XS
                 Status                  GetStatus( void )        const;
                 std::string             GetFailureReason( void ) const;
                 
-                bool Run( std::ostream & os );
+                bool Run( Optional< std::reference_wrapper< std::ostream > > os );
                 
                 friend void swap( Info & o1, Info & o2 );
                 

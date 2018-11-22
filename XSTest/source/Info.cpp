@@ -142,13 +142,16 @@ namespace XS
             return this->impl->_failureReason;
         }
         
-        bool Info::Run( std::ostream & os )
+        bool Info::Run( Optional< std::reference_wrapper< std::ostream > > os )
         {
             StopWatch time;
             
             this->impl->_status = Status::Running;
             
-            os << "[ RUN      ] " << this->GetName() << std::endl;
+            if( os )
+            {
+                os.value().get() << "[ RUN      ] " << this->GetName() << std::endl;
+            }
             
             time.Start();
             
@@ -165,16 +168,19 @@ namespace XS
             
             time.Stop();
             
-            if( this->impl->_status == Status::Success )
+            if( os )
             {
-                os << "[       OK ] ";
+                if( this->impl->_status == Status::Success )
+                {
+                    os.value().get() << "[       OK ] ";
+                }
+                else
+                {
+                    os.value().get() << "[  FAILED  ] ";
+                }
+                
+                os.value().get() << this->GetName() << " (" << time.GetString() << ")" << std::endl;
             }
-            else
-            {
-                os << "[  FAILED  ] ";
-            }
-            
-            os << this->GetName() << " (" << time.GetString() << ")" << std::endl;
             
             return this->impl->_status == Status::Success;
         }

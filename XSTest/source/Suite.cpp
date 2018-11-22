@@ -78,7 +78,7 @@ namespace XS
             return this->impl->_infos;
         }
         
-        bool Suite::Run( std::ostream & os )
+        bool Suite::Run( Optional< std::reference_wrapper< std::ostream > > os )
         {
             StopWatch time;
             bool      success( true );
@@ -88,17 +88,20 @@ namespace XS
                 return false;
             }
             
-            os << "[----------] "
-               << Utility::Numbered( "test", this->impl->_infos.size() )
-               << " from "
-               << this->impl->_name
-               << std::endl;
+            if( os )
+            {
+                os.value().get() << "[----------] "
+                                 << Utility::Numbered( "test", this->impl->_infos.size() )
+                                 << " from "
+                                 << this->impl->_name
+                                 << std::endl;
+            }
             
             time.Start();
             
             for( auto & i: this->impl->_infos )
             {
-                if( i.Run( std::cout ) == false )
+                if( i.Run( os ) == false )
                 {
                     success = false;
                 }
@@ -106,16 +109,19 @@ namespace XS
             
             time.Stop();
             
-            os << "[----------] "
-               << Utility::Numbered( "test", this->impl->_infos.size() )
-               << " from "
-               << this->impl->_name
-               << " ("
-               << time.GetString()
-               << " total)"
-               << std::endl
-               << std::endl;
-               
+            if( os )
+            {
+                os.value().get() << "[----------] "
+                                 << Utility::Numbered( "test", this->impl->_infos.size() )
+                                 << " from "
+                                 << this->impl->_name
+                                 << " ("
+                                 << time.GetString()
+                                 << " total)"
+                                 << std::endl
+                                 << std::endl;
+            }
+            
             return success;
         }
         

@@ -99,6 +99,7 @@
 		05D5260B21A62A6D0025CCEB /* Suite.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Suite.cpp; sourceTree = "<group>"; };
 		05D5260D21A630C50025CCEB /* Utility.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Utility.hpp; sourceTree = "<group>"; };
 		05D5260E21A6310E0025CCEB /* Utility.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Utility.cpp; sourceTree = "<group>"; };
+		05D5261E21A6B9880025CCEB /* Optional.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Optional.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -190,6 +191,7 @@
 				05D525F121A606550025CCEB /* Macros.hpp */,
 				05D5260721A629D20025CCEB /* Runner.hpp */,
 				05D525FA21A61FAE0025CCEB /* StopWatch.hpp */,
+				05D5261E21A6B9880025CCEB /* Optional.hpp */,
 			);
 			path = Test;
 			sourceTree = "<group>";

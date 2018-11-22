@@ -33,6 +33,7 @@
 
 #include <iostream>
 #include <memory>
+#include <XS/Test/Optional.hpp>
 
 namespace XS
 {
@@ -52,7 +53,7 @@ namespace XS
                 
                 std::vector< Suite > GetSuites( void ) const;
                 
-                bool Run( std::ostream & os );
+                bool Run( Optional< std::reference_wrapper< std::ostream > > os );
                 
                 friend void swap( Runner & o1, Runner & o2 );
                 

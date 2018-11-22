@@ -47,8 +47,8 @@ namespace XS
                 IMPL( IMPL & o );
                 ~IMPL( void );
                 
-                void setup( std::ostream & os );
-                void tearDown( std::ostream & os );
+                void setup( Optional< std::reference_wrapper< std::ostream > > os );
+                void tearDown( Optional< std::reference_wrapper< std::ostream > > os );
                 
                 std::vector< Suite > _suites;
         };
@@ -76,7 +76,7 @@ namespace XS
             return this->impl->_suites;
         }
         
-        bool Runner::Run( std::ostream & os )
+        bool Runner::Run( Optional< std::reference_wrapper< std::ostream > > os )
         {
             size_t    cases( 0 );
             size_t    tests( 0 );
@@ -95,18 +95,24 @@ namespace XS
                 tests += suite.GetInfos().size();
             }
             
-            os << "[==========] Running "
-               << Utility::Numbered( "test", tests )
-               << " from "
-               << Utility::Numbered( "case", cases )
-               << "."
-               << std::endl;
+            if( os )
+            {
+                os.value().get() << "[==========] Running "
+                                 << Utility::Numbered( "test", tests )
+                                 << " from "
+                                 << Utility::Numbered( "case", cases )
+                                 << "."
+                                 << std::endl;
+            }
             
             this->impl->setup( os );
             
             time.Start();
             
-            os << std::endl;
+            if( os )
+            {
+                os.value().get() << std::endl;
+            }
             
             for( auto & suite: this->impl->_suites )
             {
@@ -120,14 +126,17 @@ namespace XS
             
             this->impl->tearDown( os );
             
-            os << "[==========] "
-               << Utility::Numbered( "test", tests )
-               << " from "
-               << Utility::Numbered( "case", cases )
-               << " ran. ("
-               << time.GetString()
-               << " total)"
-               << std::endl;
+            if( os )
+            {
+                os.value().get() << "[==========] "
+                                 << Utility::Numbered( "test", tests )
+                                 << " from "
+                                 << Utility::Numbered( "case", cases )
+                                 << " ran. ("
+                                 << time.GetString()
+                                 << " total)"
+                                 << std::endl;
+            }
             
             {
                 std::vector< Info > passed;
@@ -148,28 +157,31 @@ namespace XS
                     }
                 }
                 
-                os << "[  PASSED  ] "
-                   << Utility::Numbered( "test", passed.size() )
-                   << "."
-                   << std::endl;
-                   
-                if( failed.size() > 0 )
+                if( os )
                 {
-                    os << "[  FAILED  ] "
-                       << Utility::Numbered( "test", failed.size() )
-                       << ", listed below:"
-                       << std::endl;
+                    os.value().get() << "[  PASSED  ] "
+                                     << Utility::Numbered( "test", passed.size() )
+                                     << "."
+                                     << std::endl;
                     
-                    for( const auto & info: failed )
+                    if( failed.size() > 0 )
                     {
-                        os << "[  FAILED  ] "
-                           << info.GetName()
-                           << std::endl;
+                        os.value().get() << "[  FAILED  ] "
+                                         << Utility::Numbered( "test", failed.size() )
+                                         << ", listed below:"
+                                         << std::endl;
+                        
+                        for( const auto & info: failed )
+                        {
+                            os.value().get() << "[  FAILED  ] "
+                                             << info.GetName()
+                                             << std::endl;
+                        }
+                        
+                        os.value().get() << std::endl
+                                         << Utility::Numbered( "FAILED TEST", failed.size(), "FAILED TESTS" )
+                                         << std::endl;
                     }
-                    
-                    os << std::endl
-                       << Utility::Numbered( "FAILED TEST", failed.size(), "FAILED TESTS" )
-                       << std::endl;
                 }
             }
             
@@ -198,16 +210,20 @@ namespace XS
         Runner::IMPL::~IMPL( void )
         {}
         
-        void Runner::IMPL::setup( std::ostream & os )
+        void Runner::IMPL::setup( Optional< std::reference_wrapper< std::ostream > > os )
         {
-            os << "[----------] Global test environment set-up."
-               << std::endl;
+            if( os )
+            {
+                os.value().get() << "[----------] Global test environment set-up." << std::endl;
+            }
         }
         
-        void Runner::IMPL::tearDown( std::ostream & os )
+        void Runner::IMPL::tearDown( Optional< std::reference_wrapper< std::ostream > > os )
         {
-            os << "[----------] Global test environment tear-down."
-            << std::endl;
+            if( os )
+            {
+                os.value().get() << "[----------] Global test environment tear-down." << std::endl;
+            }
         }
     }
 }

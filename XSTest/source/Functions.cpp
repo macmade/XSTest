@@ -37,7 +37,7 @@ namespace XS
 {
     namespace Test
     {
-        int RunAll( std::ostream & os )
+        int RunAll( Optional< std::reference_wrapper< std::ostream > > os )
         {
             Runner runner( Info::All() );
             

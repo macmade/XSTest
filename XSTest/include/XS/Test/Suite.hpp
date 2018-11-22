@@ -35,6 +35,7 @@
 #include <string>
 #include <iostream>
 #include <vector>
+#include <XS/Test/Optional.hpp>
 
 namespace XS
 {
@@ -55,7 +56,7 @@ namespace XS
                 std::string         GetName( void )  const;
                 std::vector< Info > GetInfos( void ) const;
                 
-                bool Run( std::ostream & os );
+                bool Run( Optional< std::reference_wrapper< std::ostream > > os );
                 
                 friend void swap( Suite & o1, Suite & o2 );
                 

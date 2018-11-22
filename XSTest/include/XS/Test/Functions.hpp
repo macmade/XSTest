@@ -32,12 +32,13 @@
 #define XS_TEST_FUNCTIONS_HPP
 
 #include <iostream>
+#include <XS/Test/Optional.hpp>
 
 namespace XS
 {
     namespace Test
     {
-        int RunAll( std::ostream & os = std::cout );
+        int RunAll( Optional< std::reference_wrapper< std::ostream > > os = { std::cout } );
     }
 }
 

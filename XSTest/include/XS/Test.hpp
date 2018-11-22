@@ -39,5 +39,6 @@
 #include <XS/Test/Runner.hpp>
 #include <XS/Test/Suite.hpp>
 #include <XS/Test/Utility.hpp>
+#include <XS/Test/Optional.hpp>
 
 #endif /* XS_TEST_HPP */
