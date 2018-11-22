@@ -9,21 +9,28 @@
 /* Begin PBXBuildFile section */
 		05D525AC21A5FFC40025CCEB /* Info.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05D525AB21A5FFC40025CCEB /* Info.cpp */; };
 		05D525E621A605160025CCEB /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05D525E521A605160025CCEB /* main.cpp */; };
-		05D525ED21A605500025CCEB /* libXSTest.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 05D5258821A5FD520025CCEB /* libXSTest.a */; };
 		05D525F021A605E90025CCEB /* Functions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05D525EF21A605E90025CCEB /* Functions.cpp */; };
 		05D525FC21A620650025CCEB /* StopWatch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05D525FB21A620650025CCEB /* StopWatch.cpp */; };
 		05D5260921A629E60025CCEB /* Runner.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05D5260821A629E60025CCEB /* Runner.cpp */; };
 		05D5260C21A62A6D0025CCEB /* Suite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05D5260B21A62A6D0025CCEB /* Suite.cpp */; };
 		05D5260F21A6310E0025CCEB /* Utility.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05D5260E21A6310E0025CCEB /* Utility.cpp */; };
+		05D5262221A6BF130025CCEB /* Utility.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05D5260E21A6310E0025CCEB /* Utility.cpp */; };
+		05D5262321A6BF130025CCEB /* Suite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05D5260B21A62A6D0025CCEB /* Suite.cpp */; };
+		05D5262421A6BF130025CCEB /* Runner.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05D5260821A629E60025CCEB /* Runner.cpp */; };
+		05D5262521A6BF130025CCEB /* Info.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05D525AB21A5FFC40025CCEB /* Info.cpp */; };
+		05D5262621A6BF130025CCEB /* Functions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05D525EF21A605E90025CCEB /* Functions.cpp */; };
+		05D5262721A6BF130025CCEB /* StopWatch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05D525FB21A620650025CCEB /* StopWatch.cpp */; };
+		05D5262F21A6BF380025CCEB /* libXSTest-Main.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 05D5262C21A6BF130025CCEB /* libXSTest-Main.a */; };
+		05D5263121A6BF510025CCEB /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05D5263021A6BF510025CCEB /* main.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		05D525EA21A6054D0025CCEB /* PBXContainerItemProxy */ = {
+		05D5262D21A6BF330025CCEB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 05D5258021A5FD520025CCEB /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 05D5258721A5FD520025CCEB;
-			remoteInfo = XSTest;
+			remoteGlobalIDString = 05D5261F21A6BF130025CCEB;
+			remoteInfo = "XSTest-Main";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -100,6 +107,8 @@
 		05D5260D21A630C50025CCEB /* Utility.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Utility.hpp; sourceTree = "<group>"; };
 		05D5260E21A6310E0025CCEB /* Utility.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Utility.cpp; sourceTree = "<group>"; };
 		05D5261E21A6B9880025CCEB /* Optional.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Optional.hpp; sourceTree = "<group>"; };
+		05D5262C21A6BF130025CCEB /* libXSTest-Main.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libXSTest-Main.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		05D5263021A6BF510025CCEB /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,7 +123,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				05D525ED21A605500025CCEB /* libXSTest.a in Frameworks */,
+				05D5262F21A6BF380025CCEB /* libXSTest-Main.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		05D5262821A6BF130025CCEB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,6 +153,7 @@
 			children = (
 				05D5258821A5FD520025CCEB /* libXSTest.a */,
 				05D525E321A605160025CCEB /* Test */,
+				05D5262C21A6BF130025CCEB /* libXSTest-Main.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -167,6 +184,7 @@
 				05D5260821A629E60025CCEB /* Runner.cpp */,
 				05D525FB21A620650025CCEB /* StopWatch.cpp */,
 				05D5260E21A6310E0025CCEB /* Utility.cpp */,
+				05D5263021A6BF510025CCEB /* main.cpp */,
 			);
 			path = source;
 			sourceTree = "<group>";
@@ -334,6 +352,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		05D5262021A6BF130025CCEB /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
@@ -365,12 +390,29 @@
 			buildRules = (
 			);
 			dependencies = (
-				05D525EB21A6054D0025CCEB /* PBXTargetDependency */,
+				05D5262E21A6BF330025CCEB /* PBXTargetDependency */,
 			);
 			name = Test;
 			productName = Test;
 			productReference = 05D525E321A605160025CCEB /* Test */;
 			productType = "com.apple.product-type.tool";
+		};
+		05D5261F21A6BF130025CCEB /* XSTest-Main */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 05D5262921A6BF130025CCEB /* Build configuration list for PBXNativeTarget "XSTest-Main" */;
+			buildPhases = (
+				05D5262021A6BF130025CCEB /* Headers */,
+				05D5262121A6BF130025CCEB /* Sources */,
+				05D5262821A6BF130025CCEB /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "XSTest-Main";
+			productName = XSTest;
+			productReference = 05D5262C21A6BF130025CCEB /* libXSTest-Main.a */;
+			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
 
@@ -402,6 +444,7 @@
 			projectRoot = "";
 			targets = (
 				05D5258721A5FD520025CCEB /* XSTest */,
+				05D5261F21A6BF130025CCEB /* XSTest-Main */,
 				05D525E221A605160025CCEB /* Test */,
 			);
 		};
@@ -429,13 +472,27 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		05D5262121A6BF130025CCEB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				05D5262221A6BF130025CCEB /* Utility.cpp in Sources */,
+				05D5262321A6BF130025CCEB /* Suite.cpp in Sources */,
+				05D5262421A6BF130025CCEB /* Runner.cpp in Sources */,
+				05D5262521A6BF130025CCEB /* Info.cpp in Sources */,
+				05D5263121A6BF510025CCEB /* main.cpp in Sources */,
+				05D5262621A6BF130025CCEB /* Functions.cpp in Sources */,
+				05D5262721A6BF130025CCEB /* StopWatch.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		05D525EB21A6054D0025CCEB /* PBXTargetDependency */ = {
+		05D5262E21A6BF330025CCEB /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 05D5258721A5FD520025CCEB /* XSTest */;
-			targetProxy = 05D525EA21A6054D0025CCEB /* PBXContainerItemProxy */;
+			target = 05D5261F21A6BF130025CCEB /* XSTest-Main */;
+			targetProxy = 05D5262D21A6BF330025CCEB /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -496,6 +553,24 @@
 			};
 			name = Release;
 		};
+		05D5262A21A6BF130025CCEB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EXECUTABLE_PREFIX = lib;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		05D5262B21A6BF130025CCEB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EXECUTABLE_PREFIX = lib;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -522,6 +597,15 @@
 			buildConfigurations = (
 				05D525E821A605160025CCEB /* Debug */,
 				05D525E921A605160025CCEB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		05D5262921A6BF130025CCEB /* Build configuration list for PBXNativeTarget "XSTest-Main" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				05D5262A21A6BF130025CCEB /* Debug */,
+				05D5262B21A6BF130025CCEB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

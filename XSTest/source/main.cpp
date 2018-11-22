@@ -23,47 +23,14 @@
  ******************************************************************************/
 
 /*!
- * @file        Info.cpp
+ * @file        main.cpp
  * @author      Jean-David Gadina - www.xs-labs.com
  * @copyright   (c) 2018, Jean-David Gadina - www.xs-labs.com
  */
 
-#include <XS/Test.hpp>
-#include <iostream>
-#include <thread>
+#include <XS/Test/Functions.hpp>
 
-XSTest( Foo, Test1 )
+int main( void )
 {
-    std::this_thread::sleep_for( std::chrono::milliseconds( 10 ) );
+    return XS::Test::RunAll();
 }
-
-XSTest( Foo, Test2 )
-{
-    std::this_thread::sleep_for( std::chrono::milliseconds( 1010 ) );
-}
-
-XSTest( Foo, Test3 )
-{
-    throw std::runtime_error( "Failure" );
-}
-
-XSTest( Foo, Test4 )
-{}
-
-XSTest( Foo, Test5 )
-{}
-
-XSTest( Bar, Test1 )
-{}
-
-XSTest( Bar, Test2 )
-{}
-
-XSTest( Bar, Test3 )
-{}
-
-XSTest( Bar, Test4 )
-{}
-
-XSTest( Bar, Test5 )
-{}
