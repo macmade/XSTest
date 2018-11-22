@@ -56,7 +56,7 @@ namespace XS
                 Status                                           _status;
                 std::string                                      _file;
                 int                                              _line;
-                std::string                                      _failureReason;
+                Optional< Failure >                              _failure;
         };
         
         Info & Info::Register( const std::string & testCaseName, const std::string & testName, const std::function< std::shared_ptr< Case >( void ) > createTest, const std::string & file, int line )
@@ -144,14 +144,16 @@ namespace XS
             return this->impl->_line;
         }
         
-        std::string Info::GetFailureReason( void ) const
+        Optional< Failure > Info::GetFailure( void ) const
         {
-            return this->impl->_failureReason;
+            return this->impl->_failure;
         }
         
         bool Info::Run( Optional< std::reference_wrapper< std::ostream > > os )
         {
             StopWatch time;
+            
+            this->impl->_failure.reset();
             
             this->impl->_status = Status::Running;
             
@@ -168,9 +170,20 @@ namespace XS
                 
                 this->impl->_status = Status::Success;
             }
+            catch( const Failure & e )
+            {
+                this->impl->_failure = e;
+                this->impl->_status  = Status::Failed;
+            }
+            catch( const std::exception & e )
+            {
+                this->impl->_failure = Failure( e.what(), this->impl->_file, this->impl->_line );
+                this->impl->_status  = Status::Failed;
+            }
             catch( ... )
             {
-                this->impl->_status = Status::Failed;
+                this->impl->_failure = Failure( "Unknown error", this->impl->_file, this->impl->_line );
+                this->impl->_status  = Status::Failed;
             }
             
             time.Stop();
@@ -215,7 +228,7 @@ namespace XS
             _status( o._status ),
             _file( o._file ),
             _line( o._line ),
-            _failureReason( o._failureReason )
+            _failure( o._failure )
         {}
         
         Info::IMPL::~IMPL( void )

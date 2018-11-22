@@ -23,23 +23,45 @@
  ******************************************************************************/
 
 /*!
- * @header      Test.hpp
+ * @header      Failure.hpp
  * @author      Jean-David Gadina - www.xs-labs.com
  * @copyright   (c) 2018, Jean-David Gadina - www.xs-labs.com
  */
 
-#ifndef XS_TEST_HPP
-#define XS_TEST_HPP
+#ifndef XS_TEST_FAILURE_HPP
+#define XS_TEST_FAILURE_HPP
 
-#include <XS/Test/Macros.hpp>
-#include <XS/Test/Case.hpp>
-#include <XS/Test/Info.hpp>
-#include <XS/Test/Functions.hpp>
-#include <XS/Test/StopWatch.hpp>
-#include <XS/Test/Runner.hpp>
-#include <XS/Test/Suite.hpp>
-#include <XS/Test/Utility.hpp>
-#include <XS/Test/Optional.hpp>
-#include <XS/Test/Failure.hpp>
+#include <stdexcept>
+#include <memory>
+#include <string>
 
-#endif /* XS_TEST_HPP */
+namespace XS
+{
+    namespace Test
+    {
+        class Failure: public std::runtime_error
+        {
+            public:
+                
+                Failure( const std::string & reason, const std::string & file, int line );
+                Failure( const Failure & o );
+                ~Failure( void );
+                
+                Failure & operator =( Failure o );
+                
+                std::string GetReason( void ) const;
+                std::string GetFile( void )   const;
+                int         GetLine( void )   const;
+                
+                friend void swap( Failure & o1, Failure & o2 );
+                
+            private:
+                
+                class IMPL;
+                
+                std::shared_ptr< IMPL > impl;
+        };
+    }
+}
+
+#endif

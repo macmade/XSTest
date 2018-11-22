@@ -36,6 +36,7 @@
 #include <vector>
 #include <functional>
 #include <XS/Test/Optional.hpp>
+#include <XS/Test/Failure.hpp>
 
 namespace XS
 {
@@ -64,13 +65,13 @@ namespace XS
                 
                 Info & operator =( Info o );
                 
-                std::string             GetName( void )          const;
-                std::string             GetSuiteName( void )     const;
-                std::string             GetCaseName( void )      const;
-                Status                  GetStatus( void )        const;
-                std::string             GetFile( void )          const;
-                int                     GetLine( void )          const;
-                std::string             GetFailureReason( void ) const;
+                std::string         GetName( void )      const;
+                std::string         GetSuiteName( void ) const;
+                std::string         GetCaseName( void )  const;
+                Status              GetStatus( void )    const;
+                std::string         GetFile( void )      const;
+                int                 GetLine( void )      const;
+                Optional< Failure > GetFailure( void )   const;
                 
                 bool Run( Optional< std::reference_wrapper< std::ostream > > os );
                 
