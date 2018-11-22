@@ -23,7 +23,7 @@
  ******************************************************************************/
 
 /*!
- * @header      Macors.hpp
+ * @header      Macros.hpp
  * @author      Jean-David Gadina - www.xs-labs.com
  * @copyright   (c) 2018, Jean-David Gadina - www.xs-labs.com
  */
@@ -31,13 +31,69 @@
 #ifndef XS_TEST_MACROS_HPP
 #define XS_TEST_MACROS_HPP
 
-#define TEST( _case_, _name_ )              XS_TEST( _case_, _name_ )
-#define XS_TEST( _case_, _name_ )           XS_TEST_SETUP( _case_, _name_, XS_TEST_CLASSNAME( _case_, _name_ ), XS::Test::Base )
-#define XS_TEST_CLASSNAME( _case_, _name_ ) Test_ ## _case_ ## _ ## _name_
-#define XS_TEST_XSTR( _s_ )                 XS_TEST_STR( _s_ )
-#define XS_TEST_STR( _s_ )                  #_s_
+/*******************************************************************************
+ * Compatibility
+ ******************************************************************************/
 
-#define XS_TEST_SETUP( _case_, _name_, _class_, _base_ )                \
+#define TEST( _case_, _name_ )              XSTest( _case_, _name_ )
+#define ASSERT_FALSE( _e_ )                 XSAssertFalse( _e_ )
+#define ASSERT_TRUE( _e_ )                  XSAssertTrue( _e_ )
+#define ASSERT_EQ( _v1_, _v2_ )             XSAssertEqual( _v1_, _v2_ )
+#define ASSERT_NE( _v1_, _v2_ )             XSAssertNotEqual( _v1_, _v2_ )
+#define ASSERT_LT( _v1_, _v2_ )             XSAssertLess( _v1_, _v2_ )
+#define ASSERT_LE( _v1_, _v2_ )             XSAssertLessOrEqual( _v1_, _v2_ )
+#define ASSERT_GT( _v1_, _v2_ )             XSAssertGreater( _v1_, _v2_ )
+#define ASSERT_GE( _v1_, _v2_ )             XSAssertGreaterOrEqual( _v1_, _v2_ )
+#define ASSERT_STREQ( _s1_, _s2_ )          XSAssertStringEqual( _s1_, _s2_ )
+#define ASSERT_STRNE( _s1_, _s2_ )          XSAssertStringNotEqual( _s1_, _s2_ )
+#define ASSERT_STRCASEEQ( _s1_, _s2_ )      XSAssertStringEqualCaseInsensitive( _s1_, _s2_ )
+#define ASSERT_STRCASENE( _s1_, _s2_ )      XSAssertStringNotEqualCaseInsensitive( _s1_, _s2_ )
+#define ASSERT_THROW( _e_, _ex_ )           XSAssertThrow( _e_, _ex_ )
+#define ASSERT_NO_THROW( _e_ )              XSAssertNoThrow( _e_ )
+#define ASSERT_ANY_THROW( _e_ )             XSAssertAnyThrow( _e_ )
+#define ASSERT_FLOAT_EQ( _v1_, _v2_ )       XSAssertFloatEqual( _v1_, _v2_ )
+#define ASSERT_DOUBLE_EQ( _v1_, _v2_ )      XSAssertDoubleEqual( _v1_, _v2_ )
+#define ASSERT_LONGDOUBLE_EQ( _v1_, _v2_ )  XSAssertLongDoubleEqual( _v1_, _v2_ )
+#define ASSERT_HRESULT_SUCCEEDED( _e_ )     XSAssertHResultSucceeded( _e_ )
+#define ASSERT_HRESULT_FAILED( _e_ )        XSAssertHResultFailed( _e_ )
+#define ASSERT_NO_FATAL_FAILURE( _e_ )      XSAssertNoFatalFailure( _e_ )
+
+/*******************************************************************************
+ * Assertions
+ ******************************************************************************/
+
+#define XSAssertFalse( _e_ )                                
+#define XSAssertTrue( _e_ )                                 
+#define XSAssertEqual( _v1_, _v2_ )                         
+#define XSAssertNotEqual( _v1_, _v2_ )                      
+#define XSAssertLess( _v1_, _v2_ )                          
+#define XSAssertLessOrEqual( _v1_, _v2_ )                   
+#define XSAssertGreater( _v1_, _v2_ )                       
+#define XSAssertGreaterOrEqual( _v1_, _v2_ )                
+#define XSAssertStringEqual( _s1_, _s2_ )                   
+#define XSAssertStringNotEqual( _s1_, _s2_ )                
+#define XSAssertStringEqualCaseInsensitive( _s1_, _s2_ )    
+#define XSAssertStringNotEqualCaseInsensitive( _s1_, _s2_ ) 
+#define XSAssertThrow( _e_, _ex_ )                          
+#define XSAssertNoThrow( _e_ )                              
+#define XSAssertAnyThrow( _e_ )                              
+#define XSAssertFloatEqual( _v1_, _v2_ )                    
+#define XSAssertDoubleEqual( _v1_, _v2_ )                   
+#define XSAssertLongDoubleEqual( _v1_, _v2_ )               
+#define XSAssertHResultSucceeded( _e_ )                     
+#define XSAssertHResultFailed( _e_ )                        
+#define XSAssertNoFatalFailure( _e_ )                       
+
+/*******************************************************************************
+ * Test cases
+ ******************************************************************************/
+ 
+#define XSTest( _case_, _name_ )                    XSTest_Internal_TestSetup( _case_, _name_, XSTest_Internal_ClassName( _case_, _name_ ), XS::Test::Base )
+#define XSTest_Internal_ClassName( _case_, _name_ ) Test_ ## _case_ ## _ ## _name_
+#define XSTest_Internal_XString( _s_ )              XSTest_Internal_String( _s_ )
+#define XSTest_Internal_String( _s_ )               #_s_
+
+#define XSTest_Internal_TestSetup( _case_, _name_, _class_, _base_ )    \
                                                                         \
     class _class_: public _base_                                        \
     {                                                                   \
@@ -55,8 +111,8 @@
                                                                         \
     const XS::Test::Info & _class_::_InfoRef = XS::Test::Info::Register \
     (                                                                   \
-        XS_TEST_XSTR( _case_ ),                                         \
-        XS_TEST_XSTR( _name_ ),                                         \
+        XSTest_Internal_XString( _case_ ),                              \
+        XSTest_Internal_XString( _name_ ),                              \
         std::make_shared< _class_ >()                                   \
     );                                                                  \
                                                                         \

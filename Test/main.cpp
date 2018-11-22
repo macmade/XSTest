@@ -32,40 +32,40 @@
 #include <iostream>
 #include <thread>
 
-XS_TEST( Foo, Test1 )
+XSTest( Foo, Test1 )
 {
     std::this_thread::sleep_for( std::chrono::milliseconds( 10 ) );
 }
 
-XS_TEST( Foo, Test2 )
+XSTest( Foo, Test2 )
 {
     std::this_thread::sleep_for( std::chrono::milliseconds( 1010 ) );
 }
 
-XS_TEST( Foo, Test3 )
+XSTest( Foo, Test3 )
 {
     throw std::runtime_error( "Failure" );
 }
 
-XS_TEST( Foo, Test4 )
+XSTest( Foo, Test4 )
 {}
 
-XS_TEST( Foo, Test5 )
+XSTest( Foo, Test5 )
 {}
 
-XS_TEST( Bar, Test1 )
+XSTest( Bar, Test1 )
 {}
 
-XS_TEST( Bar, Test2 )
+XSTest( Bar, Test2 )
 {}
 
-XS_TEST( Bar, Test3 )
+XSTest( Bar, Test3 )
 {}
 
-XS_TEST( Bar, Test4 )
+XSTest( Bar, Test4 )
 {}
 
-XS_TEST( Bar, Test5 )
+XSTest( Bar, Test5 )
 {}
 
 int main( void )
