@@ -40,7 +40,7 @@ namespace XS
     namespace Test
     {
         class Suite;
-        class Base;
+        class Case;
         
         class Info
         {
@@ -54,7 +54,7 @@ namespace XS
                     Failed
                 };
                 
-                static Info &               Register( const std::string & testCase, const std::string & testName, std::shared_ptr< Base > test );
+                static Info &               Register( const std::string & testCase, const std::string & testName, std::shared_ptr< Case > test );
                 static std::vector< Suite > All( void );
                 
                 Info( const Info & o );
@@ -65,7 +65,7 @@ namespace XS
                 std::string             GetName( void )         const;
                 std::string             GetTestCaseName( void ) const;
                 std::string             GetTestName( void )     const;
-                std::shared_ptr< Base > GetTest( void )         const;
+                std::shared_ptr< Case > GetTest( void )         const;
                 Status                  GetStatus( void )        const;
                 std::string             GetFailureReason( void ) const;
                 
@@ -75,7 +75,7 @@ namespace XS
                 
             private:
                 
-                Info( const std::string & testCase, const std::string & testName, std::shared_ptr< Base > test );
+                Info( const std::string & testCase, const std::string & testName, std::shared_ptr< Case > test );
                 
                 class IMPL;
                 

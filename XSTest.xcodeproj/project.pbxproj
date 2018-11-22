@@ -42,7 +42,7 @@
 /* Begin PBXFileReference section */
 		05D5258821A5FD520025CCEB /* libXSTest.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libXSTest.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		05D5259A21A5FD7C0025CCEB /* Test.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Test.hpp; sourceTree = "<group>"; };
-		05D525A921A5FDFF0025CCEB /* Base.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Base.hpp; sourceTree = "<group>"; };
+		05D525A921A5FDFF0025CCEB /* Case.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Case.hpp; sourceTree = "<group>"; };
 		05D525AA21A5FE810025CCEB /* Info.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Info.hpp; sourceTree = "<group>"; };
 		05D525AB21A5FFC40025CCEB /* Info.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Info.cpp; sourceTree = "<group>"; };
 		05D525AE21A604950025CCEB /* Release - ccache.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Release - ccache.xcconfig"; sourceTree = "<group>"; };
@@ -182,7 +182,7 @@
 		05D5259921A5FD720025CCEB /* Test */ = {
 			isa = PBXGroup;
 			children = (
-				05D525A921A5FDFF0025CCEB /* Base.hpp */,
+				05D525A921A5FDFF0025CCEB /* Case.hpp */,
 				05D525EE21A605930025CCEB /* Functions.hpp */,
 				05D5260D21A630C50025CCEB /* Utility.hpp */,
 				05D5260A21A62A590025CCEB /* Suite.hpp */,

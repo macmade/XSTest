@@ -88,7 +88,7 @@
  * Test cases
  ******************************************************************************/
  
-#define XSTest( _case_, _name_ )                    XSTest_Internal_TestSetup( _case_, _name_, XSTest_Internal_ClassName( _case_, _name_ ), XS::Test::Base )
+#define XSTest( _case_, _name_ )                    XSTest_Internal_TestSetup( _case_, _name_, XSTest_Internal_ClassName( _case_, _name_ ), XS::Test::Case )
 #define XSTest_Internal_ClassName( _case_, _name_ ) Test_ ## _case_ ## _ ## _name_
 #define XSTest_Internal_XString( _s_ )              XSTest_Internal_String( _s_ )
 #define XSTest_Internal_String( _s_ )               #_s_

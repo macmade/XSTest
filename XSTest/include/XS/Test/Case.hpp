@@ -23,7 +23,7 @@
  ******************************************************************************/
 
 /*!
- * @header      Base.hpp
+ * @header      Case.hpp
  * @author      Jean-David Gadina - www.xs-labs.com
  * @copyright   (c) 2018, Jean-David Gadina - www.xs-labs.com
  */
@@ -37,15 +37,15 @@ namespace XS
     {
         class Info;
         
-        class Base
+        class Case
         {
             public:
                 
-                Base( void )          = default;
-                virtual ~Base( void ) = default;
+                Case( void )          = default;
+                virtual ~Case( void ) = default;
                 
-                Base( const Base & o )              = delete;
-                Base & operator =( const Base & o ) = delete;
+                Case( const Case & o )              = delete;
+                Case & operator =( const Case & o ) = delete;
                 
                 virtual const Info & Info( void ) = 0;
                 virtual void         Test( void ) = 0;

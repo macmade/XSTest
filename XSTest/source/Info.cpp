@@ -29,7 +29,7 @@
  */
 
 #include <XS/Test/Info.hpp>
-#include <XS/Test/Base.hpp>
+#include <XS/Test/Case.hpp>
 #include <XS/Test/Suite.hpp>
 #include <XS/Test/StopWatch.hpp>
 #include <algorithm>
@@ -46,18 +46,18 @@ namespace XS
         {
             public:
                 
-                IMPL( const std::string & testCaseName, const std::string & testName, std::shared_ptr< Base > test );
+                IMPL( const std::string & testCaseName, const std::string & testName, std::shared_ptr< Case > test );
                 IMPL( const IMPL & o );
                 ~IMPL( void );
                 
                 std::string             _testCaseName;
                 std::string             _testName;
-                std::shared_ptr< Base > _test;
+                std::shared_ptr< Case > _test;
                 Status                  _status;
                 std::string             _failureReason;
         };
         
-        Info & Info::Register( const std::string & testCaseName, const std::string & testName, std::shared_ptr< Base > test )
+        Info & Info::Register( const std::string & testCaseName, const std::string & testName, std::shared_ptr< Case > test )
         {
             Info * i = new Info( testCaseName, testName, test );
             
@@ -94,7 +94,7 @@ namespace XS
             return suites;
         }
         
-        Info::Info( const std::string & testCaseName, const std::string & testName, std::shared_ptr< Base > test ):
+        Info::Info( const std::string & testCaseName, const std::string & testName, std::shared_ptr< Case > test ):
             impl( std::make_shared< IMPL >( testCaseName, testName, test ) )
         {}
         
@@ -127,7 +127,7 @@ namespace XS
             return this->impl->_testName;
         }
         
-        std::shared_ptr< Base > Info::GetTest( void ) const
+        std::shared_ptr< Case > Info::GetTest( void ) const
         {
             return this->impl->_test;
         }
@@ -186,7 +186,7 @@ namespace XS
             swap( o1.impl, o2.impl );
         }
         
-        Info::IMPL::IMPL( const std::string & testCaseName, const std::string & testName, std::shared_ptr< Base > test ):
+        Info::IMPL::IMPL( const std::string & testCaseName, const std::string & testName, std::shared_ptr< Case > test ):
             _testCaseName( testCaseName ),
             _testName( testName ),
             _test( test ),

@@ -32,7 +32,7 @@
 #define XS_TEST_HPP
 
 #include <XS/Test/Macros.hpp>
-#include <XS/Test/Base.hpp>
+#include <XS/Test/Case.hpp>
 #include <XS/Test/Info.hpp>
 #include <XS/Test/Functions.hpp>
 #include <XS/Test/StopWatch.hpp>
