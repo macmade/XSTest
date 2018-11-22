@@ -46,12 +46,12 @@ namespace XS
         {
             public:
                 
-                IMPL( const std::string & testCaseName, const std::string & testName, const std::function< std::shared_ptr< Case >( void ) > createTest, const std::string & file, int line );
+                IMPL( const std::string & suiteName, const std::string & caseName, const std::function< std::shared_ptr< Case >( void ) > createTest, const std::string & file, int line );
                 IMPL( const IMPL & o );
                 ~IMPL( void );
                 
-                std::string                                      _testCaseName;
-                std::string                                      _testName;
+                std::string                                      _suiteName;
+                std::string                                      _caseName;
                 std::function< std::shared_ptr< Case >( void ) > _createTest;
                 Status                                           _status;
                 std::string                                      _file;
@@ -85,7 +85,7 @@ namespace XS
             
             for( auto & i: *( infos ) )
             {
-                all[ i->GetTestCaseName() ].push_back( *( i ) );
+                all[ i->GetName() ].push_back( *( i ) );
             }
             
             for( const auto & p: all )
@@ -96,8 +96,8 @@ namespace XS
             return suites;
         }
         
-        Info::Info( const std::string & testCaseName, const std::string & testName, const std::function< std::shared_ptr< Case >( void ) > createTest, const std::string & file, int line ):
-            impl( std::make_shared< IMPL >( testCaseName, testName, createTest, file, line ) )
+        Info::Info( const std::string & suiteName, const std::string & caseName, const std::function< std::shared_ptr< Case >( void ) > createTest, const std::string & file, int line ):
+            impl( std::make_shared< IMPL >( suiteName, caseName, createTest, file, line ) )
         {}
         
         Info::Info( const Info & o ):
@@ -116,17 +116,17 @@ namespace XS
         
         std::string Info::GetName( void ) const
         {
-            return this->GetTestCaseName() + "." + this->GetTestName();
+            return this->GetSuiteName() + "." + this->GetCaseName();
         }
         
-        std::string Info::GetTestCaseName( void ) const
+        std::string Info::GetSuiteName( void ) const
         {
-            return this->impl->_testCaseName;
+            return this->impl->_suiteName;
         }
         
-        std::string Info::GetTestName( void ) const
+        std::string Info::GetCaseName( void ) const
         {
-            return this->impl->_testName;
+            return this->impl->_caseName;
         }
         
         Info::Status Info::GetStatus( void ) const
@@ -199,9 +199,9 @@ namespace XS
             swap( o1.impl, o2.impl );
         }
         
-        Info::IMPL::IMPL( const std::string & testCaseName, const std::string & testName, const std::function< std::shared_ptr< Case >( void ) > createTest, const std::string & file, int line ):
-            _testCaseName( testCaseName ),
-            _testName( testName ),
+        Info::IMPL::IMPL( const std::string & suiteName, const std::string & caseName, const std::function< std::shared_ptr< Case >( void ) > createTest, const std::string & file, int line ):
+            _suiteName( suiteName ),
+            _caseName( caseName ),
             _createTest( createTest ),
             _file( file ),
             _line( line ),
@@ -209,8 +209,8 @@ namespace XS
         {}
         
         Info::IMPL::IMPL( const IMPL & o ):
-            _testCaseName( o._testCaseName ),
-            _testName( o._testName ),
+            _suiteName( o._suiteName ),
+            _caseName( o._caseName ),
             _createTest( o._createTest ),
             _status( o._status ),
             _file( o._file ),

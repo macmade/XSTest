@@ -65,8 +65,8 @@ namespace XS
                 Info & operator =( Info o );
                 
                 std::string             GetName( void )          const;
-                std::string             GetTestCaseName( void )  const;
-                std::string             GetTestName( void )      const;
+                std::string             GetSuiteName( void )     const;
+                std::string             GetCaseName( void )      const;
                 Status                  GetStatus( void )        const;
                 std::string             GetFile( void )          const;
                 int                     GetLine( void )          const;
