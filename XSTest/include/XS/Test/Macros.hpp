@@ -113,7 +113,9 @@
     (                                                                   \
         XSTest_Internal_XString( _case_ ),                              \
         XSTest_Internal_XString( _name_ ),                              \
-        std::make_shared< _class_ >()                                   \
+        []( void ) { return std::make_shared< _class_ >(); },           \
+        __FILE__,                                                       \
+        __LINE__                                                        \
     );                                                                  \
                                                                         \
     const XS::Test::Info & _class_::Info( void )                        \

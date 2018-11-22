@@ -34,6 +34,7 @@
 #include <memory>
 #include <string>
 #include <vector>
+#include <functional>
 #include <XS/Test/Optional.hpp>
 
 namespace XS
@@ -55,7 +56,7 @@ namespace XS
                     Failed
                 };
                 
-                static Info &               Register( const std::string & testCase, const std::string & testName, std::shared_ptr< Case > test );
+                static Info &               Register( const std::string & testCaseName, const std::string & testName, const std::function< std::shared_ptr< Case >( void ) > createTest, const std::string & file, int line );
                 static std::vector< Suite > All( void );
                 
                 Info( const Info & o );
@@ -63,10 +64,9 @@ namespace XS
                 
                 Info & operator =( Info o );
                 
-                std::string             GetName( void )         const;
-                std::string             GetTestCaseName( void ) const;
-                std::string             GetTestName( void )     const;
-                std::shared_ptr< Case > GetTest( void )         const;
+                std::string             GetName( void )          const;
+                std::string             GetTestCaseName( void )  const;
+                std::string             GetTestName( void )      const;
                 Status                  GetStatus( void )        const;
                 std::string             GetFailureReason( void ) const;
                 
@@ -76,7 +76,7 @@ namespace XS
                 
             private:
                 
-                Info( const std::string & testCase, const std::string & testName, std::shared_ptr< Case > test );
+                Info( const std::string & testCase, const std::string & testName, const std::function< std::shared_ptr< Case >( void ) > createTest, const std::string & file, int line );
                 
                 class IMPL;
                 

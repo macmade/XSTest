@@ -46,20 +46,22 @@ namespace XS
         {
             public:
                 
-                IMPL( const std::string & testCaseName, const std::string & testName, std::shared_ptr< Case > test );
+                IMPL( const std::string & testCaseName, const std::string & testName, const std::function< std::shared_ptr< Case >( void ) > createTest, const std::string & file, int line );
                 IMPL( const IMPL & o );
                 ~IMPL( void );
                 
-                std::string             _testCaseName;
-                std::string             _testName;
-                std::shared_ptr< Case > _test;
-                Status                  _status;
-                std::string             _failureReason;
+                std::string                                      _testCaseName;
+                std::string                                      _testName;
+                std::function< std::shared_ptr< Case >( void ) > _createTest;
+                Status                                           _status;
+                std::string                                      _file;
+                int                                              _line;
+                std::string                                      _failureReason;
         };
         
-        Info & Info::Register( const std::string & testCaseName, const std::string & testName, std::shared_ptr< Case > test )
+        Info & Info::Register( const std::string & testCaseName, const std::string & testName, const std::function< std::shared_ptr< Case >( void ) > createTest, const std::string & file, int line )
         {
-            Info * i = new Info( testCaseName, testName, test );
+            Info * i = new Info( testCaseName, testName, createTest, file, line );
             
             if( infos == nullptr )
             {
@@ -94,8 +96,8 @@ namespace XS
             return suites;
         }
         
-        Info::Info( const std::string & testCaseName, const std::string & testName, std::shared_ptr< Case > test ):
-            impl( std::make_shared< IMPL >( testCaseName, testName, test ) )
+        Info::Info( const std::string & testCaseName, const std::string & testName, const std::function< std::shared_ptr< Case >( void ) > createTest, const std::string & file, int line ):
+            impl( std::make_shared< IMPL >( testCaseName, testName, createTest, file, line ) )
         {}
         
         Info::Info( const Info & o ):
@@ -127,11 +129,6 @@ namespace XS
             return this->impl->_testName;
         }
         
-        std::shared_ptr< Case > Info::GetTest( void ) const
-        {
-            return this->impl->_test;
-        }
-        
         Info::Status Info::GetStatus( void ) const
         {
             return this->impl->_status;
@@ -157,7 +154,7 @@ namespace XS
             
             try
             {
-                this->GetTest()->Test();
+                this->impl->_createTest()->Test();
                 
                 this->impl->_status = Status::Success;
             }
@@ -192,18 +189,22 @@ namespace XS
             swap( o1.impl, o2.impl );
         }
         
-        Info::IMPL::IMPL( const std::string & testCaseName, const std::string & testName, std::shared_ptr< Case > test ):
+        Info::IMPL::IMPL( const std::string & testCaseName, const std::string & testName, const std::function< std::shared_ptr< Case >( void ) > createTest, const std::string & file, int line ):
             _testCaseName( testCaseName ),
             _testName( testName ),
-            _test( test ),
+            _createTest( createTest ),
+            _file( file ),
+            _line( line ),
             _status( Status::Unknown )
         {}
         
         Info::IMPL::IMPL( const IMPL & o ):
             _testCaseName( o._testCaseName ),
             _testName( o._testName ),
-            _test( o._test ),
+            _createTest( o._createTest ),
             _status( o._status ),
+            _file( o._file ),
+            _line( o._line ),
             _failureReason( o._failureReason )
         {}
         
