@@ -68,6 +68,8 @@ namespace XS
                 std::string             GetTestCaseName( void )  const;
                 std::string             GetTestName( void )      const;
                 Status                  GetStatus( void )        const;
+                std::string             GetFile( void )          const;
+                int                     GetLine( void )          const;
                 std::string             GetFailureReason( void ) const;
                 
                 bool Run( Optional< std::reference_wrapper< std::ostream > > os );

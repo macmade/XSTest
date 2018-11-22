@@ -134,6 +134,16 @@ namespace XS
             return this->impl->_status;
         }
         
+        std::string Info::GetFile( void ) const
+        {
+            return this->impl->_file;
+        }
+        
+        int Info::GetLine( void ) const
+        {
+            return this->impl->_line;
+        }
+        
         std::string Info::GetFailureReason( void ) const
         {
             return this->impl->_failureReason;
