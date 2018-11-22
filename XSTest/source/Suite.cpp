@@ -23,12 +23,12 @@
  ******************************************************************************/
 
 /*!
- * @file        Group.cpp
+ * @file        Suite.cpp
  * @author      Jean-David Gadina - www.xs-labs.com
  * @copyright   (c) 2018, Jean-David Gadina - www.xs-labs.com
  */
 
-#include <XS/Test/Group.hpp>
+#include <XS/Test/Suite.hpp>
 #include <XS/Test/StopWatch.hpp>
 #include <XS/Test/Utility.hpp>
 #include <XS/Test/Info.hpp>
@@ -38,7 +38,7 @@ namespace XS
 {
     namespace Test
     {
-        class Group::IMPL
+        class Suite::IMPL
         {
             public:
                 
@@ -50,35 +50,35 @@ namespace XS
                 std::vector< Info > _infos;
         };
         
-        Group::Group( const std::string & name, std::vector< Info > infos ):
+        Suite::Suite( const std::string & name, std::vector< Info > infos ):
             impl( std::make_shared< IMPL >( name, infos ) )
         {}
         
-        Group::Group( const Group & o ):
+        Suite::Suite( const Suite & o ):
             impl( std::make_shared< IMPL >( *( o.impl ) ) )
         {}
         
-        Group::~Group( void )
+        Suite::~Suite( void )
         {}
         
-        Group & Group::operator =( Group o )
+        Suite & Suite::operator =( Suite o )
         {
             swap( *( this ), o );
             
             return *( this );
         }
         
-        std::string Group::GetName( void ) const
+        std::string Suite::GetName( void ) const
         {
             return this->impl->_name;
         }
         
-        std::vector< Info > Group::GetInfos( void ) const
+        std::vector< Info > Suite::GetInfos( void ) const
         {
             return this->impl->_infos;
         }
         
-        bool Group::Run( std::ostream & os )
+        bool Suite::Run( std::ostream & os )
         {
             StopWatch time;
             bool      success( true );
@@ -119,28 +119,28 @@ namespace XS
             return success;
         }
         
-        void swap( Group & o1, Group & o2 )
+        void swap( Suite & o1, Suite & o2 )
         {
             using std::swap;
             
             swap( o1.impl, o2.impl );
         }
         
-        Group::IMPL::IMPL( const std::string & name, std::vector< Info > infos ):
+        Suite::IMPL::IMPL( const std::string & name, std::vector< Info > infos ):
             _name( name ),
             _infos( infos )
         {
             Utility::Shuffle( this->_infos );
         }
         
-        Group::IMPL::IMPL( const IMPL & o ):
+        Suite::IMPL::IMPL( const IMPL & o ):
             _name( o._name ),
             _infos( o._infos )
         {
             Utility::Shuffle( this->_infos );
         }
         
-        Group::IMPL::~IMPL( void )
+        Suite::IMPL::~IMPL( void )
         {}
     }
 }

@@ -31,7 +31,7 @@
 #include <XS/Test/Functions.hpp>
 #include <XS/Test/Runner.hpp>
 #include <XS/Test/Info.hpp>
-#include <XS/Test/Group.hpp>
+#include <XS/Test/Suite.hpp>
 
 namespace XS
 {

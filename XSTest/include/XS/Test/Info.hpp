@@ -39,7 +39,7 @@ namespace XS
 {
     namespace Test
     {
-        class Group;
+        class Suite;
         class Base;
         
         class Info
@@ -55,7 +55,7 @@ namespace XS
                 };
                 
                 static Info &               Register( const std::string & testCase, const std::string & testName, std::shared_ptr< Base > test );
-                static std::vector< Group > All( void );
+                static std::vector< Suite > All( void );
                 
                 Info( const Info & o );
                 ~Info( void );

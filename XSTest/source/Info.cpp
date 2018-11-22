@@ -30,7 +30,7 @@
 
 #include <XS/Test/Info.hpp>
 #include <XS/Test/Base.hpp>
-#include <XS/Test/Group.hpp>
+#include <XS/Test/Suite.hpp>
 #include <XS/Test/StopWatch.hpp>
 #include <algorithm>
 #include <random>
@@ -71,10 +71,10 @@ namespace XS
             return *( i );
         }
         
-        std::vector< Group > Info::All( void )
+        std::vector< Suite > Info::All( void )
         {
             std::map< std::string, std::vector< Info > > all;
-            std::vector< Group >                         groups;
+            std::vector< Suite >                         suites;
             
             if( infos == nullptr )
             {
@@ -88,10 +88,10 @@ namespace XS
             
             for( const auto & p: all )
             {
-                groups.push_back( Group( p.first, p.second ) );
+                suites.push_back( Suite( p.first, p.second ) );
             }
             
-            return groups;
+            return suites;
         }
         
         Info::Info( const std::string & testCaseName, const std::string & testName, std::shared_ptr< Base > test ):

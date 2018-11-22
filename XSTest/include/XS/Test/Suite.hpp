@@ -23,13 +23,13 @@
  ******************************************************************************/
 
 /*!
- * @header      Group.hpp
+ * @header      Suite.hpp
  * @author      Jean-David Gadina - www.xs-labs.com
  * @copyright   (c) 2018, Jean-David Gadina - www.xs-labs.com
  */
 
-#ifndef XS_TEST_GROUP_HPP
-#define XS_TEST_GROUP_HPP
+#ifndef XS_TEST_SUITE_HPP
+#define XS_TEST_SUITE_HPP
 
 #include <memory>
 #include <string>
@@ -42,22 +42,22 @@ namespace XS
     {
         class Info;
         
-        class Group
+        class Suite
         {
             public:
                 
-                Group( const std::string & name, std::vector< Info > infos );
-                Group( const Group & o );
-                virtual ~Group( void );
+                Suite( const std::string & name, std::vector< Info > infos );
+                Suite( const Suite & o );
+                virtual ~Suite( void );
                 
-                Group & operator =( Group o );
+                Suite & operator =( Suite o );
                 
                 std::string         GetName( void )  const;
                 std::vector< Info > GetInfos( void ) const;
                 
                 bool Run( std::ostream & os );
                 
-                friend void swap( Group & o1, Group & o2 );
+                friend void swap( Suite & o1, Suite & o2 );
                 
             private:
                 
@@ -68,4 +68,4 @@ namespace XS
     }
 }
 
-#endif /* XS_TEST_GROUP_HPP */
+#endif /* XS_TEST_SUITE_HPP */

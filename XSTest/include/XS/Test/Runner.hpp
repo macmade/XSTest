@@ -38,19 +38,19 @@ namespace XS
 {
     namespace Test
     {
-        class Group;
+        class Suite;
         
         class Runner
         {
             public:
                 
-                Runner( const std::vector< Group > & groups );
+                Runner( const std::vector< Suite > & suites );
                 Runner( const Runner & o );
                 virtual ~Runner( void );
                 
                 Runner & operator =( Runner o );
                 
-                std::vector< Group > GetGroups( void ) const;
+                std::vector< Suite > GetSuites( void ) const;
                 
                 bool Run( std::ostream & os );
                 

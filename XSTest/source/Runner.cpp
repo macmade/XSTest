@@ -31,7 +31,7 @@
 #include <XS/Test/Runner.hpp>
 #include <XS/Test/Utility.hpp>
 #include <XS/Test/Info.hpp>
-#include <XS/Test/Group.hpp>
+#include <XS/Test/Suite.hpp>
 #include <XS/Test/StopWatch.hpp>
 #include <algorithm>
 
@@ -43,18 +43,18 @@ namespace XS
         {
             public:
                 
-                IMPL( const std::vector< Group > & groups );
+                IMPL( const std::vector< Suite > & suites );
                 IMPL( IMPL & o );
                 ~IMPL( void );
                 
                 void setup( std::ostream & os );
                 void tearDown( std::ostream & os );
                 
-                std::vector< Group > _groups;
+                std::vector< Suite > _suites;
         };
         
-        Runner::Runner( const std::vector< Group > & groups ):
-            impl( std::make_shared< IMPL >( groups ) )
+        Runner::Runner( const std::vector< Suite > & suites ):
+            impl( std::make_shared< IMPL >( suites ) )
         {}
         
         Runner::Runner( const Runner & o ):
@@ -71,9 +71,9 @@ namespace XS
             return *( this );
         }
         
-        std::vector< Group > Runner::GetGroups( void ) const
+        std::vector< Suite > Runner::GetSuites( void ) const
         {
-            return this->impl->_groups;
+            return this->impl->_suites;
         }
         
         bool Runner::Run( std::ostream & os )
@@ -83,16 +83,16 @@ namespace XS
             StopWatch time;
             bool      success( true );
             
-            if( this->impl->_groups.size() == 0 )
+            if( this->impl->_suites.size() == 0 )
             {
                 return false;
             }
             
-            cases += this->impl->_groups.size();
+            cases += this->impl->_suites.size();
             
-            for( const auto & group: this->impl->_groups )
+            for( const auto & suite: this->impl->_suites )
             {
-                tests += group.GetInfos().size();
+                tests += suite.GetInfos().size();
             }
             
             os << "[==========] Running "
@@ -108,9 +108,9 @@ namespace XS
             
             os << std::endl;
             
-            for( auto & group: this->impl->_groups )
+            for( auto & suite: this->impl->_suites )
             {
-                if( group.Run( os ) == false )
+                if( suite.Run( os ) == false )
                 {
                     success = false;
                 }
@@ -133,9 +133,9 @@ namespace XS
                 std::vector< Info > passed;
                 std::vector< Info > failed;
                 
-                for( auto & group: this->impl->_groups )
+                for( auto & suite: this->impl->_suites )
                 {
-                    for( auto & info: group.GetInfos() )
+                    for( auto & info: suite.GetInfos() )
                     {
                         if( info.GetStatus() == Info::Status::Failed )
                         {
@@ -183,16 +183,16 @@ namespace XS
             swap( o1.impl, o2.impl );
         }
         
-        Runner::IMPL::IMPL( const std::vector< Group > & groups ):
-            _groups( groups )
+        Runner::IMPL::IMPL( const std::vector< Suite > & suites ):
+            _suites( suites )
         {
-            Utility::Shuffle( this->_groups );
+            Utility::Shuffle( this->_suites );
         }
         
         Runner::IMPL::IMPL( IMPL & o ):
-            _groups( o._groups )
+            _suites( o._suites )
         {
-            Utility::Shuffle( this->_groups );
+            Utility::Shuffle( this->_suites );
         }
         
         Runner::IMPL::~IMPL( void )
