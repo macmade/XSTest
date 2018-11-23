@@ -49,13 +49,15 @@ namespace XS
         };
         
         Failure::Failure( const std::string & reason, const std::string & file, int line ):
-            std::runtime_error( reason ),
             impl( new IMPL( reason, file, line ) )
         {}
         
         Failure::Failure( const Failure & o ):
-            std::runtime_error( o.impl->_reason ),
             impl( new IMPL( *( o.impl ) ) )
+        {}
+        
+        Failure::Failure( Failure && o ) noexcept:
+            impl( std::move( o.impl ) )
         {}
         
         Failure::~Failure( void )
@@ -78,12 +80,17 @@ namespace XS
             return this->impl->_file;
         }
         
-        int Failure::GetLine( void ) const
+        int Failure::GetLine( void ) const noexcept
         {
             return this->impl->_line;
         }
         
-        void swap( Failure & o1, Failure & o2 )
+        const char * Failure::what( void ) const noexcept
+        {
+            return this->impl->_reason.c_str();
+        }
+        
+        void swap( Failure & o1, Failure & o2 ) noexcept
         {
             using std::swap;
             

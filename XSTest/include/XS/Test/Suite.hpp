@@ -49,6 +49,7 @@ namespace XS
                 
                 Suite( const std::string & name, std::vector< Info > infos );
                 Suite( const Suite & o );
+                Suite( Suite && o ) noexcept;
                 virtual ~Suite( void );
                 
                 Suite & operator =( Suite o );
@@ -58,7 +59,7 @@ namespace XS
                 
                 bool Run( Optional< std::reference_wrapper< std::ostream > > os );
                 
-                friend void swap( Suite & o1, Suite & o2 );
+                friend void swap( Suite & o1, Suite & o2 ) noexcept;
                 
             private:
                 

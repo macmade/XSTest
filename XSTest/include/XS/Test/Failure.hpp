@@ -39,21 +39,24 @@ namespace XS
 {
     namespace Test
     {
-        class Failure: public std::runtime_error
+        class Failure: public std::exception
         {
             public:
                 
                 Failure( const std::string & reason, const std::string & file, int line );
                 Failure( const Failure & o );
+                Failure( Failure && o ) noexcept;
                 ~Failure( void );
                 
                 Failure & operator =( Failure o );
                 
                 std::string GetReason( void ) const;
                 std::string GetFile( void )   const;
-                int         GetLine( void )   const;
+                int         GetLine( void )   const noexcept;
                 
-                friend void swap( Failure & o1, Failure & o2 );
+                const char * what( void ) const noexcept override;
+                
+                friend void swap( Failure & o1, Failure & o2 ) noexcept;
                 
             private:
                 

@@ -104,6 +104,10 @@ namespace XS
             impl( new IMPL( *( o.impl ) ) )
         {}
         
+        Info::Info( Info && o ) noexcept:
+            impl( std::move( o.impl ) )
+        {}
+        
         Info::~Info( void )
         {}
         
@@ -129,7 +133,7 @@ namespace XS
             return this->impl->_caseName;
         }
         
-        Info::Status Info::GetStatus( void ) const
+        Info::Status Info::GetStatus( void ) const noexcept
         {
             return this->impl->_status;
         }
@@ -139,7 +143,7 @@ namespace XS
             return this->impl->_file;
         }
         
-        int Info::GetLine( void ) const
+        int Info::GetLine( void ) const noexcept
         {
             return this->impl->_line;
         }
@@ -216,7 +220,7 @@ namespace XS
             return this->impl->_status == Status::Success;
         }
         
-        void swap( Info & o1, Info & o2 )
+        void swap( Info & o1, Info & o2 ) noexcept
         {
             using std::swap;
             

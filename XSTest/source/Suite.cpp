@@ -58,6 +58,10 @@ namespace XS
             impl( new IMPL( *( o.impl ) ) )
         {}
         
+        Suite::Suite( Suite && o ) noexcept:
+            impl( std::move( o.impl ) )
+        {}
+        
         Suite::~Suite( void )
         {}
         
@@ -125,7 +129,7 @@ namespace XS
             return success;
         }
         
-        void swap( Suite & o1, Suite & o2 )
+        void swap( Suite & o1, Suite & o2 ) noexcept
         {
             using std::swap;
             

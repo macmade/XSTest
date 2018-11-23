@@ -61,6 +61,10 @@ namespace XS
             impl( new IMPL( *( o.impl ) ) )
         {}
         
+        Runner::Runner( Runner && o ) noexcept:
+            impl( std::move( o.impl ) )
+        {}
+        
         Runner::~Runner( void )
         {}
         
@@ -188,7 +192,7 @@ namespace XS
             return success;
         }
         
-        void swap( Runner & o1, Runner & o2 )
+        void swap( Runner & o1, Runner & o2 ) noexcept
         {
             using std::swap;
             

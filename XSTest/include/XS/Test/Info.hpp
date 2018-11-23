@@ -61,6 +61,7 @@ namespace XS
                 static std::vector< Suite > All( void );
                 
                 Info( const Info & o );
+                Info( Info && o ) noexcept;
                 ~Info( void );
                 
                 Info & operator =( Info o );
@@ -68,14 +69,14 @@ namespace XS
                 std::string         GetName( void )      const;
                 std::string         GetSuiteName( void ) const;
                 std::string         GetCaseName( void )  const;
-                Status              GetStatus( void )    const;
+                Status              GetStatus( void )    const noexcept;
                 std::string         GetFile( void )      const;
-                int                 GetLine( void )      const;
+                int                 GetLine( void )      const noexcept;
                 Optional< Failure > GetFailure( void )   const;
                 
                 bool Run( Optional< std::reference_wrapper< std::ostream > > os );
                 
-                friend void swap( Info & o1, Info & o2 );
+                friend void swap( Info & o1, Info & o2 ) noexcept;
                 
             private:
                 

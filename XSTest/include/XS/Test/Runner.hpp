@@ -47,6 +47,7 @@ namespace XS
                 
                 Runner( const std::vector< Suite > & suites );
                 Runner( const Runner & o );
+                Runner( Runner && o ) noexcept;
                 virtual ~Runner( void );
                 
                 Runner & operator =( Runner o );
@@ -55,7 +56,7 @@ namespace XS
                 
                 bool Run( Optional< std::reference_wrapper< std::ostream > > os );
                 
-                friend void swap( Runner & o1, Runner & o2 );
+                friend void swap( Runner & o1, Runner & o2 ) noexcept;
                 
             private:
                 
