@@ -28,7 +28,7 @@
  * @copyright   (c) 2018, Jean-David Gadina - www.xs-labs.com
  */
 
-#include <XS/Test.hpp>
+#include <XSTest/XSTest.hpp>
 
 class Bar: public XS::Test::Case
 {

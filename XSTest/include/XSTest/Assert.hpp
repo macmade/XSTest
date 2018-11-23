@@ -23,27 +23,41 @@
  ******************************************************************************/
 
 /*!
- * @file        Foo.cpp
+ * @header      Assert.hpp
  * @author      Jean-David Gadina - www.xs-labs.com
  * @copyright   (c) 2018, Jean-David Gadina - www.xs-labs.com
  */
 
-#include <XSTest/XSTest.hpp>
-#include <thread>
+#ifndef XS_TEST_ASSERT_HPP
+#define XS_TEST_ASSERT_HPP
 
-XSTest( Foo, Test1 )
+#include <string>
+#include <XSTest/Failure.hpp>
+#include <sstream>
+
+namespace XS
 {
-    std::this_thread::sleep_for( std::chrono::milliseconds( 10 ) );
+    namespace Test
+    {
+        namespace Assert
+        {
+            inline void Boolean( bool value, bool expected, const std::string & expression, const std::string & file, int line )
+            {
+                std::stringstream ss;
+                
+                if( value != expected )
+                {
+                    using std::to_string;
+                    
+                    ss << "Value of: " << expression                          << std::endl
+                       << "  Actual: " << ( ( value    ) ? "true" : "false" ) << std::endl
+                       << "Expected: " << ( ( expected ) ? "true" : "false" );
+                    
+                    throw Failure( ss.str(), file, line );
+                } 
+            }
+        }
+    }
 }
 
-XSTest( Foo, Test2 )
-{}
-
-XSTest( Foo, Test3 )
-{}
-
-XSTest( Foo, Test4 )
-{}
-
-XSTest( Foo, Test5 )
-{}
+#endif /* XS_TEST_ASSERT_HPP */

@@ -38,10 +38,10 @@
 #include <algorithm>
 #include <random>
 #include <map>
-#include <XS/Test/Optional.hpp>
-#include <XS/Test/Failure.hpp>
-#include <XS/Test/Case.hpp>
-#include <XS/Test/StopWatch.hpp>
+#include <XSTest/Optional.hpp>
+#include <XSTest/Failure.hpp>
+#include <XSTest/Case.hpp>
+#include <XSTest/StopWatch.hpp>
 
 namespace XS
 {
@@ -50,6 +50,20 @@ namespace XS
         class Suite;
         class Case;
         
+        #ifdef XS_TEST_DYLIB
+        
+        extern std::vector< std::shared_ptr< Info > > & GetAllInfos( void );
+        
+        #else
+        
+        inline std::vector< std::shared_ptr< Info > > & GetAllInfos( void )
+        {
+            static auto infos = new std::vector< std::shared_ptr< Info > >();
+            
+            return *( infos );
+        }
+        
+        #endif
         class Info
         {
             public:
@@ -66,7 +80,7 @@ namespace XS
                 {
                     Info * i = new Info( testCaseName, testName, createTest, file, line );
                                         
-                    GetInfos()->push_back( std::shared_ptr< Info >( i ) );
+                    GetInfos().push_back( std::shared_ptr< Info >( i ) );
                     
                     return *( i );
                 }
@@ -75,7 +89,7 @@ namespace XS
                 {
                     std::vector< Info > all;
                     
-                    for( auto & i: *( GetInfos() ) )
+                    for( auto & i: GetInfos() )
                     {
                         all.push_back( *( i ) );
                     }
@@ -230,16 +244,9 @@ namespace XS
                 
             private:
                 
-                static std::vector< std::shared_ptr< Info > > * GetInfos( void )
+                static std::vector< std::shared_ptr< Info > > & GetInfos( void )
                 {
-                    static std::vector< std::shared_ptr< Info > > * infos = nullptr;
-                    
-                    if( infos == nullptr )
-                    {
-                        infos = new std::vector< std::shared_ptr< Info > >();
-                    }
-                    
-                    return infos;
+                    return GetAllInfos();
                 }
                 
                 Info( const std::string & suiteName, const std::string & caseName, const std::function< std::shared_ptr< Case >( void ) > createTest, const std::string & file, int line ):

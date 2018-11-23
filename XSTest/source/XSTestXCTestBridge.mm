@@ -29,10 +29,7 @@
  */
 
 #import <XCTest/XCTest.h>
-#import <XS/Test/Info.hpp>
-#import <XS/Test/Suite.hpp>
-#import <XS/Test/Case.hpp>
-#import <objc/runtime.h>
+#import <XSTest/XSTest.hpp>
 #import <objc/message.h>
 
 static id runTestCase( XCTestCase * self, SEL _cmd );
@@ -64,7 +61,7 @@ static std::vector< std::shared_ptr< XS::Test::Info > > * allInfos = nullptr;
 {
     allInfos = new std::vector< std::shared_ptr< XS::Test::Info > >();
     
-    for( const auto & suite: XS::Test::Info::All() )
+    for( const auto & suite: XS::Test::Suite::All() )
     {
         [ self createTestSuite: suite ];
     }

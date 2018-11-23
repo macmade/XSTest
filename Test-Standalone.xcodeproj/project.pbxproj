@@ -7,28 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		05D526F121A864F20025CCEB /* XSTestXCTestBridge.mm in Sources */ = {isa = PBXBuildFile; fileRef = 05D5267721A6FF260025CCEB /* XSTestXCTestBridge.mm */; };
-		05D526F621A865820025CCEB /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05D5266921A6EC430025CCEB /* XCTest.framework */; };
-		05D526F721A865860025CCEB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05D5269221A714C90025CCEB /* Foundation.framework */; };
-		05D526F821A8658C0025CCEB /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 05D5266C21A6EC7B0025CCEB /* libc++.tbd */; };
-		05D526F921A86E070025CCEB /* Assert.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 05D526DB21A792920025CCEB /* Assert.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
-		05D526FA21A86E070025CCEB /* Case.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 05D525A921A5FDFF0025CCEB /* Case.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
-		05D526FB21A86E070025CCEB /* Failure.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 05D5269421A71A9A0025CCEB /* Failure.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
-		05D526FC21A86E070025CCEB /* Functions.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 05D525EE21A605930025CCEB /* Functions.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
-		05D526FD21A86E070025CCEB /* Info.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 05D525AA21A5FE810025CCEB /* Info.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
-		05D526FE21A86E070025CCEB /* Macros.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 05D525F121A606550025CCEB /* Macros.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
-		05D526FF21A86E070025CCEB /* Optional.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 05D5261E21A6B9880025CCEB /* Optional.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
-		05D5270021A86E070025CCEB /* Runner.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 05D5260721A629D20025CCEB /* Runner.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
-		05D5270121A86E070025CCEB /* StopWatch.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 05D525FA21A61FAE0025CCEB /* StopWatch.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
-		05D5270221A86E070025CCEB /* Suite.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 05D5260A21A62A590025CCEB /* Suite.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
-		05D5270321A86E070025CCEB /* Utility.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 05D5260D21A630C50025CCEB /* Utility.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
-		05D5270A21A87F1B0025CCEB /* XSTest.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 05D5270921A87F1B0025CCEB /* XSTest.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
+		05D5264F21A6C0F20025CCEB /* Foo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05D525E521A605160025CCEB /* Foo.cpp */; };
+		05D526D721A78CEE0025CCEB /* Bar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05D526D521A78CE80025CCEB /* Bar.cpp */; };
+		05D526E021A85A520025CCEB /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05D526DF21A85A520025CCEB /* main.cpp */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		05D525E121A605160025CCEB /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
-		05D5259A21A5FD7C0025CCEB /* XSTest.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = XSTest.hpp; sourceTree = "<group>"; };
-		05D525A921A5FDFF0025CCEB /* Case.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Case.hpp; sourceTree = "<group>"; };
-		05D525AA21A5FE810025CCEB /* Info.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Info.hpp; sourceTree = "<group>"; };
 		05D525AE21A604950025CCEB /* Release - ccache.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Release - ccache.xcconfig"; sourceTree = "<group>"; };
 		05D525AF21A604950025CCEB /* Common.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Common.xcconfig; sourceTree = "<group>"; };
 		05D525B021A604950025CCEB /* Debug - ccache.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Debug - ccache.xcconfig"; sourceTree = "<group>"; };
@@ -70,32 +66,32 @@
 		05D525DB21A604950025CCEB /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		05D525DD21A604950025CCEB /* ccache-config.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "ccache-config.sh"; sourceTree = "<group>"; };
 		05D525DE21A604950025CCEB /* ccache.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = ccache.sh; sourceTree = "<group>"; };
-		05D525EE21A605930025CCEB /* Functions.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Functions.hpp; sourceTree = "<group>"; };
-		05D525F121A606550025CCEB /* Macros.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Macros.hpp; sourceTree = "<group>"; };
-		05D525FA21A61FAE0025CCEB /* StopWatch.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = StopWatch.hpp; sourceTree = "<group>"; };
-		05D5260721A629D20025CCEB /* Runner.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Runner.hpp; sourceTree = "<group>"; };
-		05D5260A21A62A590025CCEB /* Suite.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Suite.hpp; sourceTree = "<group>"; };
-		05D5260D21A630C50025CCEB /* Utility.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Utility.hpp; sourceTree = "<group>"; };
-		05D5261E21A6B9880025CCEB /* Optional.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Optional.hpp; sourceTree = "<group>"; };
+		05D525E321A605160025CCEB /* TestExec */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = TestExec; sourceTree = BUILT_PRODUCTS_DIR; };
+		05D525E521A605160025CCEB /* Foo.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Foo.cpp; sourceTree = "<group>"; };
 		05D5266921A6EC430025CCEB /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/MacOSX.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		05D5266C21A6EC7B0025CCEB /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
-		05D5267721A6FF260025CCEB /* XSTestXCTestBridge.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = XSTestXCTestBridge.mm; sourceTree = "<group>"; };
 		05D5269221A714C90025CCEB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		05D5269421A71A9A0025CCEB /* Failure.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Failure.hpp; sourceTree = "<group>"; };
-		05D526DB21A792920025CCEB /* Assert.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Assert.hpp; sourceTree = "<group>"; };
-		05D526E721A864BC0025CCEB /* XSTest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = XSTest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		05D526EF21A864E80025CCEB /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		05D5270921A87F1B0025CCEB /* XSTest.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = XSTest.hpp; sourceTree = "<group>"; };
+		05D526D521A78CE80025CCEB /* Bar.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Bar.cpp; sourceTree = "<group>"; };
+		05D526DF21A85A520025CCEB /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		05D5271421A88B950025CCEB /* Functions.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Functions.hpp; sourceTree = "<group>"; };
+		05D5271521A88B950025CCEB /* Info.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Info.hpp; sourceTree = "<group>"; };
+		05D5271621A88B950025CCEB /* Utility.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Utility.hpp; sourceTree = "<group>"; };
+		05D5271721A88B950025CCEB /* Case.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Case.hpp; sourceTree = "<group>"; };
+		05D5271821A88B950025CCEB /* StopWatch.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = StopWatch.hpp; sourceTree = "<group>"; };
+		05D5271921A88B950025CCEB /* XSTest.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = XSTest.hpp; sourceTree = "<group>"; };
+		05D5271A21A88B950025CCEB /* Macros.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Macros.hpp; sourceTree = "<group>"; };
+		05D5271B21A88B950025CCEB /* Optional.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Optional.hpp; sourceTree = "<group>"; };
+		05D5271C21A88B950025CCEB /* Assert.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Assert.hpp; sourceTree = "<group>"; };
+		05D5271D21A88B950025CCEB /* Suite.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Suite.hpp; sourceTree = "<group>"; };
+		05D5271E21A88B950025CCEB /* Failure.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Failure.hpp; sourceTree = "<group>"; };
+		05D5271F21A88B950025CCEB /* Runner.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Runner.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		05D526E421A864BC0025CCEB /* Frameworks */ = {
+		05D525E021A605160025CCEB /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				05D526F821A8658C0025CCEB /* libc++.tbd in Frameworks */,
-				05D526F721A865860025CCEB /* Foundation.framework in Frameworks */,
-				05D526F621A865820025CCEB /* XCTest.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -106,7 +102,8 @@
 			isa = PBXGroup;
 			children = (
 				05D525AD21A604950025CCEB /* xcconfig */,
-				05D5258A21A5FD520025CCEB /* XSTest */,
+				05D5270E21A88B950025CCEB /* XSTest */,
+				05D5264721A6C0D10025CCEB /* Test */,
 				05D5258921A5FD520025CCEB /* Products */,
 				05D525EC21A605500025CCEB /* Frameworks */,
 			);
@@ -115,54 +112,9 @@
 		05D5258921A5FD520025CCEB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				05D526E721A864BC0025CCEB /* XSTest.framework */,
+				05D525E321A605160025CCEB /* TestExec */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		05D5258A21A5FD520025CCEB /* XSTest */ = {
-			isa = PBXGroup;
-			children = (
-				05D5270C21A882630025CCEB /* framework */,
-				05D5259621A5FD5A0025CCEB /* include */,
-				05D5259721A5FD640025CCEB /* source */,
-			);
-			path = XSTest;
-			sourceTree = "<group>";
-		};
-		05D5259621A5FD5A0025CCEB /* include */ = {
-			isa = PBXGroup;
-			children = (
-				05D5259821A5FD6F0025CCEB /* XSTest */,
-			);
-			path = include;
-			sourceTree = "<group>";
-		};
-		05D5259721A5FD640025CCEB /* source */ = {
-			isa = PBXGroup;
-			children = (
-				05D5267721A6FF260025CCEB /* XSTestXCTestBridge.mm */,
-			);
-			path = source;
-			sourceTree = "<group>";
-		};
-		05D5259821A5FD6F0025CCEB /* XSTest */ = {
-			isa = PBXGroup;
-			children = (
-				05D526DB21A792920025CCEB /* Assert.hpp */,
-				05D525A921A5FDFF0025CCEB /* Case.hpp */,
-				05D5269421A71A9A0025CCEB /* Failure.hpp */,
-				05D525EE21A605930025CCEB /* Functions.hpp */,
-				05D525AA21A5FE810025CCEB /* Info.hpp */,
-				05D525F121A606550025CCEB /* Macros.hpp */,
-				05D5261E21A6B9880025CCEB /* Optional.hpp */,
-				05D5260721A629D20025CCEB /* Runner.hpp */,
-				05D525FA21A61FAE0025CCEB /* StopWatch.hpp */,
-				05D5260A21A62A590025CCEB /* Suite.hpp */,
-				05D5260D21A630C50025CCEB /* Utility.hpp */,
-				05D5259A21A5FD7C0025CCEB /* XSTest.hpp */,
-			);
-			path = XSTest;
 			sourceTree = "<group>";
 		};
 		05D525AD21A604950025CCEB /* xcconfig */ = {
@@ -288,57 +240,70 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		05D5270C21A882630025CCEB /* framework */ = {
+		05D5264721A6C0D10025CCEB /* Test */ = {
 			isa = PBXGroup;
 			children = (
-				05D526EF21A864E80025CCEB /* Info.plist */,
-				05D5270921A87F1B0025CCEB /* XSTest.hpp */,
+				05D526D521A78CE80025CCEB /* Bar.cpp */,
+				05D525E521A605160025CCEB /* Foo.cpp */,
+				05D526DF21A85A520025CCEB /* main.cpp */,
 			);
-			path = framework;
+			path = Test;
+			sourceTree = "<group>";
+		};
+		05D5270E21A88B950025CCEB /* XSTest */ = {
+			isa = PBXGroup;
+			children = (
+				05D5271221A88B950025CCEB /* include */,
+			);
+			path = XSTest;
+			sourceTree = "<group>";
+		};
+		05D5271221A88B950025CCEB /* include */ = {
+			isa = PBXGroup;
+			children = (
+				05D5271321A88B950025CCEB /* XSTest */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		05D5271321A88B950025CCEB /* XSTest */ = {
+			isa = PBXGroup;
+			children = (
+				05D5271421A88B950025CCEB /* Functions.hpp */,
+				05D5271521A88B950025CCEB /* Info.hpp */,
+				05D5271621A88B950025CCEB /* Utility.hpp */,
+				05D5271721A88B950025CCEB /* Case.hpp */,
+				05D5271821A88B950025CCEB /* StopWatch.hpp */,
+				05D5271921A88B950025CCEB /* XSTest.hpp */,
+				05D5271A21A88B950025CCEB /* Macros.hpp */,
+				05D5271B21A88B950025CCEB /* Optional.hpp */,
+				05D5271C21A88B950025CCEB /* Assert.hpp */,
+				05D5271D21A88B950025CCEB /* Suite.hpp */,
+				05D5271E21A88B950025CCEB /* Failure.hpp */,
+				05D5271F21A88B950025CCEB /* Runner.hpp */,
+			);
+			path = XSTest;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
-/* Begin PBXHeadersBuildPhase section */
-		05D526E221A864BC0025CCEB /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				05D526FC21A86E070025CCEB /* Functions.hpp in Headers */,
-				05D526FE21A86E070025CCEB /* Macros.hpp in Headers */,
-				05D5270021A86E070025CCEB /* Runner.hpp in Headers */,
-				05D526FB21A86E070025CCEB /* Failure.hpp in Headers */,
-				05D526FF21A86E070025CCEB /* Optional.hpp in Headers */,
-				05D5270A21A87F1B0025CCEB /* XSTest.hpp in Headers */,
-				05D5270321A86E070025CCEB /* Utility.hpp in Headers */,
-				05D526FA21A86E070025CCEB /* Case.hpp in Headers */,
-				05D526F921A86E070025CCEB /* Assert.hpp in Headers */,
-				05D5270221A86E070025CCEB /* Suite.hpp in Headers */,
-				05D5270121A86E070025CCEB /* StopWatch.hpp in Headers */,
-				05D526FD21A86E070025CCEB /* Info.hpp in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXHeadersBuildPhase section */
-
 /* Begin PBXNativeTarget section */
-		05D526E621A864BC0025CCEB /* XSTest */ = {
+		05D525E221A605160025CCEB /* TestExec */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 05D526EC21A864BC0025CCEB /* Build configuration list for PBXNativeTarget "XSTest" */;
+			buildConfigurationList = 05D525E721A605160025CCEB /* Build configuration list for PBXNativeTarget "TestExec" */;
 			buildPhases = (
-				05D526E221A864BC0025CCEB /* Headers */,
-				05D526E321A864BC0025CCEB /* Sources */,
-				05D526E421A864BC0025CCEB /* Frameworks */,
-				05D526E521A864BC0025CCEB /* Resources */,
+				05D525DF21A605160025CCEB /* Sources */,
+				05D525E021A605160025CCEB /* Frameworks */,
+				05D525E121A605160025CCEB /* CopyFiles */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = XSTest;
-			productName = XSTest;
-			productReference = 05D526E721A864BC0025CCEB /* XSTest.framework */;
-			productType = "com.apple.product-type.framework";
+			name = TestExec;
+			productName = Test;
+			productReference = 05D525E321A605160025CCEB /* TestExec */;
+			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
 
@@ -349,12 +314,12 @@
 				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = "XS-Labs";
 				TargetAttributes = {
-					05D526E621A864BC0025CCEB = {
+					05D525E221A605160025CCEB = {
 						CreatedOnToolsVersion = 10.1;
 					};
 				};
 			};
-			buildConfigurationList = 05D5258321A5FD520025CCEB /* Build configuration list for PBXProject "XSTest" */;
+			buildConfigurationList = 05D5258321A5FD520025CCEB /* Build configuration list for PBXProject "Test-Standalone" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -366,27 +331,19 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				05D526E621A864BC0025CCEB /* XSTest */,
+				05D525E221A605160025CCEB /* TestExec */,
 			);
 		};
 /* End PBXProject section */
 
-/* Begin PBXResourcesBuildPhase section */
-		05D526E521A864BC0025CCEB /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXResourcesBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
-		05D526E321A864BC0025CCEB /* Sources */ = {
+		05D525DF21A605160025CCEB /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				05D526F121A864F20025CCEB /* XSTestXCTestBridge.mm in Sources */,
+				05D5264F21A6C0F20025CCEB /* Foo.cpp in Sources */,
+				05D526D721A78CEE0025CCEB /* Bar.cpp in Sources */,
+				05D526E021A85A520025CCEB /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -399,9 +356,7 @@
 			buildSettings = {
 				CLANG_ENABLE_CODE_COVERAGE = NO;
 				GCC_GENERATE_TEST_COVERAGE_FILES = NO;
-				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
 				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = NO;
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/XSTest/include";
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 			};
@@ -413,68 +368,30 @@
 			buildSettings = {
 				CLANG_ENABLE_CODE_COVERAGE = NO;
 				GCC_GENERATE_TEST_COVERAGE_FILES = NO;
-				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
 				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = NO;
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/XSTest/include";
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 			};
 			name = Release;
 		};
-		05D526ED21A864BC0025CCEB /* Debug */ = {
+		05D525E821A605160025CCEB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_SEARCH_PATHS = "$(PLATFORM_DIR)/Developer/Library/Frameworks";
-				FRAMEWORK_VERSION = A;
-				INFOPLIST_FILE = XSTest/framework/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.xs-labs.XSTest";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SKIP_INSTALL = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
 		};
-		05D526EE21A864BC0025CCEB /* Release */ = {
+		05D525E921A605160025CCEB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_SEARCH_PATHS = "$(PLATFORM_DIR)/Developer/Library/Frameworks";
-				FRAMEWORK_VERSION = A;
-				INFOPLIST_FILE = XSTest/framework/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.xs-labs.XSTest";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SKIP_INSTALL = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		05D5258321A5FD520025CCEB /* Build configuration list for PBXProject "XSTest" */ = {
+		05D5258321A5FD520025CCEB /* Build configuration list for PBXProject "Test-Standalone" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				05D5259121A5FD520025CCEB /* Debug */,
@@ -483,11 +400,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		05D526EC21A864BC0025CCEB /* Build configuration list for PBXNativeTarget "XSTest" */ = {
+		05D525E721A605160025CCEB /* Build configuration list for PBXNativeTarget "TestExec" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				05D526ED21A864BC0025CCEB /* Debug */,
-				05D526EE21A864BC0025CCEB /* Release */,
+				05D525E821A605160025CCEB /* Debug */,
+				05D525E921A605160025CCEB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

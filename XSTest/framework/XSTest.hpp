@@ -23,41 +23,26 @@
  ******************************************************************************/
 
 /*!
- * @header      Assert.hpp
+ * @header      Test.hpp
  * @author      Jean-David Gadina - www.xs-labs.com
  * @copyright   (c) 2018, Jean-David Gadina - www.xs-labs.com
  */
 
-#ifndef XS_TEST_ASSERT_HPP
-#define XS_TEST_ASSERT_HPP
+#ifndef XS_TEST_DYLIB_HPP
+#define XS_TEST_DYLIB_HPP
 
-#include <string>
-#include <XS/Test/Failure.hpp>
-#include <sstream>
+#define XS_TEST_DYLIB
 
-namespace XS
-{
-    namespace Test
-    {
-        namespace Assert
-        {
-            inline void Boolean( bool value, bool expected, const std::string & expression, const std::string & file, int line )
-            {
-                std::stringstream ss;
-                
-                if( value != expected )
-                {
-                    using std::to_string;
-                    
-                    ss << "Value of: " << expression                          << std::endl
-                       << "  Actual: " << ( ( value    ) ? "true" : "false" ) << std::endl
-                       << "Expected: " << ( ( expected ) ? "true" : "false" );
-                    
-                    throw Failure( ss.str(), file, line );
-                } 
-            }
-        }
-    }
-}
+#include <XSTest/Macros.hpp>
+#include <XSTest/Case.hpp>
+#include <XSTest/Info.hpp>
+#include <XSTest/Functions.hpp>
+#include <XSTest/StopWatch.hpp>
+#include <XSTest/Runner.hpp>
+#include <XSTest/Suite.hpp>
+#include <XSTest/Utility.hpp>
+#include <XSTest/Optional.hpp>
+#include <XSTest/Failure.hpp>
+#include <XSTest/Assert.hpp>
 
-#endif /* XS_TEST_ASSERT_HPP */
+#endif /* XS_TEST_DYLIB_HPP */

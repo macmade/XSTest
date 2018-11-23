@@ -29,4 +29,4 @@
  */
 
 #define XS_TEST_MAIN
-#include <XS/Test.hpp>
+#include <XSTest/XSTest.hpp>

@@ -23,24 +23,40 @@
  ******************************************************************************/
 
 /*!
- * @header      Test.hpp
+ * @header      Functions.hpp
  * @author      Jean-David Gadina - www.xs-labs.com
  * @copyright   (c) 2018, Jean-David Gadina - www.xs-labs.com
  */
 
-#ifndef XS_TEST_HPP
-#define XS_TEST_HPP
+#ifndef XS_TEST_FUNCTIONS_HPP
+#define XS_TEST_FUNCTIONS_HPP
 
-#include <XS/Test/Macros.hpp>
-#include <XS/Test/Case.hpp>
-#include <XS/Test/Info.hpp>
-#include <XS/Test/Functions.hpp>
-#include <XS/Test/StopWatch.hpp>
-#include <XS/Test/Runner.hpp>
-#include <XS/Test/Suite.hpp>
-#include <XS/Test/Utility.hpp>
-#include <XS/Test/Optional.hpp>
-#include <XS/Test/Failure.hpp>
-#include <XS/Test/Assert.hpp>
+#include <iostream>
+#include <XSTest/Optional.hpp>
+#include <XSTest/Runner.hpp>
+#include <XSTest/Info.hpp>
+#include <XSTest/Suite.hpp>
 
-#endif /* XS_TEST_HPP */
+namespace XS
+{
+    namespace Test
+    {
+        inline int RunAll( Optional< std::reference_wrapper< std::ostream > > os = { std::cout } )
+        {
+            Runner runner( Suite::All() );
+            
+            return ( runner.Run( os ) ) ? 0 : -1;
+        }
+    }
+}
+
+#ifdef XS_TEST_MAIN
+
+int main( void )
+{
+    return XS::Test::RunAll();
+}
+
+#endif
+
+#endif /* XS_TEST_FUNCTIONS_HPP */

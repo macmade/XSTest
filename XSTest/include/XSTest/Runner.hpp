@@ -34,11 +34,11 @@
 #include <iostream>
 #include <memory>
 #include <algorithm>
-#include <XS/Test/Optional.hpp>
-#include <XS/Test/Utility.hpp>
-#include <XS/Test/Info.hpp>
-#include <XS/Test/Suite.hpp>
-#include <XS/Test/StopWatch.hpp>
+#include <XSTest/Optional.hpp>
+#include <XSTest/Utility.hpp>
+#include <XSTest/Info.hpp>
+#include <XSTest/Suite.hpp>
+#include <XSTest/StopWatch.hpp>
 
 namespace XS
 {

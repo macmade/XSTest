@@ -36,10 +36,10 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
-#include <XS/Test/Optional.hpp>
-#include <XS/Test/StopWatch.hpp>
-#include <XS/Test/Utility.hpp>
-#include <XS/Test/Info.hpp>
+#include <XSTest/Optional.hpp>
+#include <XSTest/StopWatch.hpp>
+#include <XSTest/Utility.hpp>
+#include <XSTest/Info.hpp>
 
 namespace XS
 {
