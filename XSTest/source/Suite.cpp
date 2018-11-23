@@ -51,11 +51,11 @@ namespace XS
         };
         
         Suite::Suite( const std::string & name, std::vector< Info > infos ):
-            impl( std::make_shared< IMPL >( name, infos ) )
+            impl( new IMPL( name, infos ) )
         {}
         
         Suite::Suite( const Suite & o ):
-            impl( std::make_shared< IMPL >( *( o.impl ) ) )
+            impl( new IMPL( *( o.impl ) ) )
         {}
         
         Suite::~Suite( void )

@@ -50,12 +50,12 @@ namespace XS
         
         Failure::Failure( const std::string & reason, const std::string & file, int line ):
             std::runtime_error( reason ),
-            impl( std::make_shared< IMPL >( reason, file, line ) )
+            impl( new IMPL( reason, file, line ) )
         {}
         
         Failure::Failure( const Failure & o ):
             std::runtime_error( o.impl->_reason ),
-            impl( std::make_shared< IMPL >( *( o.impl ) ) )
+            impl( new IMPL( *( o.impl ) ) )
         {}
         
         Failure::~Failure( void )

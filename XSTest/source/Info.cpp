@@ -97,11 +97,11 @@ namespace XS
         }
         
         Info::Info( const std::string & suiteName, const std::string & caseName, const std::function< std::shared_ptr< Case >( void ) > createTest, const std::string & file, int line ):
-            impl( std::make_shared< IMPL >( suiteName, caseName, createTest, file, line ) )
+            impl( new IMPL( suiteName, caseName, createTest, file, line ) )
         {}
         
         Info::Info( const Info & o ):
-            impl( std::make_shared< IMPL >( *( o.impl ) ) )
+            impl( new IMPL( *( o.impl ) ) )
         {}
         
         Info::~Info( void )

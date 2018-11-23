@@ -54,11 +54,11 @@ namespace XS
         };
         
         Runner::Runner( const std::vector< Suite > & suites ):
-            impl( std::make_shared< IMPL >( suites ) )
+            impl( new IMPL( suites ) )
         {}
         
         Runner::Runner( const Runner & o ):
-            impl( std::make_shared< IMPL >( *( o.impl ) ) )
+            impl( new IMPL( *( o.impl ) ) )
         {}
         
         Runner::~Runner( void )

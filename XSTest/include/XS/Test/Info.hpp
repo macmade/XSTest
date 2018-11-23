@@ -83,7 +83,7 @@ namespace XS
                 
                 class IMPL;
                 
-                std::shared_ptr< IMPL > impl;
+                std::unique_ptr< IMPL > impl;
         };
     }
 }

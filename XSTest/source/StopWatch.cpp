@@ -55,7 +55,7 @@ namespace XS
                 Status                                               _status;
         };
         
-        StopWatch::StopWatch( void ): impl( std::make_shared< IMPL >() )
+        StopWatch::StopWatch( void ): impl( new IMPL() )
         {}
         
         StopWatch::~StopWatch( void )
