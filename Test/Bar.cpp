@@ -23,47 +23,37 @@
  ******************************************************************************/
 
 /*!
- * @file        Info.cpp
+ * @file        Bar.cpp
  * @author      Jean-David Gadina - www.xs-labs.com
  * @copyright   (c) 2018, Jean-David Gadina - www.xs-labs.com
  */
 
 #include <XS/Test.hpp>
-#include <iostream>
-#include <thread>
 
-XSTest( Foo, Test1 )
+class Bar: public XS::Test::Case
 {
-    std::this_thread::sleep_for( std::chrono::milliseconds( 10 ) );
-}
+    protected:
+        
+        void SetUp( void ) override
+        {}
+        
+        void TearDown( void ) override
+        {}
+};
 
-XSTest( Foo, Test2 )
-{
-    std::this_thread::sleep_for( std::chrono::milliseconds( 1010 ) );
-}
-
-XSTest( Foo, Test3 )
+XSTestFixture( Bar, Test1 )
 {
     throw XS::Test::Failure( "Some error", __FILE__, __LINE__ );
 }
 
-XSTest( Foo, Test4 )
+XSTestFixture( Bar, Test2 )
 {}
 
-XSTest( Foo, Test5 )
+XSTestFixture( Bar, Test3 )
 {}
 
-XSTest( Bar, Test1 )
+XSTestFixture( Bar, Test4 )
 {}
 
-XSTest( Bar, Test2 )
-{}
-
-XSTest( Bar, Test3 )
-{}
-
-XSTest( Bar, Test4 )
-{}
-
-XSTest( Bar, Test5 )
+XSTestFixture( Bar, Test5 )
 {}

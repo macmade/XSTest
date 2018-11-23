@@ -23,43 +23,31 @@
  ******************************************************************************/
 
 /*!
- * @header      Case.hpp
+ * @file        Foo.cpp
  * @author      Jean-David Gadina - www.xs-labs.com
  * @copyright   (c) 2018, Jean-David Gadina - www.xs-labs.com
  */
 
-#ifndef XS_TEST_BASE_HPP
-#define XS_TEST_BASE_HPP
+#include <XS/Test.hpp>
+#include <thread>
 
-namespace XS
+XSTest( Foo, Test1 )
 {
-    namespace Test
-    {
-        class Info;
-        
-        class Case
-        {
-            public:
-                
-                Case( void );
-                virtual ~Case( void );
-                
-                Case( const Case & o )              = delete;
-                Case & operator =( const Case & o ) = delete;
-                
-            protected:
-                
-                virtual void SetUp( void );
-                virtual void TearDown( void );
-                
-            private:
-                
-                friend class Info;
-                
-                virtual const Info & Info( void ) = 0;
-                virtual void         Test( void ) = 0;
-        };
-    }
+    std::this_thread::sleep_for( std::chrono::milliseconds( 10 ) );
 }
 
-#endif /* XS_TEST_BASE_HPP */
+XSTest( Foo, Test2 )
+{
+    std::this_thread::sleep_for( std::chrono::milliseconds( 1010 ) );
+}
+
+XSTest( Foo, Test3 )
+{
+    throw XS::Test::Failure( "Some error", __FILE__, __LINE__ );
+}
+
+XSTest( Foo, Test4 )
+{}
+
+XSTest( Foo, Test5 )
+{}

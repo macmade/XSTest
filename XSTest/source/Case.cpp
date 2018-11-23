@@ -23,43 +23,27 @@
  ******************************************************************************/
 
 /*!
- * @header      Case.hpp
+ * @file        Case.cpp
  * @author      Jean-David Gadina - www.xs-labs.com
  * @copyright   (c) 2018, Jean-David Gadina - www.xs-labs.com
  */
 
-#ifndef XS_TEST_BASE_HPP
-#define XS_TEST_BASE_HPP
+#include <XS/Test/Case.hpp>
 
 namespace XS
 {
     namespace Test
     {
-        class Info;
+        Case::Case( void )
+        {}
         
-        class Case
-        {
-            public:
-                
-                Case( void );
-                virtual ~Case( void );
-                
-                Case( const Case & o )              = delete;
-                Case & operator =( const Case & o ) = delete;
-                
-            protected:
-                
-                virtual void SetUp( void );
-                virtual void TearDown( void );
-                
-            private:
-                
-                friend class Info;
-                
-                virtual const Info & Info( void ) = 0;
-                virtual void         Test( void ) = 0;
-        };
+        Case::~Case( void )
+        {}
+        
+        void Case::SetUp( void )
+        {}
+        
+        void Case::TearDown( void )
+        {}
     }
 }
-
-#endif /* XS_TEST_BASE_HPP */

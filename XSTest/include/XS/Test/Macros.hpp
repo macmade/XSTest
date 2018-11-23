@@ -36,6 +36,7 @@
  ******************************************************************************/
 
 #define TEST( _case_, _name_ )              XSTest( _case_, _name_ )
+#define TEST_F( _case_, _name_ )            XSTestFixture( _case_, _name_ )
 #define ASSERT_FALSE( _e_ )                 XSAssertFalse( _e_ )
 #define ASSERT_TRUE( _e_ )                  XSAssertTrue( _e_ )
 #define ASSERT_EQ( _v1_, _v2_ )             XSAssertEqual( _v1_, _v2_ )
@@ -89,6 +90,7 @@
  ******************************************************************************/
  
 #define XSTest( _case_, _name_ )                    XSTest_Internal_TestSetup( _case_, _name_, XSTest_Internal_ClassName( _case_, _name_ ), XS::Test::Case )
+#define XSTestFixture( _case_, _name_ )             XSTest_Internal_TestSetup( _case_, _name_, XSTest_Internal_ClassName( _case_, _name_ ), _case_ )
 #define XSTest_Internal_ClassName( _case_, _name_ ) Test_ ## _case_ ## _ ## _name_
 #define XSTest_Internal_XString( _s_ )              XSTest_Internal_String( _s_ )
 #define XSTest_Internal_String( _s_ )               #_s_

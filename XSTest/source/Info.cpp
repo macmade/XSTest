@@ -151,7 +151,8 @@ namespace XS
         
         bool Info::Run( Optional< std::reference_wrapper< std::ostream > > os )
         {
-            StopWatch time;
+            StopWatch               time;
+            std::shared_ptr< Case > test( this->impl->_createTest() );
             
             this->impl->_failure.reset();
             
@@ -162,11 +163,12 @@ namespace XS
                 os.value().get() << "[ RUN      ] " << this->GetName() << std::endl;
             }
             
+            test->SetUp();
             time.Start();
             
             try
             {
-                this->impl->_createTest()->Test();
+                test->Test();
                 
                 this->impl->_status = Status::Success;
             }
@@ -187,6 +189,7 @@ namespace XS
             }
             
             time.Stop();
+            test->TearDown();
             
             if( os )
             {
