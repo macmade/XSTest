@@ -37,14 +37,10 @@ XSTest( Foo, Test1 )
 }
 
 XSTest( Foo, Test2 )
-{
-    std::this_thread::sleep_for( std::chrono::milliseconds( 1010 ) );
-}
+{}
 
 XSTest( Foo, Test3 )
-{
-    throw XS::Test::Failure( "Some error", __FILE__, __LINE__ );
-}
+{}
 
 XSTest( Foo, Test4 )
 {}
