@@ -43,7 +43,7 @@ static std::vector< std::shared_ptr< XS::Test::Info > > * allInfos = nullptr;
 {}
 
 + ( void )createAllTests;
-+ ( void )createTestsSuite: ( const XS::Test::Suite & )suite;
++ ( void )createTestSuite: ( const XS::Test::Suite & )suite;
 + ( void )addTestCase: ( const XS::Test::Info & )info toClass: ( Class )cls;
 
 @end
@@ -66,11 +66,11 @@ static std::vector< std::shared_ptr< XS::Test::Info > > * allInfos = nullptr;
     
     for( const auto & suite: XS::Test::Info::All() )
     {
-        [ self createTestsSuite: suite ];
+        [ self createTestSuite: suite ];
     }
 }
 
-+ ( void )createTestsSuite: ( const XS::Test::Suite & )suite
++ ( void )createTestSuite: ( const XS::Test::Suite & )suite
 {
     Class cls;
     Class sup;
@@ -99,7 +99,7 @@ static std::vector< std::shared_ptr< XS::Test::Info > > * allInfos = nullptr;
 
 + ( void )addTestCase: ( const XS::Test::Info & )info toClass: ( Class )cls
 {
-    std::string                       name( "test." + info.GetName() );
+    std::string                       name( "test_" + info.GetCaseName() );
     SEL                               sel;
     std::shared_ptr< XS::Test::Info > p;
     
@@ -138,11 +138,30 @@ static id runTestCase( XCTestCase * self, SEL _cmd )
     }
     
     {
-        XS::Test::Info & info( *( static_cast< XS::Test::Info * >( assoc ) ) );
+        XS::Test::Info                        & info( *( static_cast< XS::Test::Info * >( assoc ) ) );
+        XS::Test::Optional< XS::Test::Failure > failure;
+        NSString                              * description;
+        std::string                             file;
+        int                                     line;
         
         if( info.Run( {} ) == false )
         {
-            [ self recordFailureWithDescription: @"Failure" inFile: [ NSString stringWithUTF8String: info.GetFile().c_str() ] atLine: static_cast< NSUInteger >( info.GetLine() ) expected: YES ];
+            failure = info.GetFailure();
+            
+            if( failure )
+            {
+                description = [ NSString stringWithUTF8String: failure->GetReason().c_str() ];
+                file        = failure->GetFile();
+                line        = failure->GetLine();
+            }
+            else
+            {
+                description = @"Unknown error";
+                file        = info.GetFile();
+                line        = info.GetLine();
+            }
+            
+            [ self recordFailureWithDescription: description inFile: [ NSString stringWithUTF8String: file.c_str() ] atLine: static_cast< NSUInteger >( line ) expected: YES ];
         }
     }
     

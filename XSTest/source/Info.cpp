@@ -85,7 +85,7 @@ namespace XS
             
             for( auto & i: *( infos ) )
             {
-                all[ i->GetName() ].push_back( *( i ) );
+                all[ i->GetSuiteName() ].push_back( *( i ) );
             }
             
             for( const auto & p: all )
@@ -177,12 +177,12 @@ namespace XS
             }
             catch( const std::exception & e )
             {
-                this->impl->_failure = Failure( e.what(), this->impl->_file, this->impl->_line );
+                this->impl->_failure = Failure( std::string( "Caught unexpected exception: " ) + e.what(), this->impl->_file, this->impl->_line );
                 this->impl->_status  = Status::Failed;
             }
             catch( ... )
             {
-                this->impl->_failure = Failure( "Unknown error", this->impl->_file, this->impl->_line );
+                this->impl->_failure = Failure( "Caught unexpected exception", this->impl->_file, this->impl->_line );
                 this->impl->_status  = Status::Failed;
             }
             
@@ -196,6 +196,14 @@ namespace XS
                 }
                 else
                 {
+                    os.value().get() << this->impl->_failure->GetFile()
+                                     << ":"
+                                     << std::to_string( this->impl->_failure->GetLine() )
+                                     << ": Failure"
+                                     << std::endl
+                                     << this->impl->_failure->GetReason()
+                                     << std::endl;
+                    
                     os.value().get() << "[  FAILED  ] ";
                 }
                 

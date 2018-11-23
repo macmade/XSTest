@@ -44,7 +44,7 @@ XSTest( Foo, Test2 )
 
 XSTest( Foo, Test3 )
 {
-    throw std::runtime_error( "Failure" );
+    throw XS::Test::Failure( "Some error", __FILE__, __LINE__ );
 }
 
 XSTest( Foo, Test4 )
