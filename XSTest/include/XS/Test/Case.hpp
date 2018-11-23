@@ -52,8 +52,6 @@ namespace XS
                 virtual void SetUp( void );
                 virtual void TearDown( void );
                 
-            private:
-                
                 friend class Info;
                 
                 virtual const Info & Info( void ) = 0;

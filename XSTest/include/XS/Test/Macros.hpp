@@ -103,6 +103,8 @@
                                                                         \
             _class_( void ) = default;                                  \
                                                                         \
+        protected:                                                      \
+                                                                        \
             const XS::Test::Info & Info( void ) override;               \
             void                   Test( void ) override;               \
                                                                         \
