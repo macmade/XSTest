@@ -23,24 +23,36 @@
  ******************************************************************************/
 
 /*!
- * @header      Test.hpp
+ * @fie         Assert.cpp
  * @author      Jean-David Gadina - www.xs-labs.com
  * @copyright   (c) 2018, Jean-David Gadina - www.xs-labs.com
  */
 
-#ifndef XS_TEST_HPP
-#define XS_TEST_HPP
-
-#include <XS/Test/Macros.hpp>
-#include <XS/Test/Case.hpp>
-#include <XS/Test/Info.hpp>
-#include <XS/Test/Functions.hpp>
-#include <XS/Test/StopWatch.hpp>
-#include <XS/Test/Runner.hpp>
-#include <XS/Test/Suite.hpp>
-#include <XS/Test/Utility.hpp>
-#include <XS/Test/Optional.hpp>
-#include <XS/Test/Failure.hpp>
 #include <XS/Test/Assert.hpp>
+#include <XS/Test/Failure.hpp>
+#include <sstream>
 
-#endif /* XS_TEST_HPP */
+namespace XS
+{
+    namespace Test
+    {
+        namespace Assert
+        {
+            void Boolean( bool value, bool expected, const std::string & expression, const std::string & file, int line )
+            {
+                std::stringstream ss;
+                
+                if( value != expected )
+                {
+                    using std::to_string;
+                    
+                    ss << "Value of: " << expression                          << std::endl
+                       << "  Actual: " << ( ( value    ) ? "true" : "false" ) << std::endl
+                       << "Expected: " << ( ( expected ) ? "true" : "false" );
+                    
+                    throw Failure( ss.str(), file, line );
+                } 
+            }
+        }
+    }
+}

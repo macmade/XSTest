@@ -23,24 +23,25 @@
  ******************************************************************************/
 
 /*!
- * @header      Test.hpp
+ * @header      Assert.hpp
  * @author      Jean-David Gadina - www.xs-labs.com
  * @copyright   (c) 2018, Jean-David Gadina - www.xs-labs.com
  */
 
-#ifndef XS_TEST_HPP
-#define XS_TEST_HPP
+#ifndef XS_TEST_ASSERT_HPP
+#define XS_TEST_ASSERT_HPP
 
-#include <XS/Test/Macros.hpp>
-#include <XS/Test/Case.hpp>
-#include <XS/Test/Info.hpp>
-#include <XS/Test/Functions.hpp>
-#include <XS/Test/StopWatch.hpp>
-#include <XS/Test/Runner.hpp>
-#include <XS/Test/Suite.hpp>
-#include <XS/Test/Utility.hpp>
-#include <XS/Test/Optional.hpp>
-#include <XS/Test/Failure.hpp>
-#include <XS/Test/Assert.hpp>
+#include <string>
 
-#endif /* XS_TEST_HPP */
+namespace XS
+{
+    namespace Test
+    {
+        namespace Assert
+        {
+            void Boolean( bool value, bool expected, const std::string & expression, const std::string & file, int line );
+        }
+    }
+}
+
+#endif /* XS_TEST_ASSERT_HPP */

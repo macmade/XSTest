@@ -33,6 +33,8 @@
 		05D526D721A78CEE0025CCEB /* Bar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05D526D521A78CE80025CCEB /* Bar.cpp */; };
 		05D526D921A78E0D0025CCEB /* Case.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05D526D821A78E0D0025CCEB /* Case.cpp */; };
 		05D526DA21A78E0D0025CCEB /* Case.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05D526D821A78E0D0025CCEB /* Case.cpp */; };
+		05D526DD21A792FC0025CCEB /* Assert.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05D526DC21A792FC0025CCEB /* Assert.cpp */; };
+		05D526DE21A792FC0025CCEB /* Assert.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05D526DC21A792FC0025CCEB /* Assert.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -130,6 +132,8 @@
 		05D5269521A71AB30025CCEB /* Failure.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Failure.cpp; sourceTree = "<group>"; };
 		05D526D521A78CE80025CCEB /* Bar.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Bar.cpp; sourceTree = "<group>"; };
 		05D526D821A78E0D0025CCEB /* Case.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Case.cpp; sourceTree = "<group>"; };
+		05D526DB21A792920025CCEB /* Assert.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Assert.hpp; sourceTree = "<group>"; };
+		05D526DC21A792FC0025CCEB /* Assert.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Assert.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -210,6 +214,7 @@
 		05D5259721A5FD640025CCEB /* source */ = {
 			isa = PBXGroup;
 			children = (
+				05D526DC21A792FC0025CCEB /* Assert.cpp */,
 				05D526D821A78E0D0025CCEB /* Case.cpp */,
 				05D5269521A71AB30025CCEB /* Failure.cpp */,
 				05D525EF21A605E90025CCEB /* Functions.cpp */,
@@ -236,6 +241,7 @@
 		05D5259921A5FD720025CCEB /* Test */ = {
 			isa = PBXGroup;
 			children = (
+				05D526DB21A792920025CCEB /* Assert.hpp */,
 				05D525A921A5FDFF0025CCEB /* Case.hpp */,
 				05D5269421A71A9A0025CCEB /* Failure.hpp */,
 				05D525EE21A605930025CCEB /* Functions.hpp */,
@@ -530,6 +536,7 @@
 				05D526D921A78E0D0025CCEB /* Case.cpp in Sources */,
 				05D5260F21A6310E0025CCEB /* Utility.cpp in Sources */,
 				05D5260C21A62A6D0025CCEB /* Suite.cpp in Sources */,
+				05D526DD21A792FC0025CCEB /* Assert.cpp in Sources */,
 				05D5260921A629E60025CCEB /* Runner.cpp in Sources */,
 				05D525AC21A5FFC40025CCEB /* Info.cpp in Sources */,
 				05D5269621A71AB30025CCEB /* Failure.cpp in Sources */,
@@ -555,6 +562,7 @@
 				05D526DA21A78E0D0025CCEB /* Case.cpp in Sources */,
 				05D5262221A6BF130025CCEB /* Utility.cpp in Sources */,
 				05D5262321A6BF130025CCEB /* Suite.cpp in Sources */,
+				05D526DE21A792FC0025CCEB /* Assert.cpp in Sources */,
 				05D5262421A6BF130025CCEB /* Runner.cpp in Sources */,
 				05D5262521A6BF130025CCEB /* Info.cpp in Sources */,
 				05D5269721A71E990025CCEB /* Failure.cpp in Sources */,

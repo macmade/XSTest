@@ -43,11 +43,15 @@ class Bar: public XS::Test::Case
 
 XSTestFixture( Bar, Test1 )
 {
-    throw XS::Test::Failure( "Some error", __FILE__, __LINE__ );
+    XSTestAssertTrue( true == true );
+    XSTestAssertTrue( true == false );
 }
 
 XSTestFixture( Bar, Test2 )
-{}
+{
+    XSTestAssertFalse( true == true );
+    XSTestAssertFalse( true == false );
+}
 
 XSTestFixture( Bar, Test3 )
 {}

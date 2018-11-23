@@ -161,6 +161,19 @@ static id runTestCase( XCTestCase * self, SEL _cmd )
                 line        = info.GetLine();
             }
             
+            {
+                NSMutableArray * parts;
+                
+                parts = [ NSMutableArray new ];
+                
+                for( NSString * part in [ description componentsSeparatedByString: @"\n" ] )
+                {
+                    [ parts addObject: [ part stringByTrimmingCharactersInSet: [ NSCharacterSet whitespaceCharacterSet ] ] ];
+                }
+                
+                description = [ parts componentsJoinedByString: @" | " ];
+            }
+            
             [ self recordFailureWithDescription: description inFile: [ NSString stringWithUTF8String: file.c_str() ] atLine: static_cast< NSUInteger >( line ) expected: YES ];
         }
     }
