@@ -23,33 +23,10 @@
  ******************************************************************************/
 
 /*!
- * @file        Utility.cpp
+ * @file        main.cpp
  * @author      Jean-David Gadina - www.xs-labs.com
  * @copyright   (c) 2018, Jean-David Gadina - www.xs-labs.com
  */
 
-#include <XS/Test/Utility.hpp>
-
-namespace XS
-{
-    namespace Test
-    {
-        namespace Utility
-        {
-            std::string Numbered( const std::string & s, size_t count )
-            {
-                return Numbered( s, count, s + "s" );
-            }
-            
-            std::string Numbered( const std::string & s, size_t count, const std::string & plural )
-            {
-                if( count == 1 )
-                {
-                    return std::to_string( count ) + " " + s;
-                }
-                
-                return std::to_string( count ) + " " + plural;
-            }
-        }
-    }
-}
+#define XS_TEST_MAIN
+#include <XS/Test.hpp>

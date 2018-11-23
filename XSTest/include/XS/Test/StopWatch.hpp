@@ -34,6 +34,8 @@
 #include <memory>
 #include <string>
 #include <cstdint>
+#include <chrono>
+#include <algorithm>
 
 namespace XS
 {
@@ -43,24 +45,77 @@ namespace XS
         {
             public:
                 
-                StopWatch( void );
-                ~StopWatch( void );
+                StopWatch( void ): _status( Status::Unknown )
+                {}
+                
+                ~StopWatch( void )
+                {}
                 
                 StopWatch( const StopWatch & o )              = delete;
                 StopWatch & operator =( const StopWatch & o ) = delete;
                 
-                void Start( void );
-                void Stop( void );
+                void Start( void )
+                {
+                    this->_start  = std::chrono::system_clock::now();
+                    this->_status = Status::Started;
+                }
                 
-                int64_t     GetSeconds( void )      const;
-                int64_t     GetMilliseconds( void ) const;
-                std::string GetString( void )       const;
+                void Stop( void )
+                {
+                    if( this->_status != Status::Started )
+                    {
+                        return;
+                    }
+                    
+                    this->_end    = std::chrono::system_clock::now();
+                    this->_status = Status::Stopped;
+                }
+                
+                int64_t GetSeconds( void ) const
+                {
+                    std::chrono::duration< double > duration;
+                    
+                    if( this->_status != Status::Stopped )
+                    {
+                        return 0;
+                    }
+                    
+                    duration = { this->_end - this->_start };
+                    
+                    return std::chrono::duration_cast< std::chrono::seconds >( duration ).count();
+                }
+                
+                int64_t GetMilliseconds( void ) const
+                {
+                    std::chrono::duration< double > duration;
+                    
+                    if( this->_status != Status::Stopped )
+                    {
+                        return 0;
+                    }
+                    
+                    duration = { this->_end - this->_start };
+                    
+                    return std::chrono::duration_cast< std::chrono::milliseconds >( duration ).count();
+                }
+                
+                std::string GetString( void ) const
+                {
+                    return std::to_string( this->GetMilliseconds() ) + " ms";
+                }
                 
             private:
                 
-                class IMPL;
+                enum class Status
+                {
+                    Unknown,
+                    Started,
+                    Stopped
+                };
                 
-                std::unique_ptr< IMPL > impl;
+                std::chrono::time_point< std::chrono::system_clock > _start;
+                std::chrono::time_point< std::chrono::system_clock > _end;
+                Status                                               _status;
         };
     }
 }

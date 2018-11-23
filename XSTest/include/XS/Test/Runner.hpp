@@ -33,7 +33,12 @@
 
 #include <iostream>
 #include <memory>
+#include <algorithm>
 #include <XS/Test/Optional.hpp>
+#include <XS/Test/Utility.hpp>
+#include <XS/Test/Info.hpp>
+#include <XS/Test/Suite.hpp>
+#include <XS/Test/StopWatch.hpp>
 
 namespace XS
 {
@@ -45,24 +50,173 @@ namespace XS
         {
             public:
                 
-                Runner( const std::vector< Suite > & suites );
-                Runner( const Runner & o );
-                Runner( Runner && o ) noexcept;
-                virtual ~Runner( void );
+                Runner( const std::vector< Suite > & suites ):
+                    _suites( suites )
+                {
+                    Utility::Shuffle( this->_suites );
+                }
                 
-                Runner & operator =( Runner o );
+                Runner( const Runner & o ):
+                    Runner( o._suites )
+                {}
                 
-                std::vector< Suite > GetSuites( void ) const;
+                Runner( Runner && o ) noexcept:
+                    _suites( std::move( o._suites ) )
+                {}
                 
-                bool Run( Optional< std::reference_wrapper< std::ostream > > os );
+                ~Runner( void )
+                {}
                 
-                friend void swap( Runner & o1, Runner & o2 ) noexcept;
+                Runner & operator =( Runner o )
+                {
+                    swap( *( this ), o );
+                    
+                    return *( this );
+                }
+                
+                std::vector< Suite > GetSuites( void ) const
+                {
+                    return this->_suites;
+                }
+                
+                bool Run( Optional< std::reference_wrapper< std::ostream > > os )
+                {
+                    size_t    cases( 0 );
+                    size_t    tests( 0 );
+                    StopWatch time;
+                    bool      success( true );
+                    
+                    if( this->_suites.size() == 0 )
+                    {
+                        return false;
+                    }
+                    
+                    cases += this->_suites.size();
+                    
+                    for( const auto & suite: this->_suites )
+                    {
+                        tests += suite.GetInfos().size();
+                    }
+                    
+                    if( os )
+                    {
+                        os.value().get() << "[==========] Running "
+                                         << Utility::Numbered( "test", tests )
+                                         << " from "
+                                         << Utility::Numbered( "case", cases )
+                                         << "."
+                                         << std::endl;
+                    }
+                    
+                    this->setup( os );
+                    
+                    time.Start();
+                    
+                    if( os )
+                    {
+                        os.value().get() << std::endl;
+                    }
+                    
+                    for( auto & suite: this->_suites )
+                    {
+                        if( suite.Run( os ) == false )
+                        {
+                            success = false;
+                        }
+                    }
+                    
+                    time.Stop();
+                    
+                    this->tearDown( os );
+                    
+                    if( os )
+                    {
+                        os.value().get() << "[==========] "
+                                         << Utility::Numbered( "test", tests )
+                                         << " from "
+                                         << Utility::Numbered( "case", cases )
+                                         << " ran. ("
+                                         << time.GetString()
+                                         << " total)"
+                                         << std::endl;
+                    }
+                    
+                    {
+                        std::vector< Info > passed;
+                        std::vector< Info > failed;
+                        
+                        for( auto & suite: this->_suites )
+                        {
+                            for( auto & info: suite.GetInfos() )
+                            {
+                                if( info.GetStatus() == Info::Status::Failed )
+                                {
+                                    failed.push_back( info );
+                                }
+                                else if( info.GetStatus() == Info::Status::Success )
+                                {
+                                    passed.push_back( info );
+                                }
+                            }
+                        }
+                        
+                        if( os )
+                        {
+                            os.value().get() << "[  PASSED  ] "
+                                             << Utility::Numbered( "test", passed.size() )
+                                             << "."
+                                             << std::endl;
+                            
+                            if( failed.size() > 0 )
+                            {
+                                os.value().get() << "[  FAILED  ] "
+                                                 << Utility::Numbered( "test", failed.size() )
+                                                 << ", listed below:"
+                                                 << std::endl;
+                                
+                                for( const auto & info: failed )
+                                {
+                                    os.value().get() << "[  FAILED  ] "
+                                                     << info.GetName()
+                                                     << std::endl;
+                                }
+                                
+                                os.value().get() << std::endl
+                                                 << Utility::Numbered( "FAILED TEST", failed.size(), "FAILED TESTS" )
+                                                 << std::endl;
+                            }
+                        }
+                    }
+                    
+                    return success;
+                }
+                
+                friend void swap( Runner & o1, Runner & o2 ) noexcept
+                {
+                    using std::swap;
+                    
+                    swap( o1._suites, o2._suites );
+                }
                 
             private:
                 
-                class IMPL;
+                void setup( Optional< std::reference_wrapper< std::ostream > > os )
+                {
+                    if( os )
+                    {
+                        os.value().get() << "[----------] Global test environment set-up." << std::endl;
+                    }
+                }
                 
-                std::unique_ptr< IMPL > impl;
+                void tearDown( Optional< std::reference_wrapper< std::ostream > > os )
+                {
+                    if( os )
+                    {
+                        os.value().get() << "[----------] Global test environment tear-down." << std::endl;
+                    }
+                }
+                
+                std::vector< Suite > _suites;
         };
     }
 }

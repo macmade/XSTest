@@ -41,16 +41,19 @@ namespace XS
         {
             public:
                 
-                Case( void );
-                virtual ~Case( void );
+                Case( void )          = default;
+                virtual ~Case( void ) = default;
                 
                 Case( const Case & o )              = delete;
                 Case & operator =( const Case & o ) = delete;
                 
             protected:
                 
-                virtual void SetUp( void );
-                virtual void TearDown( void );
+                virtual void SetUp( void )
+                {}
+                
+                virtual void TearDown( void )
+                {}
                 
                 friend class Info;
                 

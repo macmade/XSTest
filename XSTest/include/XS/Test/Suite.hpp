@@ -35,7 +35,11 @@
 #include <string>
 #include <iostream>
 #include <vector>
+#include <algorithm>
 #include <XS/Test/Optional.hpp>
+#include <XS/Test/StopWatch.hpp>
+#include <XS/Test/Utility.hpp>
+#include <XS/Test/Info.hpp>
 
 namespace XS
 {
@@ -47,25 +51,119 @@ namespace XS
         {
             public:
                 
-                Suite( const std::string & name, std::vector< Info > infos );
-                Suite( const Suite & o );
-                Suite( Suite && o ) noexcept;
-                virtual ~Suite( void );
+                static std::vector< Suite > All( void )
+                {
+                    std::map< std::string, std::vector< Info > > all;
+                    std::vector< Suite >                         suites;
+                    
+                    for( auto & i: Info::All() )
+                    {
+                        all[ i.GetSuiteName() ].push_back( i );
+                    }
+                    
+                    for( const auto & p: all )
+                    {
+                        suites.push_back( Suite( p.first, p.second ) );
+                    }
+                    
+                    return suites;
+                }
                 
-                Suite & operator =( Suite o );
+                Suite( const std::string & name, std::vector< Info > infos ):
+                    _name(  name ),
+                    _infos( infos )
+                {
+                    Utility::Shuffle( this->_infos );
+                }
                 
-                std::string         GetName( void )  const;
-                std::vector< Info > GetInfos( void ) const;
+                Suite( const Suite & o ):
+                    Suite( o._name, o._infos )
+                {}
                 
-                bool Run( Optional< std::reference_wrapper< std::ostream > > os );
+                Suite( Suite && o ) noexcept:
+                    _name(  std::move( o._name ) ),
+                    _infos( std::move( o._infos ) )
+                {}
                 
-                friend void swap( Suite & o1, Suite & o2 ) noexcept;
+                ~Suite( void )
+                {}
+                
+                Suite & operator =( Suite o )
+                {
+                    swap( *( this ), o );
+                    
+                    return *( this );
+                }
+                
+                std::string GetName( void )  const
+                {
+                    return this->_name;
+                }
+                
+                std::vector< Info > GetInfos( void ) const
+                {
+                    return this->_infos;
+                }
+                
+                bool Run( Optional< std::reference_wrapper< std::ostream > > os )
+                {
+                    StopWatch time;
+                    bool      success( true );
+                    
+                    if( this->_infos.size() == 0 )
+                    {
+                        return false;
+                    }
+                    
+                    if( os )
+                    {
+                        os.value().get() << "[----------] "
+                                         << Utility::Numbered( "test", this->_infos.size() )
+                                         << " from "
+                                         << this->_name
+                                         << std::endl;
+                    }
+                    
+                    time.Start();
+                    
+                    for( auto & i: this->_infos )
+                    {
+                        if( i.Run( os ) == false )
+                        {
+                            success = false;
+                        }
+                    }
+                    
+                    time.Stop();
+                    
+                    if( os )
+                    {
+                        os.value().get() << "[----------] "
+                                         << Utility::Numbered( "test", this->_infos.size() )
+                                         << " from "
+                                         << this->_name
+                                         << " ("
+                                         << time.GetString()
+                                         << " total)"
+                                         << std::endl
+                                         << std::endl;
+                    }
+                    
+                    return success;
+                }
+                
+                friend void swap( Suite & o1, Suite & o2 ) noexcept
+                {
+                    using std::swap;
+                    
+                    swap( o1._name,  o2._name );
+                    swap( o1._infos, o2._infos );
+                }
                 
             private:
                 
-                class IMPL;
-                
-                std::unique_ptr< IMPL > impl;
+                std::string         _name;
+                std::vector< Info > _infos;
         };
     }
 }

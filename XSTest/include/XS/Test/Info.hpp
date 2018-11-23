@@ -35,8 +35,13 @@
 #include <string>
 #include <vector>
 #include <functional>
+#include <algorithm>
+#include <random>
+#include <map>
 #include <XS/Test/Optional.hpp>
 #include <XS/Test/Failure.hpp>
+#include <XS/Test/Case.hpp>
+#include <XS/Test/StopWatch.hpp>
 
 namespace XS
 {
@@ -57,34 +62,202 @@ namespace XS
                     Failed
                 };
                 
-                static Info &               Register( const std::string & testCaseName, const std::string & testName, const std::function< std::shared_ptr< Case >( void ) > createTest, const std::string & file, int line );
-                static std::vector< Suite > All( void );
+                static Info & Register( const std::string & testCaseName, const std::string & testName, const std::function< std::shared_ptr< Case >( void ) > createTest, const std::string & file, int line )
+                {
+                    Info * i = new Info( testCaseName, testName, createTest, file, line );
+                                        
+                    GetInfos()->push_back( std::shared_ptr< Info >( i ) );
+                    
+                    return *( i );
+                }
                 
-                Info( const Info & o );
-                Info( Info && o ) noexcept;
-                ~Info( void );
+                static std::vector< Info > All( void )
+                {
+                    std::vector< Info > all;
+                    
+                    for( auto & i: *( GetInfos() ) )
+                    {
+                        all.push_back( *( i ) );
+                    }
+                    
+                    return all;
+                }
                 
-                Info & operator =( Info o );
+                Info( const Info & o ):
+                    _suiteName(  o._suiteName ),
+                    _caseName(   o._caseName ),
+                    _createTest( o._createTest ),
+                    _status(     o._status ),
+                    _file(       o._file ),
+                    _line(       o._line ),
+                    _failure(    o._failure )
+                {}
                 
-                std::string         GetName( void )      const;
-                std::string         GetSuiteName( void ) const;
-                std::string         GetCaseName( void )  const;
-                Status              GetStatus( void )    const noexcept;
-                std::string         GetFile( void )      const;
-                int                 GetLine( void )      const noexcept;
-                Optional< Failure > GetFailure( void )   const;
+                Info( Info && o ) noexcept:
+                    _suiteName(  std::move( o._suiteName ) ),
+                    _caseName(   std::move( o._caseName ) ),
+                    _createTest( std::move( o._createTest ) ),
+                    _status(     std::move( o._status ) ),
+                    _file(       std::move( o._file ) ),
+                    _line(       std::move( o._line ) ),
+                    _failure(    std::move( o._failure ) )
+                {}
                 
-                bool Run( Optional< std::reference_wrapper< std::ostream > > os );
+                ~Info( void )
+                {}
                 
-                friend void swap( Info & o1, Info & o2 ) noexcept;
+                Info & operator =( Info o )
+                {
+                    swap( *( this ), o );
+                    
+                    return *( this );
+                }
+                
+                std::string GetName( void ) const
+                {
+                    return this->_suiteName + "." + this->_caseName;
+                }
+                
+                std::string GetSuiteName( void ) const
+                {
+                    return this->_suiteName;
+                }
+                
+                std::string GetCaseName( void ) const
+                {
+                    return this->_caseName;
+                }
+                
+                Status GetStatus( void ) const noexcept
+                {
+                    return this->_status;
+                }
+                
+                std::string GetFile( void ) const
+                {
+                    return this->_file;
+                }
+                
+                int GetLine( void ) const noexcept
+                {
+                    return this->_line;
+                }
+                
+                Optional< Failure > GetFailure( void ) const
+                {
+                    return this->_failure;
+                }
+                
+                bool Run( Optional< std::reference_wrapper< std::ostream > > os )
+                {
+                    StopWatch               time;
+                    std::shared_ptr< Case > test( this->_createTest() );
+                    
+                    this->_failure.reset();
+                    
+                    this->_status = Status::Running;
+                    
+                    if( os )
+                    {
+                        os.value().get() << "[ RUN      ] " << this->GetName() << std::endl;
+                    }
+                    
+                    test->SetUp();
+                    time.Start();
+                    
+                    try
+                    {
+                        test->Test();
+                        
+                        this->_status = Status::Success;
+                    }
+                    catch( const Failure & e )
+                    {
+                        this->_failure = e;
+                        this->_status  = Status::Failed;
+                    }
+                    catch( const std::exception & e )
+                    {
+                        this->_failure = Failure( std::string( "Caught unexpected exception: " ) + e.what(), this->_file, this->_line );
+                        this->_status  = Status::Failed;
+                    }
+                    catch( ... )
+                    {
+                        this->_failure = Failure( "Caught unexpected exception", this->_file, this->_line );
+                        this->_status  = Status::Failed;
+                    }
+                    
+                    time.Stop();
+                    test->TearDown();
+                    
+                    if( os )
+                    {
+                        if( this->_status == Status::Success )
+                        {
+                            os.value().get() << "[       OK ] ";
+                        }
+                        else
+                        {
+                            os.value().get() << this->_failure->GetFile()
+                                             << ":"
+                                             << std::to_string( this->_failure->GetLine() )
+                                             << ": Failure"
+                                             << std::endl
+                                             << this->_failure->GetReason()
+                                             << std::endl;
+                            
+                            os.value().get() << "[  FAILED  ] ";
+                        }
+                        
+                        os.value().get() << this->GetName() << " (" << time.GetString() << ")" << std::endl;
+                    }
+                    
+                    return this->_status == Status::Success;
+                }
+                
+                friend void swap( Info & o1, Info & o2 ) noexcept
+                {
+                    using std::swap;
+                    
+                    swap( o1._suiteName,  o2._suiteName );
+                    swap( o1._caseName,   o2._caseName );
+                    swap( o1._createTest, o2._createTest );
+                    swap( o1._status,     o2._status );
+                    swap( o1._file,       o2._file );
+                    swap( o1._line,       o2._line );
+                    swap( o1._failure,    o2._failure );
+                }
                 
             private:
                 
-                Info( const std::string & testCase, const std::string & testName, const std::function< std::shared_ptr< Case >( void ) > createTest, const std::string & file, int line );
+                static std::vector< std::shared_ptr< Info > > * GetInfos( void )
+                {
+                    static std::vector< std::shared_ptr< Info > > * infos = nullptr;
+                    
+                    if( infos == nullptr )
+                    {
+                        infos = new std::vector< std::shared_ptr< Info > >();
+                    }
+                    
+                    return infos;
+                }
                 
-                class IMPL;
+                Info( const std::string & suiteName, const std::string & caseName, const std::function< std::shared_ptr< Case >( void ) > createTest, const std::string & file, int line ):
+                    _suiteName( suiteName ),
+                    _caseName( caseName ),
+                    _createTest( createTest ),
+                    _file( file ),
+                    _line( line ),
+                    _status( Status::Unknown )
+                {}
                 
-                std::unique_ptr< IMPL > impl;
+                std::string                                      _suiteName;
+                std::string                                      _caseName;
+                std::function< std::shared_ptr< Case >( void ) > _createTest;
+                Status                                           _status;
+                std::string                                      _file;
+                int                                              _line;
+                Optional< Failure >                              _failure;
         };
     }
 }

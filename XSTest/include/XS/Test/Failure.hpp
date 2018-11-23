@@ -34,6 +34,7 @@
 #include <stdexcept>
 #include <memory>
 #include <string>
+#include <algorithm>
 
 namespace XS
 {
@@ -43,26 +44,66 @@ namespace XS
         {
             public:
                 
-                Failure( const std::string & reason, const std::string & file, int line );
-                Failure( const Failure & o );
-                Failure( Failure && o ) noexcept;
-                ~Failure( void );
+                Failure( const std::string & reason, const std::string & file, int line ):
+                    _reason( reason ),
+                    _file(   file ),
+                    _line(   line )
+                {}
                 
-                Failure & operator =( Failure o );
+                Failure( const Failure & o ):
+                    Failure( o._reason, o._file, o._line )
+                {}
                 
-                std::string GetReason( void ) const;
-                std::string GetFile( void )   const;
-                int         GetLine( void )   const noexcept;
+                Failure( Failure && o ) noexcept:
+                    _reason( std::move( o._reason ) ),
+                    _file(   std::move( o._file ) ),
+                    _line(   std::move( o._line ) )
+                {}
                 
-                const char * what( void ) const noexcept override;
+                ~Failure( void )
+                {}
                 
-                friend void swap( Failure & o1, Failure & o2 ) noexcept;
+                Failure & operator =( Failure o )
+                {
+                    swap( *( this ), o );
+                    
+                    return *( this );
+                }
+                
+                std::string GetReason( void ) const
+                {
+                    return this->_reason;
+                }
+                
+                std::string GetFile( void ) const
+                {
+                    return this->_file;
+                }
+                
+                int GetLine( void ) const noexcept
+                {
+                    return this->_line;
+                }
+                
+                const char * what( void ) const noexcept override
+                {
+                    return this->_reason.c_str();
+                }
+                
+                friend void swap( Failure & o1, Failure & o2 ) noexcept
+                {
+                    using std::swap;
+                    
+                    swap( o1._reason, o2._reason );
+                    swap( o1._file,   o2._file );
+                    swap( o1._line,   o2._line );
+                }
                 
             private:
                 
-                class IMPL;
-                
-                std::unique_ptr< IMPL > impl;
+                std::string _reason;
+                std::string _file;
+                int         _line;
         };
     }
 }

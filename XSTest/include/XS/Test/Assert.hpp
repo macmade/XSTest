@@ -32,6 +32,8 @@
 #define XS_TEST_ASSERT_HPP
 
 #include <string>
+#include <XS/Test/Failure.hpp>
+#include <sstream>
 
 namespace XS
 {
@@ -39,7 +41,21 @@ namespace XS
     {
         namespace Assert
         {
-            void Boolean( bool value, bool expected, const std::string & expression, const std::string & file, int line );
+            inline void Boolean( bool value, bool expected, const std::string & expression, const std::string & file, int line )
+            {
+                std::stringstream ss;
+                
+                if( value != expected )
+                {
+                    using std::to_string;
+                    
+                    ss << "Value of: " << expression                          << std::endl
+                       << "  Actual: " << ( ( value    ) ? "true" : "false" ) << std::endl
+                       << "Expected: " << ( ( expected ) ? "true" : "false" );
+                    
+                    throw Failure( ss.str(), file, line );
+                } 
+            }
         }
     }
 }

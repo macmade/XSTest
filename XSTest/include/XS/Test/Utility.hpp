@@ -40,8 +40,20 @@ namespace XS
     {
         namespace Utility
         {
-            std::string Numbered( const std::string & s, size_t count );
-            std::string Numbered( const std::string & s, size_t count, const std::string & plural );
+            inline std::string Numbered( const std::string & s, size_t count, const std::string & plural )
+            {
+                if( count == 1 )
+                {
+                    return std::to_string( count ) + " " + s;
+                }
+                
+                return std::to_string( count ) + " " + plural;
+            }
+            
+            inline std::string Numbered( const std::string & s, size_t count )
+            {
+                return Numbered( s, count, s + "s" );
+            }
             
             template< typename _T_ >
             void Shuffle( _T_ & o )

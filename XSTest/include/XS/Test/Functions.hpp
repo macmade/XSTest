@@ -33,13 +33,30 @@
 
 #include <iostream>
 #include <XS/Test/Optional.hpp>
+#include <XS/Test/Runner.hpp>
+#include <XS/Test/Info.hpp>
+#include <XS/Test/Suite.hpp>
 
 namespace XS
 {
     namespace Test
     {
-        int RunAll( Optional< std::reference_wrapper< std::ostream > > os = { std::cout } );
+        inline int RunAll( Optional< std::reference_wrapper< std::ostream > > os = { std::cout } )
+        {
+            Runner runner( Suite::All() );
+            
+            return ( runner.Run( os ) ) ? 0 : -1;
+        }
     }
 }
+
+#ifdef XS_TEST_MAIN
+
+int main( void )
+{
+    return XS::Test::RunAll();
+}
+
+#endif
 
 #endif /* XS_TEST_FUNCTIONS_HPP */
