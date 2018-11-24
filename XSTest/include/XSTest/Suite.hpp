@@ -116,7 +116,7 @@ namespace XS
                         return false;
                     }
                     
-                    Log( os, { this->_name }, Utility::Numbered( "test", this->_infos.size() ) + " from " + this->_name );
+                    Logging::Log( os, { this->_name }, Utility::Numbered( "test", this->_infos.size() ) + " from " + this->_name );
                     
                     time.Start();
                     
@@ -130,7 +130,7 @@ namespace XS
                     
                     time.Stop();
                     
-                    Log( os, { this->_name }, Utility::Numbered( "test", this->_infos.size() ) + " from " + this->_name + " (" + time.GetString() + " total)" );
+                    Logging::Log( os, { this->_name }, Utility::Numbered( "test", this->_infos.size() ) + " from " + this->_name + " (" + time.GetString() + " total)" );
                     
                     return success;
                 }

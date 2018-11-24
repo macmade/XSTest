@@ -172,7 +172,7 @@ namespace XS
                     
                     this->_status = Status::Running;
                     
-                    Log( os, { this->_suiteName, this->_caseName }, "Running..." );
+                    Logging::Log( os, { this->_suiteName, this->_caseName }, "Running..." );
                     
                     test->SetUp();
                     time.Start();
@@ -204,12 +204,12 @@ namespace XS
                     
                     if( this->_status == Status::Success )
                     {
-                        Log( os, { this->_suiteName, this->_caseName }, "OK (" + time.GetString() + ")" );
+                        Logging::Log( os, { this->_suiteName, this->_caseName }, "OK (" + time.GetString() + ")" );
                     }
                     else
                     {
-                        Log( os, { this->_suiteName, this->_caseName }, "Failed (" + time.GetString() + ")" );
-                        Log( os, { this->_suiteName, this->_caseName }, *( this->_failure ) );
+                        Logging::Log( os, { this->_suiteName, this->_caseName }, "Failed (" + time.GetString() + ")" );
+                        Logging::Log( os, { this->_suiteName, this->_caseName }, *( this->_failure ) );
                     }
                     
                     return this->_status == Status::Success;

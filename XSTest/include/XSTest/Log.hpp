@@ -39,27 +39,30 @@ namespace XS
 {
     namespace Test
     {
-        inline void Log( Optional< std::reference_wrapper< std::ostream > > os, const std::vector< std::string > & prompt, const std::string & message )
+        namespace Logging
         {
-            if( os.hasValue() == false )
+            inline void Log( Optional< std::reference_wrapper< std::ostream > > os, const std::vector< std::string > & prompt, const std::string & message )
             {
-                return;
-            }
-            
-            {
-                std::stringstream ss( message );
-                std::string       line;
-                
-                while( std::getline( ss, line, '\n' ) )
+                if( os.hasValue() == false )
                 {
-                    os->get() << "[ XSTest ]> ";
+                    return;
+                }
+                
+                {
+                    std::stringstream ss( message );
+                    std::string       line;
                     
-                    for( const auto & p: prompt )
+                    while( std::getline( ss, line, '\n' ) )
                     {
-                        os->get() << "[ " << p << " ]> ";
+                        os->get() << "[ XSTest ]> ";
+                        
+                        for( const auto & p: prompt )
+                        {
+                            os->get() << "[ " << p << " ]> ";
+                        }
+                        
+                        os->get() << line << std::endl;
                     }
-                    
-                    os->get() << line << std::endl;
                 }
             }
         }

@@ -99,7 +99,7 @@ namespace XS
                         tests += suite.GetInfos().size();
                     }
                     
-                    Log( os, {}, "Running " + Utility::Numbered( "test", tests ) + " from " + Utility::Numbered( "case", cases ) );
+                    Logging::Log( os, {}, "Running " + Utility::Numbered( "test", tests ) + " from " + Utility::Numbered( "case", cases ) );
                     
                     this->setup( os );
                     
@@ -117,7 +117,7 @@ namespace XS
                     
                     this->tearDown( os );
                     
-                    Log( os, {}, Utility::Numbered( "test", tests ) + " from " + Utility::Numbered( "case", cases ) + " ran (" + time.GetString() + " total)" );
+                    Logging::Log( os, {}, Utility::Numbered( "test", tests ) + " from " + Utility::Numbered( "case", cases ) + " ran (" + time.GetString() + " total)" );
                     
                     {
                         std::vector< Info > passed;
@@ -138,18 +138,18 @@ namespace XS
                             }
                         }
                         
-                        Log( os, {}, Utility::Numbered( "test", passed.size() ) + " passed" );
+                        Logging::Log( os, {}, Utility::Numbered( "test", passed.size() ) + " passed" );
                         
                         if( failed.size() > 0 )
                         {
-                            Log( os, {}, Utility::Numbered( "test", passed.size() ) + " failed, listed below:" );
+                            Logging::Log( os, {}, Utility::Numbered( "test", passed.size() ) + " failed, listed below:" );
                             
                             for( const auto & info: failed )
                             {
-                                Log( os, { "FAILED" }, info.GetName() );
+                                Logging::Log( os, { "FAILED" }, info.GetName() );
                             }
                             
-                            Log( os, {}, Utility::Numbered( "FAILED TEST", failed.size(), "FAILED TESTS" ) );
+                            Logging::Log( os, {}, Utility::Numbered( "FAILED TEST", failed.size(), "FAILED TESTS" ) );
                         }
                     }
                     
@@ -167,12 +167,12 @@ namespace XS
                 
                 void setup( Optional< std::reference_wrapper< std::ostream > > os )
                 {
-                    Log( os, {}, "Global test environment set-up" );
+                    Logging::Log( os, {}, "Global test environment set-up" );
                 }
                 
                 void tearDown( Optional< std::reference_wrapper< std::ostream > > os )
                 {
-                    Log( os, {}, "Global test environment tear-down" );
+                    Logging::Log( os, {}, "Global test environment tear-down" );
                 }
                 
                 std::vector< Suite > _suites;
