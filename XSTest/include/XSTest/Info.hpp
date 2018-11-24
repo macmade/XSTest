@@ -42,6 +42,7 @@
 #include <XSTest/Failure.hpp>
 #include <XSTest/Case.hpp>
 #include <XSTest/StopWatch.hpp>
+#include <XSTest/Log.hpp>
 
 namespace XS
 {
@@ -171,10 +172,7 @@ namespace XS
                     
                     this->_status = Status::Running;
                     
-                    if( os )
-                    {
-                        os.value().get() << "[ RUN      ] " << this->GetName() << std::endl;
-                    }
+                    Log( os, { this->_suiteName, this->_caseName }, "Running..." );
                     
                     test->SetUp();
                     time.Start();
@@ -204,26 +202,14 @@ namespace XS
                     time.Stop();
                     test->TearDown();
                     
-                    if( os )
+                    if( this->_status == Status::Success )
                     {
-                        if( this->_status == Status::Success )
-                        {
-                            os.value().get() << "[       OK ] ";
-                        }
-                        else
-                        {
-                            os.value().get() << this->_failure->GetFile()
-                                             << ":"
-                                             << std::to_string( this->_failure->GetLine() )
-                                             << ": Failure"
-                                             << std::endl
-                                             << this->_failure->GetReason()
-                                             << std::endl;
-                            
-                            os.value().get() << "[  FAILED  ] ";
-                        }
-                        
-                        os.value().get() << this->GetName() << " (" << time.GetString() << ")" << std::endl;
+                        Log( os, { this->_suiteName, this->_caseName }, "OK (" + time.GetString() + ")" );
+                    }
+                    else
+                    {
+                        Log( os, { this->_suiteName, this->_caseName }, "Failed (" + time.GetString() + ")" );
+                        Log( os, { this->_suiteName, this->_caseName }, *( this->_failure ) );
                     }
                     
                     return this->_status == Status::Success;

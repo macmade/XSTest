@@ -70,6 +70,23 @@ namespace XS
                     return *( this );
                 }
                 
+                operator std::string()
+                {
+                    std::string s;
+                    
+                    s += ( this->_file.length() > 0 ) ? this->_file : "<unknown>";
+                    s += ":";
+                    s += std::to_string( this->_line );
+                    
+                    if( this->_reason.length() > 0 )
+                    {
+                        s += "\n";
+                        s += this->_reason;
+                    }
+                    
+                    return s;
+                }
+                
                 std::string GetReason( void ) const
                 {
                     return this->_reason;

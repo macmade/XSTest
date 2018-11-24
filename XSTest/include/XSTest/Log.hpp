@@ -23,41 +23,48 @@
  ******************************************************************************/
 
 /*!
- * @header      Assert.hpp
+ * @header      Log.hpp
  * @author      Jean-David Gadina - www.xs-labs.com
  * @copyright   (c) 2018, Jean-David Gadina - www.xs-labs.com
  */
 
-#ifndef XS_TEST_ASSERT_HPP
-#define XS_TEST_ASSERT_HPP
+#ifndef XS_TEST_LOG_HPP
+#define XS_TEST_LOG_HPP
 
+#include <iostream>
 #include <string>
-#include <XSTest/Failure.hpp>
 #include <sstream>
 
 namespace XS
 {
     namespace Test
     {
-        namespace Assert
+        inline void Log( Optional< std::reference_wrapper< std::ostream > > os, const std::vector< std::string > & prompt, const std::string & message )
         {
-            inline void Boolean( bool value, bool expected, const std::string & expression, const std::string & file, int line )
+            if( os.hasValue() == false )
             {
-                std::stringstream ss;
+                return;
+            }
+            
+            
+            {
+                std::stringstream ss( message );
+                std::string       line;
                 
-                if( value != expected )
+                while( std::getline( ss, line, '\n' ) )
                 {
-                    using std::to_string;
+                    os->get() << "[ XSTest ]> ";
                     
-                    ss << "Value of: " << expression                          << std::endl
-                       << "Actual:   " << ( ( value    ) ? "true" : "false" ) << std::endl
-                       << "Expected: " << ( ( expected ) ? "true" : "false" );
+                    for( const auto & p: prompt )
+                    {
+                        os->get() << "[ " << p << " ]> ";
+                    }
                     
-                    throw Failure( ss.str(), file, line );
-                } 
+                    os->get() << line << std::endl;
+                }
             }
         }
     }
 }
 
-#endif /* XS_TEST_ASSERT_HPP */
+#endif /* XS_TEST_LOG_HPP */

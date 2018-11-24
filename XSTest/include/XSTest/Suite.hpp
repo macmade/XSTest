@@ -40,6 +40,7 @@
 #include <XSTest/StopWatch.hpp>
 #include <XSTest/Utility.hpp>
 #include <XSTest/Info.hpp>
+#include <XSTest/Log.hpp>
 
 namespace XS
 {
@@ -115,14 +116,7 @@ namespace XS
                         return false;
                     }
                     
-                    if( os )
-                    {
-                        os.value().get() << "[----------] "
-                                         << Utility::Numbered( "test", this->_infos.size() )
-                                         << " from "
-                                         << this->_name
-                                         << std::endl;
-                    }
+                    Log( os, { this->_name }, Utility::Numbered( "test", this->_infos.size() ) + " from " + this->_name );
                     
                     time.Start();
                     
@@ -136,18 +130,7 @@ namespace XS
                     
                     time.Stop();
                     
-                    if( os )
-                    {
-                        os.value().get() << "[----------] "
-                                         << Utility::Numbered( "test", this->_infos.size() )
-                                         << " from "
-                                         << this->_name
-                                         << " ("
-                                         << time.GetString()
-                                         << " total)"
-                                         << std::endl
-                                         << std::endl;
-                    }
+                    Log( os, { this->_name }, Utility::Numbered( "test", this->_infos.size() ) + " from " + this->_name + " (" + time.GetString() + " total)" );
                     
                     return success;
                 }

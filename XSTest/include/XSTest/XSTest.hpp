@@ -42,5 +42,6 @@
 #include <XSTest/Optional.hpp>
 #include <XSTest/Failure.hpp>
 #include <XSTest/Assert.hpp>
+#include <XSTest/Log.hpp>
 
 #endif /* XS_TEST_HPP */

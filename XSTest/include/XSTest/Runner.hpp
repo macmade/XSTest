@@ -39,6 +39,7 @@
 #include <XSTest/Info.hpp>
 #include <XSTest/Suite.hpp>
 #include <XSTest/StopWatch.hpp>
+#include <XSTest/Log.hpp>
 
 namespace XS
 {
@@ -98,24 +99,11 @@ namespace XS
                         tests += suite.GetInfos().size();
                     }
                     
-                    if( os )
-                    {
-                        os.value().get() << "[==========] Running "
-                                         << Utility::Numbered( "test", tests )
-                                         << " from "
-                                         << Utility::Numbered( "case", cases )
-                                         << "."
-                                         << std::endl;
-                    }
+                    Log( os, {}, "Running " + Utility::Numbered( "test", tests ) + " from " + Utility::Numbered( "case", cases ) );
                     
                     this->setup( os );
                     
                     time.Start();
-                    
-                    if( os )
-                    {
-                        os.value().get() << std::endl;
-                    }
                     
                     for( auto & suite: this->_suites )
                     {
@@ -129,17 +117,7 @@ namespace XS
                     
                     this->tearDown( os );
                     
-                    if( os )
-                    {
-                        os.value().get() << "[==========] "
-                                         << Utility::Numbered( "test", tests )
-                                         << " from "
-                                         << Utility::Numbered( "case", cases )
-                                         << " ran. ("
-                                         << time.GetString()
-                                         << " total)"
-                                         << std::endl;
-                    }
+                    Log( os, {}, Utility::Numbered( "test", tests ) + " from " + Utility::Numbered( "case", cases ) + " ran (" + time.GetString() + " total)" );
                     
                     {
                         std::vector< Info > passed;
@@ -160,31 +138,18 @@ namespace XS
                             }
                         }
                         
-                        if( os )
+                        Log( os, {}, Utility::Numbered( "test", passed.size() ) + " passed" );
+                        
+                        if( failed.size() > 0 )
                         {
-                            os.value().get() << "[  PASSED  ] "
-                                             << Utility::Numbered( "test", passed.size() )
-                                             << "."
-                                             << std::endl;
+                            Log( os, {}, Utility::Numbered( "test", passed.size() ) + " failed, listed below:" );
                             
-                            if( failed.size() > 0 )
+                            for( const auto & info: failed )
                             {
-                                os.value().get() << "[  FAILED  ] "
-                                                 << Utility::Numbered( "test", failed.size() )
-                                                 << ", listed below:"
-                                                 << std::endl;
-                                
-                                for( const auto & info: failed )
-                                {
-                                    os.value().get() << "[  FAILED  ] "
-                                                     << info.GetName()
-                                                     << std::endl;
-                                }
-                                
-                                os.value().get() << std::endl
-                                                 << Utility::Numbered( "FAILED TEST", failed.size(), "FAILED TESTS" )
-                                                 << std::endl;
+                                Log( os, { "FAILED" }, info.GetName() );
                             }
+                            
+                            Log( os, {}, Utility::Numbered( "FAILED TEST", failed.size(), "FAILED TESTS" ) );
                         }
                     }
                     
@@ -202,18 +167,12 @@ namespace XS
                 
                 void setup( Optional< std::reference_wrapper< std::ostream > > os )
                 {
-                    if( os )
-                    {
-                        os.value().get() << "[----------] Global test environment set-up." << std::endl;
-                    }
+                    Log( os, {}, "Global test environment set-up" );
                 }
                 
                 void tearDown( Optional< std::reference_wrapper< std::ostream > > os )
                 {
-                    if( os )
-                    {
-                        os.value().get() << "[----------] Global test environment tear-down." << std::endl;
-                    }
+                    Log( os, {}, "Global test environment tear-down" );
                 }
                 
                 std::vector< Suite > _suites;
