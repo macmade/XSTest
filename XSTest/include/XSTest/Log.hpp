@@ -46,7 +46,6 @@ namespace XS
                 return;
             }
             
-            
             {
                 std::stringstream ss( message );
                 std::string       line;
