@@ -32,30 +32,30 @@
 #include <thread>
 #include <chrono>
 
-XSTest( Success, XSTestAssertEqual_Int )
+XSTest( Success, XSTestAssertNotEqual_Int )
 {
     std::this_thread::sleep_for( std::chrono::milliseconds( 10 ) );
     
-    XSTestAssertEqual( 0, 0 );
+    XSTestAssertNotEqual( 0, 1 );
 }
 
-XSTest( Failure, XSTestAssertEqual_Int )
+XSTest( Failure, XSTestAssertNotEqual_Int )
 {
     std::this_thread::sleep_for( std::chrono::milliseconds( 10 ) );
     
-    XSTestAssertEqual( 0, 1 );
+    XSTestAssertNotEqual( 0, 0 );
 }
 
-XSTest( Success, XSTestAssertEqual_String )
+XSTest( Success, XSTestAssertNotEqual_String )
 {
     std::this_thread::sleep_for( std::chrono::milliseconds( 10 ) );
     
-    XSTestAssertEqual( std::string( "foo" ), std::string( "foo" ) );
+    XSTestAssertNotEqual( std::string( "foo" ), std::string( "bar" ) );
 }
 
-XSTest( Failure, XSTestAssertEqual_String )
+XSTest( Failure, XSTestAssertNotEqual_String )
 {
     std::this_thread::sleep_for( std::chrono::milliseconds( 10 ) );
     
-    XSTestAssertEqual( std::string( "foo" ), std::string( "bar" ) );
+    XSTestAssertNotEqual( std::string( "foo" ), std::string( "foo" ) );
 }

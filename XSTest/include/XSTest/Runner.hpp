@@ -138,11 +138,19 @@ namespace XS
                         
                         if( failed.size() > 0 )
                         {
+                            std::sort( passed.begin(), passed.end(), []( const Info & o1, const Info & o2 ) { return o1.GetName() < o2.GetName(); } );
+                            std::sort( failed.begin(), failed.end(), []( const Info & o1, const Info & o2 ) { return o1.GetName() < o2.GetName(); } );
+                            
+                            for( const auto & info: passed )
+                            {
+                                Logging::Log( os, info.GetSuiteName(), info.GetCaseName(), "  - ✅ " );
+                            }
+                            
                             Logging::Log( os, Utility::Numbered( "test", failed.size() ) + " failed, listed below:", TermColor::Red() );
                             
                             for( const auto & info: failed )
                             {
-                                Logging::Log( os, info.GetSuiteName(), info.GetCaseName(), "  - " );
+                                Logging::Log( os, info.GetSuiteName(), info.GetCaseName(), "  - ❌ " );
                             }
                         }
                     }
