@@ -35,6 +35,8 @@
  * Compatibility
  ******************************************************************************/
 
+#ifdef XSTEST_GTEST_COMPAT
+
 #define TEST( _case_, _name_ )              XSTest( _case_, _name_ )
 #define TEST_F( _case_, _name_ )            XSTestFixture( _case_, _name_ )
 #define ASSERT_FALSE( _e_ )                 XSTestAssertFalse( _e_ )
@@ -58,6 +60,8 @@
 #define ASSERT_HRESULT_SUCCEEDED( _e_ )     XSTestAssertHResultSucceeded( _e_ )
 #define ASSERT_HRESULT_FAILED( _e_ )        XSTestAssertHResultFailed( _e_ )
 #define ASSERT_NO_FATAL_FAILURE( _e_ )      XSTestAssertNoFatalFailure( _e_ )
+
+#endif
 
 /*******************************************************************************
  * Assertions
