@@ -32,11 +32,12 @@
 #define XS_TEST_ASSERT_HPP
 
 #include <string>
-#include <XSTest/Failure.hpp>
 #include <sstream>
 #include <cstring>
 #include <stdexcept>
 #include <functional>
+#include <type_traits>
+#include <XSTest/Failure.hpp>
 
 namespace XS
 {
@@ -86,7 +87,79 @@ namespace XS
             }
             
             template< typename T1, typename T2 >
-            inline void Compare( const T1 & v1, const T2 & v2, Operator op, const std::string & expression1, const std::string & expression2, const std::string & file, size_t line )
+            inline auto Compare( const T1 & v1, const T2 & v2, Operator op, const std::string & expression1, const std::string & expression2, const std::string & file, size_t line )
+                -> typename std::enable_if
+                   <
+                           ( std::is_integral< T1 >::value       && std::is_integral< T2 >::value )
+                        || ( std::is_floating_point< T1 >::value && std::is_floating_point< T2 >::value )
+                   >
+                   ::type
+            {
+                if( op == Operator::Equal )
+                {
+                    Boolean( v1 == v2, true, expression1 + " == " + expression2, std::to_string( v1 ) + " == " + std::to_string( v2 ), file, line );
+                }
+                else if( op == Operator::NotEqual )
+                {
+                    Boolean( v1 != v2, true, expression1 + " != " + expression2, std::to_string( v1 ) + " != " + std::to_string( v2 ), file, line );
+                }
+                else if( op == Operator::Less )
+                {
+                    Boolean( v1 < v2, true, expression1 + " < " + expression2, std::to_string( v1 ) + " < " + std::to_string( v2 ), file, line );
+                }
+                else if( op == Operator::LessOrEqual )
+                {
+                    Boolean( v1 <= v2, true, expression1 + " <= " + expression2, std::to_string( v1 ) + " <= " + std::to_string( v2 ), file, line );
+                }
+                else if( op == Operator::Greater )
+                {
+                    Boolean( v1 > v2, true, expression1 + " > " + expression2, std::to_string( v1 ) + " > " + std::to_string( v2 ), file, line );
+                }
+                else if( op == Operator::GreaterOrEqual )
+                {
+                    Boolean( v1 >= v2, true, expression1 + " >= " + expression2, std::to_string( v1 ) + " >= " + std::to_string( v2 ), file, line );
+                }
+            }
+            
+            template< typename T1, typename T2 >
+            inline auto Compare( const T1 & v1, const T2 & v2, Operator op, const std::string & expression1, const std::string & expression2, const std::string & file, size_t line )
+                -> typename std::enable_if< ( std::is_same< T1, std::string >::value && std::is_same< T2, std::string >::value ) > ::type
+            {
+                if( op == Operator::Equal )
+                {
+                    Boolean( v1 == v2, true, expression1 + " == " + expression2, "\"" + v1 + "\" == \"" + v2 + "\"", file, line );
+                }
+                else if( op == Operator::NotEqual )
+                {
+                    Boolean( v1 != v2, true, expression1 + " != " + expression2, "\"" + v1 + "\" != \"" + v2 + "\"", file, line );
+                }
+                else if( op == Operator::Less )
+                {
+                    Boolean( v1 < v2, true, expression1 + " < " + expression2, "\"" + v1 + "\" < \"" + v2 + "\"", file, line );
+                }
+                else if( op == Operator::LessOrEqual )
+                {
+                    Boolean( v1 <= v2, true, expression1 + " <= " + expression2, "\"" + v1 + "\" <= \"" + v2 + "\"", file, line );
+                }
+                else if( op == Operator::Greater )
+                {
+                    Boolean( v1 > v2, true, expression1 + " > " + expression2, "\"" + v1 + " \"> \"" + v2 + "\"", file, line );
+                }
+                else if( op == Operator::GreaterOrEqual )
+                {
+                    Boolean( v1 >= v2, true, expression1 + " >= " + expression2, "\"" + v1 + "\" >= \"" + v2 + "\"", file, line );
+                }
+            }
+            
+            template< typename T1, typename T2 >
+            inline auto Compare( const T1 & v1, const T2 & v2, Operator op, const std::string & expression1, const std::string & expression2, const std::string & file, size_t line )
+                -> typename std::enable_if
+                   <
+                          ( !std::is_integral< T1 >::value          || !std::is_integral< T2 >::value )
+                       && ( !std::is_floating_point< T1 >::value    || !std::is_floating_point< T2 >::value )
+                       && ( !std::is_same< T1, std::string >::value || !std::is_same< T2, std::string >::value )
+                   >
+                   ::type
             {
                 if( op == Operator::Equal )
                 {

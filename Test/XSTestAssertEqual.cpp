@@ -36,14 +36,14 @@ XSTest( Success, XSTestAssertEqual_Int )
 {
     std::this_thread::sleep_for( std::chrono::milliseconds( 10 ) );
     
-    XSTestAssertEqual( 0, 0 );
+    XSTestAssertEqual( 1 + 1, 2 );
 }
 
 XSTest( Failure, XSTestAssertEqual_Int )
 {
     std::this_thread::sleep_for( std::chrono::milliseconds( 10 ) );
     
-    XSTestAssertEqual( 0, 1 );
+    XSTestAssertEqual( 1 + 1, 1 );
 }
 
 XSTest( Success, XSTestAssertEqual_String )

@@ -36,12 +36,12 @@ XSTest( Success, XSTestAssertLess )
 {
     std::this_thread::sleep_for( std::chrono::milliseconds( 10 ) );
     
-    XSTestAssertLess( 0, 1 );
+    XSTestAssertLess( 1 + 1, 3 );
 }
 
 XSTest( Failure, XSTestAssertLess )
 {
     std::this_thread::sleep_for( std::chrono::milliseconds( 10 ) );
     
-    XSTestAssertLess( 0, 0 );
+    XSTestAssertLess( 1 + 1, 1 );
 }

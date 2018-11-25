@@ -36,19 +36,19 @@ XSTest( Success, XSTestAssertStringNotEqual )
 {
     std::this_thread::sleep_for( std::chrono::milliseconds( 10 ) );
     
-    XSTestAssertStringNotEqual( "foo", "bar" );
+    XSTestAssertStringNotEqual( std::string( "foo" ).c_str(), std::string( "bar" ).c_str() );
 }
 
 XSTest( Success, XSTestAssertStringNotEqual_CaseSensitive )
 {
     std::this_thread::sleep_for( std::chrono::milliseconds( 10 ) );
     
-    XSTestAssertStringNotEqual( "foo", "FOO" );
+    XSTestAssertStringNotEqual( std::string( "foo" ).c_str(), std::string( "FOO" ).c_str() );
 }
 
 XSTest( Failure, XSTestAssertStringNotEqual )
 {
     std::this_thread::sleep_for( std::chrono::milliseconds( 10 ) );
     
-    XSTestAssertStringNotEqual( "foo", "foo" );
+    XSTestAssertStringNotEqual( std::string( "foo" ).c_str(), std::string( "foo" ).c_str() );
 }
