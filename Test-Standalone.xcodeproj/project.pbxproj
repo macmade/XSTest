@@ -258,20 +258,20 @@
 			children = (
 				05D526DF21A85A520025CCEB /* main.cpp */,
 				05E572C421AB0AC300D6E51C /* XSTest.cpp */,
+				05E572E121AB218F00D6E51C /* XSTestAssertAnyThrow.cpp */,
 				05E572D321AB149F00D6E51C /* XSTestAssertEqual.cpp */,
-				05E572E521AB240E00D6E51C /* XSTestAssertNotEqual.cpp */,
 				05E572CD21AB136300D6E51C /* XSTestAssertFalse.cpp */,
+				05E5730521AB3A3300D6E51C /* XSTestAssertGreater.cpp */,
+				05E5730321AB39DD00D6E51C /* XSTestAssertLess.cpp */,
+				05E572E521AB240E00D6E51C /* XSTestAssertNotEqual.cpp */,
+				05E572DF21AB218300D6E51C /* XSTestAssertNoThrow.cpp */,
 				05E572D521AB1BD700D6E51C /* XSTestAssertStringEqual.cpp */,
 				05E572D921AB1BED00D6E51C /* XSTestAssertStringEqualCaseInsensitive.cpp */,
 				05E572D721AB1BE100D6E51C /* XSTestAssertStringNotEqual.cpp */,
 				05E572DB21AB1BF900D6E51C /* XSTestAssertStringNotEqualCaseInsensitive.cpp */,
+				05E572DD21AB1DB800D6E51C /* XSTestAssertThrow.cpp */,
 				05E572CF21AB13ED00D6E51C /* XSTestAssertTrue.cpp */,
 				05E572C321AB0AC300D6E51C /* XSTestFixture.cpp */,
-				05E572DD21AB1DB800D6E51C /* XSTestAssertThrow.cpp */,
-				05E572DF21AB218300D6E51C /* XSTestAssertNoThrow.cpp */,
-				05E572E121AB218F00D6E51C /* XSTestAssertAnyThrow.cpp */,
-				05E5730321AB39DD00D6E51C /* XSTestAssertLess.cpp */,
-				05E5730521AB3A3300D6E51C /* XSTestAssertGreater.cpp */,
 			);
 			path = Test;
 			sourceTree = "<group>";
