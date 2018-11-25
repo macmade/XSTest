@@ -23,43 +23,36 @@
  ******************************************************************************/
 
 /*!
- * @file        Bar.cpp
+ * @file        Foo.cpp
  * @author      Jean-David Gadina - www.xs-labs.com
  * @copyright   (c) 2018, Jean-David Gadina - www.xs-labs.com
  */
 
 #include <XSTest/XSTest.hpp>
+#include <thread>
+#include <chrono>
 
-class Bar: public XS::Test::Case
+XSTest( Test, Test1 )
 {
-    protected:
-        
-        void SetUp( void ) override
-        {}
-        
-        void TearDown( void ) override
-        {}
-};
-
-XSTestFixture( Bar, Test1 )
-{
-    XSTestAssertTrue( true == true );
-    XSTestAssertTrue( true == false );
+    std::this_thread::sleep_for( std::chrono::milliseconds( 10 ) );
 }
 
-XSTestFixture( Bar, Test2 )
+XSTest( Test, Test2 )
 {
-    XSTestAssertFalse( true == true );
-    XSTestAssertFalse( true == false );
+    std::this_thread::sleep_for( std::chrono::milliseconds( 10 ) );
 }
 
-XSTestFixture( Bar, Test3 )
+XSTest( Test, Test3 )
 {
-    throw std::runtime_error( "Some exception" );
+    std::this_thread::sleep_for( std::chrono::milliseconds( 10 ) );
 }
 
-XSTestFixture( Bar, Test4 )
-{}
+XSTest( Test, Test4 )
+{
+    std::this_thread::sleep_for( std::chrono::milliseconds( 10 ) );
+}
 
-XSTestFixture( Bar, Test5 )
-{}
+XSTest( Test, Test5 )
+{
+    std::this_thread::sleep_for( std::chrono::milliseconds( 10 ) );
+}

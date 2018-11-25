@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		05D5266B21A6EC520025CCEB /* Foo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05D525E521A605160025CCEB /* Foo.cpp */; };
-		05D526D621A78CE80025CCEB /* Bar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05D526D521A78CE80025CCEB /* Bar.cpp */; };
+		05D5266B21A6EC520025CCEB /* Test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05D525E521A605160025CCEB /* Test.cpp */; };
+		05D526D621A78CE80025CCEB /* Fixture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05D526D521A78CE80025CCEB /* Fixture.cpp */; };
 		05D5272A21A88D190025CCEB /* XSTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05D5272721A88CF90025CCEB /* XSTest.framework */; };
 /* End PBXBuildFile section */
 
@@ -71,11 +71,12 @@
 		05D525DB21A604950025CCEB /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		05D525DD21A604950025CCEB /* ccache-config.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "ccache-config.sh"; sourceTree = "<group>"; };
 		05D525DE21A604950025CCEB /* ccache.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = ccache.sh; sourceTree = "<group>"; };
-		05D525E521A605160025CCEB /* Foo.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Foo.cpp; sourceTree = "<group>"; };
+		05D525E521A605160025CCEB /* Test.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Test.cpp; sourceTree = "<group>"; };
 		05D5264621A6C0D10025CCEB /* Test.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Test.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		05D5264A21A6C0D10025CCEB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		05D526D521A78CE80025CCEB /* Bar.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Bar.cpp; sourceTree = "<group>"; };
+		05D526D521A78CE80025CCEB /* Fixture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Fixture.cpp; sourceTree = "<group>"; };
 		05D5272221A88CF90025CCEB /* XSTest.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = XSTest.xcodeproj; sourceTree = "<group>"; };
+		05E572C721AB0B2800D6E51C /* Assertions.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Assertions.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -232,9 +233,10 @@
 		05D5264721A6C0D10025CCEB /* Test */ = {
 			isa = PBXGroup;
 			children = (
-				05D526D521A78CE80025CCEB /* Bar.cpp */,
-				05D525E521A605160025CCEB /* Foo.cpp */,
+				05E572C721AB0B2800D6E51C /* Assertions.cpp */,
+				05D526D521A78CE80025CCEB /* Fixture.cpp */,
 				05D5264A21A6C0D10025CCEB /* Info.plist */,
+				05D525E521A605160025CCEB /* Test.cpp */,
 			);
 			path = Test;
 			sourceTree = "<group>";
@@ -330,8 +332,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				05D5266B21A6EC520025CCEB /* Foo.cpp in Sources */,
-				05D526D621A78CE80025CCEB /* Bar.cpp in Sources */,
+				05D5266B21A6EC520025CCEB /* Test.cpp in Sources */,
+				05D526D621A78CE80025CCEB /* Fixture.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

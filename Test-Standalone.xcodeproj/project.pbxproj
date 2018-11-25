@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		05D5264F21A6C0F20025CCEB /* Foo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05D525E521A605160025CCEB /* Foo.cpp */; };
-		05D526D721A78CEE0025CCEB /* Bar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05D526D521A78CE80025CCEB /* Bar.cpp */; };
 		05D526E021A85A520025CCEB /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05D526DF21A85A520025CCEB /* main.cpp */; };
+		05E572C521AB0AC300D6E51C /* Fixture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05E572C321AB0AC300D6E51C /* Fixture.cpp */; };
+		05E572C621AB0AC300D6E51C /* Test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05E572C421AB0AC300D6E51C /* Test.cpp */; };
+		05E572CB21AB0C1A00D6E51C /* Assertions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05E572CA21AB0C1A00D6E51C /* Assertions.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -67,11 +68,9 @@
 		05D525DD21A604950025CCEB /* ccache-config.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "ccache-config.sh"; sourceTree = "<group>"; };
 		05D525DE21A604950025CCEB /* ccache.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = ccache.sh; sourceTree = "<group>"; };
 		05D525E321A605160025CCEB /* TestExec */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = TestExec; sourceTree = BUILT_PRODUCTS_DIR; };
-		05D525E521A605160025CCEB /* Foo.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Foo.cpp; sourceTree = "<group>"; };
 		05D5266921A6EC430025CCEB /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/MacOSX.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		05D5266C21A6EC7B0025CCEB /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		05D5269221A714C90025CCEB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		05D526D521A78CE80025CCEB /* Bar.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Bar.cpp; sourceTree = "<group>"; };
 		05D526DF21A85A520025CCEB /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		05D5271421A88B950025CCEB /* Functions.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Functions.hpp; sourceTree = "<group>"; };
 		05D5271521A88B950025CCEB /* Info.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Info.hpp; sourceTree = "<group>"; };
@@ -85,6 +84,9 @@
 		05D5271D21A88B950025CCEB /* Suite.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Suite.hpp; sourceTree = "<group>"; };
 		05D5271E21A88B950025CCEB /* Failure.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Failure.hpp; sourceTree = "<group>"; };
 		05D5271F21A88B950025CCEB /* Runner.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Runner.hpp; sourceTree = "<group>"; };
+		05E572C321AB0AC300D6E51C /* Fixture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Fixture.cpp; sourceTree = "<group>"; };
+		05E572C421AB0AC300D6E51C /* Test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Test.cpp; sourceTree = "<group>"; };
+		05E572CA21AB0C1A00D6E51C /* Assertions.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Assertions.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -243,9 +245,10 @@
 		05D5264721A6C0D10025CCEB /* Test */ = {
 			isa = PBXGroup;
 			children = (
-				05D526D521A78CE80025CCEB /* Bar.cpp */,
-				05D525E521A605160025CCEB /* Foo.cpp */,
+				05E572CA21AB0C1A00D6E51C /* Assertions.cpp */,
+				05E572C321AB0AC300D6E51C /* Fixture.cpp */,
 				05D526DF21A85A520025CCEB /* main.cpp */,
+				05E572C421AB0AC300D6E51C /* Test.cpp */,
 			);
 			path = Test;
 			sourceTree = "<group>";
@@ -341,9 +344,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				05D5264F21A6C0F20025CCEB /* Foo.cpp in Sources */,
-				05D526D721A78CEE0025CCEB /* Bar.cpp in Sources */,
+				05E572C621AB0AC300D6E51C /* Test.cpp in Sources */,
 				05D526E021A85A520025CCEB /* main.cpp in Sources */,
+				05E572CB21AB0C1A00D6E51C /* Assertions.cpp in Sources */,
+				05E572C521AB0AC300D6E51C /* Fixture.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

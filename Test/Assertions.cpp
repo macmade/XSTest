@@ -30,20 +30,18 @@
 
 #include <XSTest/XSTest.hpp>
 #include <thread>
+#include <chrono>
 
-XSTest( Foo, Test1 )
+XSTest( Assertions, XSTestAssertFalse )
 {
     std::this_thread::sleep_for( std::chrono::milliseconds( 10 ) );
+    
+    XSTestAssertFalse( true == true );
 }
 
-XSTest( Foo, Test2 )
-{}
-
-XSTest( Foo, Test3 )
-{}
-
-XSTest( Foo, Test4 )
-{}
-
-XSTest( Foo, Test5 )
-{}
+XSTest( Assertions, XSTestAssertTrue )
+{
+    std::this_thread::sleep_for( std::chrono::milliseconds( 10 ) );
+    
+    XSTestAssertTrue( true == false );
+}
