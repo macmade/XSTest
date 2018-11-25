@@ -41,19 +41,18 @@ namespace XS
     {
         namespace Assert
         {
-            inline void Boolean( bool value, bool expected, const std::string & expression, const std::string & file, int line )
+            inline void Boolean( bool value, bool expected, const std::string & expression, const std::string & file, size_t line )
             {
-                std::stringstream ss;
-                
                 if( value != expected )
                 {
-                    using std::to_string;
-                    
-                    ss << "Value of: " << expression                          << std::endl
-                       << "Actual:   " << ( ( value    ) ? "true" : "false" ) << std::endl
-                       << "Expected: " << ( ( expected ) ? "true" : "false" );
-                    
-                    throw Failure( ss.str(), file, line );
+                    throw Failure
+                    (
+                        expression,
+                        ( expected ) ? "true" : "false",
+                        ( value    ) ? "true" : "false",
+                        file,
+                        line
+                    );
                 } 
             }
         }

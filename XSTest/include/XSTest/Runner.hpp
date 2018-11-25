@@ -39,7 +39,8 @@
 #include <XSTest/Info.hpp>
 #include <XSTest/Suite.hpp>
 #include <XSTest/StopWatch.hpp>
-#include <XSTest/Log.hpp>
+#include <XSTest/Logging.hpp>
+#include <XSTest/TermColor.hpp>
 
 namespace XS
 {
@@ -82,8 +83,8 @@ namespace XS
                 
                 bool Run( Optional< std::reference_wrapper< std::ostream > > os )
                 {
+                    size_t    suites( 0 );
                     size_t    cases( 0 );
-                    size_t    tests( 0 );
                     StopWatch time;
                     bool      success( true );
                     
@@ -92,16 +93,14 @@ namespace XS
                         return false;
                     }
                     
-                    cases += this->_suites.size();
+                    suites += this->_suites.size();
                     
                     for( const auto & suite: this->_suites )
                     {
-                        tests += suite.GetInfos().size();
+                        cases += suite.GetInfos().size();
                     }
                     
-                    Logging::Log( os, {}, "Running " + Utility::Numbered( "test", tests ) + " from " + Utility::Numbered( "case", cases ) );
-                    
-                    this->setup( os );
+                    Logging::Log( os, "Running " + Utility::Numbered( "test case", cases ) + " from " + Utility::Numbered( "test suite", suites ) );
                     
                     time.Start();
                     
@@ -114,10 +113,6 @@ namespace XS
                     }
                     
                     time.Stop();
-                    
-                    this->tearDown( os );
-                    
-                    Logging::Log( os, {}, Utility::Numbered( "test", tests ) + " from " + Utility::Numbered( "case", cases ) + " ran (" + time.GetString() + " total)" );
                     
                     {
                         std::vector< Info > passed;
@@ -137,19 +132,18 @@ namespace XS
                                 }
                             }
                         }
-                        
-                        Logging::Log( os, {}, Utility::Numbered( "test", passed.size() ) + " passed" );
+                    
+                        Logging::Log( os, Utility::Numbered( "test case", cases ) + " from " + Utility::Numbered( "test suite", suites ) + " ran (" + time.GetString() + " total)", {}, Logging::Style::None, Logging::Options::NewLineBefore );
+                        Logging::Log( os, Utility::Numbered( "test", passed.size() ) + " passed", ( ( passed.size() > 0 ) ? TermColor::Green() : TermColor::Red() ) );
                         
                         if( failed.size() > 0 )
                         {
-                            Logging::Log( os, {}, Utility::Numbered( "test", passed.size() ) + " failed, listed below:" );
+                            Logging::Log( os, Utility::Numbered( "test", failed.size() ) + " failed, listed below:", TermColor::Red() );
                             
                             for( const auto & info: failed )
                             {
-                                Logging::Log( os, { "FAILED" }, info.GetName() );
+                                Logging::Log( os, info.GetSuiteName(), info.GetCaseName(), "  - " );
                             }
-                            
-                            Logging::Log( os, {}, Utility::Numbered( "FAILED TEST", failed.size(), "FAILED TESTS" ) );
                         }
                     }
                     
@@ -164,16 +158,6 @@ namespace XS
                 }
                 
             private:
-                
-                void setup( Optional< std::reference_wrapper< std::ostream > > os )
-                {
-                    Logging::Log( os, {}, "Global test environment set-up" );
-                }
-                
-                void tearDown( Optional< std::reference_wrapper< std::ostream > > os )
-                {
-                    Logging::Log( os, {}, "Global test environment tear-down" );
-                }
                 
                 std::vector< Suite > _suites;
         };

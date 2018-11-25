@@ -93,7 +93,7 @@ namespace XS
                 
                 operator bool() const
                 {
-                    return this->hasValue();
+                    return this->HasValue();
                 }
                 
                 const _T_ * operator ->( void ) const
@@ -118,40 +118,40 @@ namespace XS
                 
                 const _T_ & operator *( void ) const &
                 {
-                    return this->value();
+                    return this->Value();
                 }
                 
                 _T_ & operator *( void ) &
                 {
-                    return this->value();
+                    return this->Value();
                 }
                 
-                bool hasValue( void ) const
+                bool HasValue( void ) const
                 {
                     return this->_hasValue;
                 }
                 
-                _T_ & value( void ) &
+                _T_ & Value( void ) &
                 {
                     return *( this->operator->() );
                 }
                 
-                const _T_ & value( void ) const &
+                const _T_ & Value( void ) const &
                 {
                     return *( this->operator->() );
                 }
                 
-                _T_ valueOr( _T_ && defaultValue ) const &
+                _T_ ValueOr( _T_ && defaultValue ) const &
                 {
-                    return ( this->hasValue() ) ? this->value() : defaultValue;
+                    return ( this->HasValue() ) ? this->Value() : defaultValue;
                 }
                 
-                _T_ valueOr( _T_ && defaultValue ) &&
+                _T_ ValueOr( _T_ && defaultValue ) &&
                 {
-                    return ( this->hasValue() ) ? this->value() : defaultValue;
+                    return ( this->HasValue() ) ? this->Value() : defaultValue;
                 }
                 
-                void reset( void )
+                void Reset( void )
                 {
                     Optional< _T_ > o;
                     

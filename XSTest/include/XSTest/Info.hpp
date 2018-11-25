@@ -42,7 +42,8 @@
 #include <XSTest/Failure.hpp>
 #include <XSTest/Case.hpp>
 #include <XSTest/StopWatch.hpp>
-#include <XSTest/Log.hpp>
+#include <XSTest/Logging.hpp>
+#include <XSTest/TermColor.hpp>
 
 namespace XS
 {
@@ -77,7 +78,7 @@ namespace XS
                     Failed
                 };
                 
-                static Info & Register( const std::string & testCaseName, const std::string & testName, const std::function< std::shared_ptr< Case >( void ) > createTest, const std::string & file, int line )
+                static Info & Register( const std::string & testCaseName, const std::string & testName, const std::function< std::shared_ptr< Case >( void ) > createTest, const std::string & file, size_t line )
                 {
                     Info * i = new Info( testCaseName, testName, createTest, file, line );
                                         
@@ -153,7 +154,7 @@ namespace XS
                     return this->_file;
                 }
                 
-                int GetLine( void ) const noexcept
+                size_t GetLine( void ) const noexcept
                 {
                     return this->_line;
                 }
@@ -168,11 +169,9 @@ namespace XS
                     StopWatch               time;
                     std::shared_ptr< Case > test( this->_createTest() );
                     
-                    this->_failure.reset();
+                    this->_failure.Reset();
                     
                     this->_status = Status::Running;
-                    
-                    Logging::Log( os, { this->_suiteName, this->_caseName }, "Running..." );
                     
                     test->SetUp();
                     time.Start();
@@ -201,16 +200,7 @@ namespace XS
                     
                     time.Stop();
                     test->TearDown();
-                    
-                    if( this->_status == Status::Success )
-                    {
-                        Logging::Log( os, { this->_suiteName, this->_caseName }, "OK (" + time.GetString() + ")" );
-                    }
-                    else
-                    {
-                        Logging::Log( os, { this->_suiteName, this->_caseName }, "Failed (" + time.GetString() + ")" );
-                        Logging::Log( os, { this->_suiteName, this->_caseName }, *( this->_failure ) );
-                    }
+                    Logging::Log( os, this->_suiteName, this->_caseName, this->_failure, time );
                     
                     return this->_status == Status::Success;
                 }
@@ -235,7 +225,7 @@ namespace XS
                     return GetAllInfos();
                 }
                 
-                Info( const std::string & suiteName, const std::string & caseName, const std::function< std::shared_ptr< Case >( void ) > createTest, const std::string & file, int line ):
+                Info( const std::string & suiteName, const std::string & caseName, const std::function< std::shared_ptr< Case >( void ) > createTest, const std::string & file, size_t line ):
                     _suiteName( suiteName ),
                     _caseName( caseName ),
                     _createTest( createTest ),
@@ -249,7 +239,7 @@ namespace XS
                 std::function< std::shared_ptr< Case >( void ) > _createTest;
                 Status                                           _status;
                 std::string                                      _file;
-                int                                              _line;
+                size_t                                           _line;
                 Optional< Failure >                              _failure;
         };
     }

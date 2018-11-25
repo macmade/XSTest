@@ -54,7 +54,9 @@ XSTestFixture( Bar, Test2 )
 }
 
 XSTestFixture( Bar, Test3 )
-{}
+{
+    throw std::runtime_error( "Some exception" );
+}
 
 XSTestFixture( Bar, Test4 )
 {}

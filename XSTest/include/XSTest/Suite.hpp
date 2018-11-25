@@ -40,7 +40,8 @@
 #include <XSTest/StopWatch.hpp>
 #include <XSTest/Utility.hpp>
 #include <XSTest/Info.hpp>
-#include <XSTest/Log.hpp>
+#include <XSTest/Logging.hpp>
+#include <XSTest/TermColor.hpp>
 
 namespace XS
 {
@@ -116,7 +117,7 @@ namespace XS
                         return false;
                     }
                     
-                    Logging::Log( os, { this->_name }, Utility::Numbered( "test", this->_infos.size() ) + " from " + this->_name );
+                    Logging::Log( os, "Running " + Utility::Numbered( "test case", this->_infos.size() ) + " from " + this->_name, {}, Logging::Style::None, Logging::Options::NewLineBefore );
                     
                     time.Start();
                     
@@ -130,7 +131,7 @@ namespace XS
                     
                     time.Stop();
                     
-                    Logging::Log( os, { this->_name }, Utility::Numbered( "test", this->_infos.size() ) + " from " + this->_name + " (" + time.GetString() + " total)" );
+                    Logging::Log( os, Utility::Numbered( "test case", this->_infos.size() ) + " from " + this->_name + " ran (" + time.GetString() + " total)" );
                     
                     return success;
                 }

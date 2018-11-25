@@ -23,7 +23,9 @@
 		05D5270221A86E070025CCEB /* Suite.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 05D5260A21A62A590025CCEB /* Suite.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
 		05D5270321A86E070025CCEB /* Utility.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 05D5260D21A630C50025CCEB /* Utility.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
 		05D5270A21A87F1B0025CCEB /* XSTest.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 05D5270921A87F1B0025CCEB /* XSTest.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
-		05E572B621A8CE1F00D6E51C /* Log.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 05E572B521A8C21E00D6E51C /* Log.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
+		05E572B621A8CE1F00D6E51C /* Logging.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 05E572B521A8C21E00D6E51C /* Logging.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
+		05E572C121AB048900D6E51C /* TermColor.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 05E572B721AA6AB300D6E51C /* TermColor.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
+		05E572C221AB04C000D6E51C /* Flags.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 05E572BE21AA748900D6E51C /* Flags.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -87,7 +89,9 @@
 		05D526E721A864BC0025CCEB /* XSTest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = XSTest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		05D526EF21A864E80025CCEB /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		05D5270921A87F1B0025CCEB /* XSTest.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = XSTest.hpp; sourceTree = "<group>"; };
-		05E572B521A8C21E00D6E51C /* Log.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Log.hpp; sourceTree = "<group>"; };
+		05E572B521A8C21E00D6E51C /* Logging.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Logging.hpp; sourceTree = "<group>"; };
+		05E572B721AA6AB300D6E51C /* TermColor.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TermColor.hpp; sourceTree = "<group>"; };
+		05E572BE21AA748900D6E51C /* Flags.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Flags.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,16 +156,18 @@
 			isa = PBXGroup;
 			children = (
 				05D526DB21A792920025CCEB /* Assert.hpp */,
-				05E572B521A8C21E00D6E51C /* Log.hpp */,
 				05D525A921A5FDFF0025CCEB /* Case.hpp */,
 				05D5269421A71A9A0025CCEB /* Failure.hpp */,
+				05E572BE21AA748900D6E51C /* Flags.hpp */,
 				05D525EE21A605930025CCEB /* Functions.hpp */,
 				05D525AA21A5FE810025CCEB /* Info.hpp */,
+				05E572B521A8C21E00D6E51C /* Logging.hpp */,
 				05D525F121A606550025CCEB /* Macros.hpp */,
 				05D5261E21A6B9880025CCEB /* Optional.hpp */,
 				05D5260721A629D20025CCEB /* Runner.hpp */,
 				05D525FA21A61FAE0025CCEB /* StopWatch.hpp */,
 				05D5260A21A62A590025CCEB /* Suite.hpp */,
+				05E572B721AA6AB300D6E51C /* TermColor.hpp */,
 				05D5260D21A630C50025CCEB /* Utility.hpp */,
 				05D5259A21A5FD7C0025CCEB /* XSTest.hpp */,
 			);
@@ -307,6 +313,8 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				05E572C121AB048900D6E51C /* TermColor.hpp in Headers */,
+				05E572C221AB04C000D6E51C /* Flags.hpp in Headers */,
 				05D526FC21A86E070025CCEB /* Functions.hpp in Headers */,
 				05D526FE21A86E070025CCEB /* Macros.hpp in Headers */,
 				05D5270021A86E070025CCEB /* Runner.hpp in Headers */,
@@ -317,7 +325,7 @@
 				05D526FA21A86E070025CCEB /* Case.hpp in Headers */,
 				05D526F921A86E070025CCEB /* Assert.hpp in Headers */,
 				05D5270221A86E070025CCEB /* Suite.hpp in Headers */,
-				05E572B621A8CE1F00D6E51C /* Log.hpp in Headers */,
+				05E572B621A8CE1F00D6E51C /* Logging.hpp in Headers */,
 				05D5270121A86E070025CCEB /* StopWatch.hpp in Headers */,
 				05D526FD21A86E070025CCEB /* Info.hpp in Headers */,
 			);

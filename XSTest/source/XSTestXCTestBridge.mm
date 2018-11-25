@@ -137,9 +137,8 @@ static id runTestCase( XCTestCase * self, SEL _cmd )
     {
         XS::Test::Info                        & info( *( static_cast< XS::Test::Info * >( assoc ) ) );
         XS::Test::Optional< XS::Test::Failure > failure;
-        NSString                              * description;
         std::string                             file;
-        int                                     line;
+        size_t                                  line;
         
         if( info.Run( {} ) == false )
         {
@@ -147,31 +146,16 @@ static id runTestCase( XCTestCase * self, SEL _cmd )
             
             if( failure )
             {
-                description = [ NSString stringWithUTF8String: failure->GetReason().c_str() ];
-                file        = failure->GetFile();
-                line        = failure->GetLine();
+                file = failure->GetFile();
+                line = failure->GetLine();
             }
             else
             {
-                description = @"Unknown error";
-                file        = info.GetFile();
-                line        = info.GetLine();
+                file = info.GetFile();
+                line = info.GetLine();
             }
             
-            {
-                NSMutableArray * parts;
-                
-                parts = [ NSMutableArray new ];
-                
-                for( NSString * part in [ description componentsSeparatedByString: @"\n" ] )
-                {
-                    [ parts addObject: [ part stringByTrimmingCharactersInSet: [ NSCharacterSet whitespaceCharacterSet ] ] ];
-                }
-                
-                description = [ parts componentsJoinedByString: @" | " ];
-            }
-            
-            [ self recordFailureWithDescription: description inFile: [ NSString stringWithUTF8String: file.c_str() ] atLine: static_cast< NSUInteger >( line ) expected: YES ];
+            [ self recordFailureWithDescription: [ NSString stringWithUTF8String: failure->GetDescription().c_str() ] inFile: [ NSString stringWithUTF8String: file.c_str() ] atLine: line expected: YES ];
         }
     }
     

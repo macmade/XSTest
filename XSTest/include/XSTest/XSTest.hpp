@@ -40,8 +40,10 @@
 #include <XSTest/Suite.hpp>
 #include <XSTest/Utility.hpp>
 #include <XSTest/Optional.hpp>
+#include <XSTest/Flags.hpp>
 #include <XSTest/Failure.hpp>
 #include <XSTest/Assert.hpp>
-#include <XSTest/Log.hpp>
+#include <XSTest/Logging.hpp>
+#include <XSTest/TermColor.hpp>
 
 #endif /* XS_TEST_HPP */

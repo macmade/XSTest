@@ -34,7 +34,9 @@
 #include <stdexcept>
 #include <memory>
 #include <string>
+#include <sstream>
 #include <algorithm>
+#include <XSTest/TermColor.hpp>
 
 namespace XS
 {
@@ -44,20 +46,65 @@ namespace XS
         {
             public:
                 
-                Failure( const std::string & reason, const std::string & file, int line ):
-                    _reason( reason ),
-                    _file(   file ),
-                    _line(   line )
+                Failure( const std::string & expression, const std::string & expected, const std::string & actual, const std::string & file, size_t line ):
+                    _expression( expression ),
+                    _expected(   expected ),
+                    _actual(     actual ),
+                    _file(       file ),
+                    _line(       line )
+                {
+                    std::string description;
+                    
+                    if( expression.length() > 0 )
+                    {
+                        description += "Expression: " + expression;
+                    }
+                    
+                    if( expected.length() > 0 )
+                    {
+                        if( description.length() > 0 )
+                        {
+                            description += " | ";
+                        }
+                        
+                        description += "Expected: " + expected;
+                    }
+                    
+                    if( actual.length() > 0 )
+                    {
+                        if( description.length() > 0 )
+                        {
+                            description += " | ";
+                        }
+                        
+                        description += "Actual: " + actual;
+                    }
+                    
+                    this->_description = description;
+                }
+                
+                Failure( const std::string & description, const std::string & file, size_t line ):
+                    _description( description ),
+                    _file(       file ),
+                    _line(       line )
                 {}
                 
                 Failure( const Failure & o ):
-                    Failure( o._reason, o._file, o._line )
+                    _expression(  o._expression ),
+                    _expected(    o._expected ),
+                    _actual(      o._actual ),
+                    _description( o._description ),
+                    _file(        o._file ),
+                    _line(        o._line )
                 {}
                 
                 Failure( Failure && o ) noexcept:
-                    _reason( std::move( o._reason ) ),
-                    _file(   std::move( o._file ) ),
-                    _line(   std::move( o._line ) )
+                    _expression(  std::move( o._expression ) ),
+                    _expected(    std::move( o._expected ) ),
+                    _actual(      std::move( o._actual ) ),
+                    _description( std::move( o._description ) ),
+                    _file(        std::move( o._file ) ),
+                    _line(        std::move( o._line ) )
                 {}
                 
                 ~Failure( void )
@@ -70,26 +117,24 @@ namespace XS
                     return *( this );
                 }
                 
-                operator std::string()
+                std::string GetExpression( void ) const
                 {
-                    std::string s;
-                    
-                    s += ( this->_file.length() > 0 ) ? this->_file : "<unknown>";
-                    s += ":";
-                    s += std::to_string( this->_line );
-                    
-                    if( this->_reason.length() > 0 )
-                    {
-                        s += "\n";
-                        s += this->_reason;
-                    }
-                    
-                    return s;
+                    return this->_expression;
                 }
                 
-                std::string GetReason( void ) const
+                std::string GetExpected( void ) const
                 {
-                    return this->_reason;
+                    return this->_expected;
+                }
+                
+                std::string GetActual( void ) const
+                {
+                    return this->_actual;
+                }
+                
+                std::string GetDescription( void ) const
+                {
+                    return this->_description;
                 }
                 
                 std::string GetFile( void ) const
@@ -97,30 +142,36 @@ namespace XS
                     return this->_file;
                 }
                 
-                int GetLine( void ) const noexcept
+                size_t GetLine( void ) const noexcept
                 {
                     return this->_line;
                 }
                 
                 const char * what( void ) const noexcept override
                 {
-                    return this->_reason.c_str();
+                    return this->_description.c_str();
                 }
                 
                 friend void swap( Failure & o1, Failure & o2 ) noexcept
                 {
                     using std::swap;
                     
-                    swap( o1._reason, o2._reason );
-                    swap( o1._file,   o2._file );
-                    swap( o1._line,   o2._line );
+                    swap( o1._expression,  o2._expression );
+                    swap( o1._expected,    o2._expected );
+                    swap( o1._actual,      o2._actual );
+                    swap( o1._description, o2._description );
+                    swap( o1._file,        o2._file );
+                    swap( o1._line,        o2._line );
                 }
                 
             private:
                 
-                std::string _reason;
+                std::string _expression;
+                std::string _expected;
+                std::string _actual;
                 std::string _file;
-                int         _line;
+                std::string _description;
+                size_t      _line;
         };
     }
 }
