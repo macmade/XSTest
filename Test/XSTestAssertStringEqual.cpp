@@ -43,7 +43,7 @@ XSTest( Failure, XSTestAssertStringEqual )
 {
     std::this_thread::sleep_for( std::chrono::milliseconds( 10 ) );
     
-    XSTestAssertStringEqual( "foo", "bar" );
+    XSTestAssertStringEqual( std::string( "foo" ).c_str(), "bar" );
 }
 
 XSTest( Failure, XSTestAssertStringEqual_CaseSensitive )

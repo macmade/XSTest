@@ -134,7 +134,7 @@ namespace XS
                         }
                     
                         Logging::Log( os, Utility::Numbered( "test case", cases ) + " from " + Utility::Numbered( "test suite", suites ) + " ran (" + time.GetString() + " total)", {}, Logging::Style::None, Logging::Options::NewLineBefore );
-                        Logging::Log( os, Utility::Numbered( "test", passed.size() ) + " passed", ( ( passed.size() > 0 ) ? TermColor::Green() : TermColor::Red() ) );
+                        Logging::Log( os, Utility::Numbered( "test", passed.size() ) + " passed:", ( ( passed.size() > 0 ) ? TermColor::Green() : TermColor::Red() ) );
                         
                         if( failed.size() > 0 )
                         {
@@ -146,7 +146,7 @@ namespace XS
                                 Logging::Log( os, info.GetSuiteName(), info.GetCaseName(), "  - ✅ " );
                             }
                             
-                            Logging::Log( os, Utility::Numbered( "test", failed.size() ) + " failed, listed below:", TermColor::Red() );
+                            Logging::Log( os, Utility::Numbered( "test", failed.size() ) + " failed:", TermColor::Red() );
                             
                             for( const auto & info: failed )
                             {

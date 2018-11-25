@@ -189,6 +189,7 @@ namespace XS
                     {
                         std::string file( ( failure->GetFile().length() > 0 ) ? failure->GetFile() : "<unknown>" );
                         std::string expression( failure->GetExpression() );
+                        std::string evaluated( failure->GetEvaluated() );
                         std::string expected( failure->GetExpected() );
                         std::string actual( failure->GetActual() );
                             
@@ -206,6 +207,15 @@ namespace XS
                                       << TermColor::Cyan()
                                       << expression
                                       << TermColor::None();
+                            
+                            if( evaluated.length() > 0 && evaluated != expression )
+                            {
+                                os->get() << std::endl
+                                          << "            - Evaluated:  "
+                                          << TermColor::Magenta()
+                                          << evaluated
+                                          << TermColor::None();
+                            }
                             
                             if( expected.length() > 0 )
                             {

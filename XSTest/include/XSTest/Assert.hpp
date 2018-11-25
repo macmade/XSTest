@@ -69,6 +69,22 @@ namespace XS
                 } 
             }
             
+            inline void Boolean( bool value, bool expected, const std::string & expression, const std::string & evaluated, const std::string & file, size_t line )
+            {
+                if( value != expected )
+                {
+                    throw Failure
+                    (
+                        expression,
+                        evaluated,
+                        ( expected ) ? "True" : "False",
+                        ( value    ) ? "True" : "False",
+                        file,
+                        line
+                    );
+                } 
+            }
+            
             template< typename T1, typename T2 >
             inline void Compare( const T1 & v1, const T2 & v2, Operator op, const std::string & expression1, const std::string & expression2, const std::string & file, size_t line )
             {
@@ -98,33 +114,33 @@ namespace XS
                 }
             }
             
-            inline void StringEquality( const char * s1, const char * s2, bool expected, bool caseInsensitive, const std::string & expression1, const std::string & expression2, const std::string & file, size_t line )
+            inline void StringEquality( const char * cp1, const char * cp2, bool expected, bool caseInsensitive, const std::string & expression1, const std::string & expression2, const std::string & file, size_t line )
             {
                 bool result;
                 
-                if( s1 == nullptr || s2 == nullptr )
+                if( cp1 == nullptr || cp2 == nullptr )
                 {
                     result = ( expected ) ? false : true;
                 }
                 else if( caseInsensitive )
                 {
-                    result = strcasecmp( s1, s2 ) == 0;
+                    result = strcasecmp( cp1, cp2 ) == 0;
                 }
                 else
                 {
-                    result = strcmp( s1, s2 ) == 0;
+                    result = strcmp( cp1, cp2 ) == 0;
                 }
                 
                 if( result != expected )
                 {
-                    Boolean
-                    (
-                        result,
-                        expected,
-                        ( expected ) ? expression1 + " == " + expression2 : expression1 + " != " + expression2,
-                        file,
-                        line
-                    );
+                    {
+                        std::string s1( ( cp1 == nullptr ) ? "NULL" : "\"" + std::string( cp1 ) + "\"" );
+                        std::string s2( ( cp2 == nullptr ) ? "NULL" : "\"" + std::string( cp2 ) + "\"" );
+                        std::string expression( ( expected ) ? expression1 + " == " + expression2 : expression1 + " != " + expression2 );
+                        std::string evaluated(  ( expected ) ? s1          + " == " + s2          : s1          + " != " + s2 );
+                        
+                        Boolean( result, expected, expression, evaluated, file, line );
+                    }
                 }
             }
             

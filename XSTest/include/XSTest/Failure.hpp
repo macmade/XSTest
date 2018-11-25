@@ -47,7 +47,12 @@ namespace XS
             public:
                 
                 Failure( const std::string & expression, const std::string & expected, const std::string & actual, const std::string & file, size_t line ):
+                    Failure( expression, "", expected, actual, file, line )
+                {}
+                
+                Failure( const std::string & expression, const std::string & evaluated, const std::string & expected, const std::string & actual, const std::string & file, size_t line ):
                     _expression( expression ),
+                    _evaluated(  evaluated ),
                     _expected(   expected ),
                     _actual(     actual ),
                     _file(       file ),
@@ -58,6 +63,16 @@ namespace XS
                     if( expression.length() > 0 )
                     {
                         description += "Expression: " + expression;
+                    }
+                    
+                    if( evaluated.length() > 0 && evaluated != expression )
+                    {
+                        if( description.length() > 0 )
+                        {
+                            description += " | ";
+                        }
+                        
+                        description += "Evaluated:  " + evaluated;
                     }
                     
                     if( expected.length() > 0 )
@@ -91,6 +106,7 @@ namespace XS
                 
                 Failure( const Failure & o ):
                     _expression(  o._expression ),
+                    _evaluated(   o._evaluated ),
                     _expected(    o._expected ),
                     _actual(      o._actual ),
                     _description( o._description ),
@@ -100,6 +116,7 @@ namespace XS
                 
                 Failure( Failure && o ) noexcept:
                     _expression(  std::move( o._expression ) ),
+                    _evaluated(   std::move( o._evaluated ) ),
                     _expected(    std::move( o._expected ) ),
                     _actual(      std::move( o._actual ) ),
                     _description( std::move( o._description ) ),
@@ -120,6 +137,11 @@ namespace XS
                 std::string GetExpression( void ) const
                 {
                     return this->_expression;
+                }
+                
+                std::string GetEvaluated( void ) const
+                {
+                    return this->_evaluated;
                 }
                 
                 std::string GetExpected( void ) const
@@ -157,6 +179,7 @@ namespace XS
                     using std::swap;
                     
                     swap( o1._expression,  o2._expression );
+                    swap( o1._evaluated,   o2._evaluated );
                     swap( o1._expected,    o2._expected );
                     swap( o1._actual,      o2._actual );
                     swap( o1._description, o2._description );
@@ -167,6 +190,7 @@ namespace XS
             private:
                 
                 std::string _expression;
+                std::string _evaluated;
                 std::string _expected;
                 std::string _actual;
                 std::string _file;
