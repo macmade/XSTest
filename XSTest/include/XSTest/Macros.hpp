@@ -65,8 +65,8 @@
 
 #define XSTestAssertFalse( _e_ )                                XS::Test::Assert::Boolean( static_cast< bool >( _e_ ), false, XSTest_Internal_XString( _e_ ), __FILE__, __LINE__ )
 #define XSTestAssertTrue( _e_ )                                 XS::Test::Assert::Boolean( static_cast< bool >( _e_ ), true,  XSTest_Internal_XString( _e_ ), __FILE__, __LINE__ )
-#define XSTestAssertEqual( _v1_, _v2_ )                         
-#define XSTestAssertNotEqual( _v1_, _v2_ )                      
+#define XSTestAssertEqual( _v1_, _v2_ )                         XS::Test::Assert::Equality( _v1_, _v2_, true,  std::string( XSTest_Internal_XString( _v1_ ) ) + " == " + std::string( XSTest_Internal_XString( _v2_ ) ), __FILE__, __LINE__ )
+#define XSTestAssertNotEqual( _v1_, _v2_ )                      XS::Test::Assert::Equality( _v1_, _v2_, false, std::string( XSTest_Internal_XString( _v1_ ) ) + " != " + std::string( XSTest_Internal_XString( _v2_ ) ), __FILE__, __LINE__ )
 #define XSTestAssertLess( _v1_, _v2_ )                          
 #define XSTestAssertLessOrEqual( _v1_, _v2_ )                   
 #define XSTestAssertGreater( _v1_, _v2_ )                       

@@ -10,6 +10,7 @@
 		05D5266B21A6EC520025CCEB /* Test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05D525E521A605160025CCEB /* Test.cpp */; };
 		05D526D621A78CE80025CCEB /* Fixture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05D526D521A78CE80025CCEB /* Fixture.cpp */; };
 		05D5272A21A88D190025CCEB /* XSTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05D5272721A88CF90025CCEB /* XSTest.framework */; };
+		05E572CC21AB0F3E00D6E51C /* Assertions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05E572C721AB0B2800D6E51C /* Assertions.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -334,6 +335,7 @@
 			files = (
 				05D5266B21A6EC520025CCEB /* Test.cpp in Sources */,
 				05D526D621A78CE80025CCEB /* Fixture.cpp in Sources */,
+				05E572CC21AB0F3E00D6E51C /* Assertions.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

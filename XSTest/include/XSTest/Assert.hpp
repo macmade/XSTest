@@ -48,12 +48,28 @@ namespace XS
                     throw Failure
                     (
                         expression,
-                        ( expected ) ? "true" : "false",
-                        ( value    ) ? "true" : "false",
+                        ( expected ) ? "True" : "False",
+                        ( value    ) ? "True" : "False",
                         file,
                         line
                     );
                 } 
+            }
+            
+            template< typename T1, typename T2 >
+            inline void Equality( const T1 & v1, const T2 & v2, bool expected, const std::string & expression, const std::string & file, size_t line )
+            {
+                if( ( v1 == v2 ) != expected )
+                {
+                    throw Failure
+                    (
+                        expression,
+                        ( expected ) ? "Equal"     : "Not equal",
+                        ( expected ) ? "Not equal" : "Equal",
+                        file,
+                        line
+                    );
+                }
             }
         }
     }

@@ -45,3 +45,31 @@ XSTest( Assertions, XSTestAssertTrue )
     
     XSTestAssertTrue( true == false );
 }
+
+XSTest( Assertions, XSTestAssertEqual_Int )
+{
+    std::this_thread::sleep_for( std::chrono::milliseconds( 10 ) );
+    
+    XSTestAssertEqual( 0, 1 );
+}
+
+XSTest( Assertions, XSTestAssertNotEqual_Int )
+{
+    std::this_thread::sleep_for( std::chrono::milliseconds( 10 ) );
+    
+    XSTestAssertNotEqual( 0, 0 );
+}
+
+XSTest( Assertions, XSTestAssertEqual_String )
+{
+    std::this_thread::sleep_for( std::chrono::milliseconds( 10 ) );
+    
+    XSTestAssertEqual( std::string( "foo" ), std::string( "bar" ) );
+}
+
+XSTest( Assertions, XSTestAssertNotEqual_String )
+{
+    std::this_thread::sleep_for( std::chrono::milliseconds( 10 ) );
+    
+    XSTestAssertNotEqual( std::string( "foo" ), std::string( "foo" ) );
+}
