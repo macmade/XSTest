@@ -38,10 +38,7 @@
 #include <functional>
 #include <type_traits>
 #include <XSTest/Failure.hpp>
-
-#ifdef __clang__
-#include <cxxabi.h>
-#endif
+#include <XSTest/Utility.hpp>
 
 namespace XS
 {
@@ -227,7 +224,6 @@ namespace XS
             {
                 bool        hasCaught( false );
                 bool        hasThrown( false );
-                std::string name;
                 std::string thrown;
                 std::string what;
                 
@@ -247,17 +243,7 @@ namespace XS
                 {
                     hasThrown = true;
                     what      = ( e.what() != nullptr ) ? e.what() : "";
-                    name      = typeid( e ).name();
-                    
-                    #ifdef __clang__
-                    {
-                        int s( 0 );
-                        
-                        name = abi::__cxa_demangle( name.c_str(), 0, 0, &s );
-                    }
-                    #endif
-                    
-                    thrown = name + ( ( what.length() > 0 ) ? ": \"" + what + "\"" : "" );
+                    thrown    = Utility::Typename( e ) + ( ( what.length() > 0 ) ? ": \"" + what + "\"" : "" );
                 }
                 catch( ... )
                 {
@@ -317,7 +303,6 @@ namespace XS
             inline void Throwing( const std::function< void( void ) > & f, bool throws, const std::string & expression, const std::string & file, size_t line )
             {
                 bool        hasThrown( false );
-                std::string name;
                 std::string thrown;
                 std::string what;
                 
@@ -332,17 +317,7 @@ namespace XS
                 {
                     hasThrown = true;
                     what      = ( e.what() != nullptr ) ? e.what() : "";
-                    name      = typeid( e ).name();
-                    
-                    #ifdef __clang__
-                    {
-                        int s( 0 );
-                        
-                        name = abi::__cxa_demangle( name.c_str(), 0, 0, &s );
-                    }
-                    #endif
-                    
-                    thrown = name + ( ( what.length() > 0 ) ? ": \"" + what + "\"" : "" );
+                    thrown    = Utility::Typename( e ) + ( ( what.length() > 0 ) ? ": \"" + what + "\"" : "" );
                 }
                 catch( ... )
                 {

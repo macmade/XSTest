@@ -34,6 +34,10 @@
 #include <string>
 #include <random>
 
+#ifdef __clang__
+#include <cxxabi.h>
+#endif
+
 namespace XS
 {
     namespace Test
@@ -62,6 +66,22 @@ namespace XS
                 std::mt19937       urng( rng() );
                 
                 std::shuffle( std::begin( o ), std::end( o ), urng );
+            }
+            
+            template< typename _T_ >
+            std::string Typename( const _T_ & o )
+            {
+                std::string name( typeid( o ).name() );
+                
+                #ifdef __clang__
+                {
+                    int s( 0 );
+                    
+                    name = abi::__cxa_demangle( name.c_str(), 0, 0, &s );
+                }
+                #endif
+                
+                return name;
             }
         }
     }
