@@ -23,7 +23,7 @@
  ******************************************************************************/
 
 /*!
- * @file        Foo.cpp
+ * @file        XSTestFixture.cpp
  * @author      Jean-David Gadina - www.xs-labs.com
  * @copyright   (c) 2018, Jean-David Gadina - www.xs-labs.com
  */
@@ -32,27 +32,38 @@
 #include <thread>
 #include <chrono>
 
-XSTest( Test, Test1 )
+class XSTestFixture: public XS::Test::Case
+{
+    protected:
+        
+        void SetUp( void ) override
+        {}
+        
+        void TearDown( void ) override
+        {}
+};
+
+XSTestFixture( XSTestFixture, Test1 )
 {
     std::this_thread::sleep_for( std::chrono::milliseconds( 10 ) );
 }
 
-XSTest( Test, Test2 )
+XSTestFixture( XSTestFixture, Test2 )
 {
     std::this_thread::sleep_for( std::chrono::milliseconds( 10 ) );
 }
 
-XSTest( Test, Test3 )
+XSTestFixture( XSTestFixture, Test3 )
 {
     std::this_thread::sleep_for( std::chrono::milliseconds( 10 ) );
 }
 
-XSTest( Test, Test4 )
+XSTestFixture( XSTestFixture, Test4 )
 {
     std::this_thread::sleep_for( std::chrono::milliseconds( 10 ) );
 }
 
-XSTest( Test, Test5 )
+XSTestFixture( XSTestFixture, Test5 )
 {
     std::this_thread::sleep_for( std::chrono::milliseconds( 10 ) );
 }

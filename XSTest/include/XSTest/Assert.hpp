@@ -34,6 +34,9 @@
 #include <string>
 #include <XSTest/Failure.hpp>
 #include <sstream>
+#include <cstring>
+#include <stdexcept>
+#include <functional>
 
 namespace XS
 {
@@ -66,6 +69,101 @@ namespace XS
                         expression,
                         ( expected ) ? "Equal"     : "Not equal",
                         ( expected ) ? "Not equal" : "Equal",
+                        file,
+                        line
+                    );
+                }
+            }
+            
+            inline void StringEquality( const char * s1, const char * s2, bool expected, bool caseInsensitive, const std::string & expression, const std::string & file, size_t line )
+            {
+                bool result;
+                
+                if( s1 == nullptr || s2 == nullptr )
+                {
+                    result = ( expected ) ? false : true;
+                }
+                else if( caseInsensitive )
+                {
+                    result = strcasecmp( s1, s2 ) == 0;
+                }
+                else
+                {
+                    result = strcmp( s1, s2 ) == 0;
+                }
+                
+                if( result != expected )
+                {
+                    throw Failure
+                    (
+                        expression,
+                        ( expected ) ? "Equal"     : "Not equal",
+                        ( expected ) ? "Not equal" : "Equal",
+                        file,
+                        line
+                    );
+                }
+            }
+            
+            template< typename T >
+            inline void Throwing( const std::function< void( void ) > & f, const std::string & exception, const std::string & expression, const std::string & file, size_t line )
+            {
+                bool hasCaught( false );
+                bool hasThrown( false );
+                
+                try
+                {
+                    if( f != nullptr )
+                    {
+                        f();
+                    }
+                }
+                catch( const T & e )
+                {
+                    hasCaught = true;
+                    hasThrown = true;
+                }
+                catch( ... )
+                {
+                    hasThrown = true;
+                }
+                
+                if( hasThrown == false || hasCaught == false )
+                {
+                    throw Failure
+                    (
+                        expression,
+                        "Throws " + exception,
+                        ( hasThrown == false ) ? "Doesn't throw anything" : "Throws a different exception",
+                        file,
+                        line
+                    );
+                }
+            }
+            
+            inline void Throwing( const std::function< void( void ) > & f, bool throws, const std::string & expression, const std::string & file, size_t line )
+            {
+                bool hasThrown( false );
+                
+                try
+                {
+                    if( f != nullptr )
+                    {
+                        f();
+                    }
+                }
+                catch( ... )
+                {
+                    hasThrown = true;
+                }
+                
+                if( hasThrown != throws )
+                {
+                    throw Failure
+                    (
+                        expression,
+                        ( throws ) ? "Throws an exception"    : "Doesn't throw any exception",
+                        ( throws ) ? "Doesn't throw anything" : "Throws an exception",
                         file,
                         line
                     );

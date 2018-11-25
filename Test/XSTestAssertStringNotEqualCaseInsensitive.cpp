@@ -23,7 +23,7 @@
  ******************************************************************************/
 
 /*!
- * @file        Bar.cpp
+ * @file        XSTestAssertStringNotEqualCaseInsensitive.cpp
  * @author      Jean-David Gadina - www.xs-labs.com
  * @copyright   (c) 2018, Jean-David Gadina - www.xs-labs.com
  */
@@ -32,38 +32,16 @@
 #include <thread>
 #include <chrono>
 
-class Fixture: public XS::Test::Case
-{
-    protected:
-        
-        void SetUp( void ) override
-        {}
-        
-        void TearDown( void ) override
-        {}
-};
-
-XSTestFixture( Fixture, Test1 )
+XSTest( Success, XSTestAssertStringNotEqualCaseInsensitive )
 {
     std::this_thread::sleep_for( std::chrono::milliseconds( 10 ) );
+    
+    XSTestAssertStringNotEqualCaseInsensitive( "foo", "bar" );
 }
 
-XSTestFixture( Fixture, Test2 )
+XSTest( Failure, XSTestAssertStringNotEqualCaseInsensitive )
 {
     std::this_thread::sleep_for( std::chrono::milliseconds( 10 ) );
-}
-
-XSTestFixture( Fixture, Test3 )
-{
-    std::this_thread::sleep_for( std::chrono::milliseconds( 10 ) );
-}
-
-XSTestFixture( Fixture, Test4 )
-{
-    std::this_thread::sleep_for( std::chrono::milliseconds( 10 ) );
-}
-
-XSTestFixture( Fixture, Test5 )
-{
-    std::this_thread::sleep_for( std::chrono::milliseconds( 10 ) );
+    
+    XSTestAssertStringNotEqualCaseInsensitive( "foo", "FOO" );
 }

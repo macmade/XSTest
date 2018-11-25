@@ -23,7 +23,7 @@
  ******************************************************************************/
 
 /*!
- * @file        Foo.cpp
+ * @file        XSTestAssertAnyThrow.cpp
  * @author      Jean-David Gadina - www.xs-labs.com
  * @copyright   (c) 2018, Jean-David Gadina - www.xs-labs.com
  */
@@ -31,45 +31,16 @@
 #include <XSTest/XSTest.hpp>
 #include <thread>
 #include <chrono>
+#include <stdexcept>
 
-XSTest( Assertions, XSTestAssertFalse )
+XSTest( Success, XSTestAssertAnyThrow )
 {
     std::this_thread::sleep_for( std::chrono::milliseconds( 10 ) );
     
-    XSTestAssertFalse( true == true );
+    XSTestAssertAnyThrow( throw std::runtime_error( "test" ) );
 }
 
-XSTest( Assertions, XSTestAssertTrue )
+XSTest( Failure, XSTestAssertAnyThrow )
 {
-    std::this_thread::sleep_for( std::chrono::milliseconds( 10 ) );
-    
-    XSTestAssertTrue( true == false );
-}
-
-XSTest( Assertions, XSTestAssertEqual_Int )
-{
-    std::this_thread::sleep_for( std::chrono::milliseconds( 10 ) );
-    
-    XSTestAssertEqual( 0, 1 );
-}
-
-XSTest( Assertions, XSTestAssertNotEqual_Int )
-{
-    std::this_thread::sleep_for( std::chrono::milliseconds( 10 ) );
-    
-    XSTestAssertNotEqual( 0, 0 );
-}
-
-XSTest( Assertions, XSTestAssertEqual_String )
-{
-    std::this_thread::sleep_for( std::chrono::milliseconds( 10 ) );
-    
-    XSTestAssertEqual( std::string( "foo" ), std::string( "bar" ) );
-}
-
-XSTest( Assertions, XSTestAssertNotEqual_String )
-{
-    std::this_thread::sleep_for( std::chrono::milliseconds( 10 ) );
-    
-    XSTestAssertNotEqual( std::string( "foo" ), std::string( "foo" ) );
+    XSTestAssertAnyThrow( std::this_thread::sleep_for( std::chrono::milliseconds( 10 ) ) );
 }
