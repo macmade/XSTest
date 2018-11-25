@@ -231,7 +231,7 @@ namespace XS
                                       << "            - Reason:     "
                                       << TermColor::Red()
                                       << failure->GetDescription()
-                                      << TermColor::Yellow();
+                                      << TermColor::None();
                         }
                     }
                     
