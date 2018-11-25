@@ -212,7 +212,7 @@ namespace XS
                             {
                                 os->get() << std::endl
                                           << "            - Evaluated:  "
-                                          << TermColor::Magenta()
+                                          << TermColor::Blue()
                                           << evaluated
                                           << TermColor::None();
                             }
