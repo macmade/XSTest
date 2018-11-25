@@ -44,6 +44,16 @@ namespace XS
     {
         namespace Assert
         {
+            enum class Operator
+            {
+                Equal,
+                NotEqual,
+                Less,
+                LessOrEqual,
+                Greater,
+                GreaterOrEqual
+            };
+            
             inline void Boolean( bool value, bool expected, const std::string & expression, const std::string & file, size_t line )
             {
                 if( value != expected )
@@ -60,22 +70,35 @@ namespace XS
             }
             
             template< typename T1, typename T2 >
-            inline void Equality( const T1 & v1, const T2 & v2, bool expected, const std::string & expression, const std::string & file, size_t line )
+            inline void Compare( const T1 & v1, const T2 & v2, Operator op, const std::string & expression1, const std::string & expression2, const std::string & file, size_t line )
             {
-                if( ( v1 == v2 ) != expected )
+                if( op == Operator::Equal )
                 {
-                    throw Failure
-                    (
-                        expression,
-                        ( expected ) ? "Equal"     : "Not equal",
-                        ( expected ) ? "Not equal" : "Equal",
-                        file,
-                        line
-                    );
+                    Boolean( v1 == v2, true, expression1 + " == " + expression2, file, line );
+                }
+                else if( op == Operator::NotEqual )
+                {
+                    Boolean( v1 != v2, true, expression1 + " != " + expression2, file, line );
+                }
+                else if( op == Operator::Less )
+                {
+                    Boolean( v1 < v2, true, expression1 + " < " + expression2, file, line );
+                }
+                else if( op == Operator::LessOrEqual )
+                {
+                    Boolean( v1 <= v2, true, expression1 + " <= " + expression2, file, line );
+                }
+                else if( op == Operator::Greater )
+                {
+                    Boolean( v1 > v2, true, expression1 + " > " + expression2, file, line );
+                }
+                else if( op == Operator::GreaterOrEqual )
+                {
+                    Boolean( v1 >= v2, true, expression1 + " >= " + expression2, file, line );
                 }
             }
             
-            inline void StringEquality( const char * s1, const char * s2, bool expected, bool caseInsensitive, const std::string & expression, const std::string & file, size_t line )
+            inline void StringEquality( const char * s1, const char * s2, bool expected, bool caseInsensitive, const std::string & expression1, const std::string & expression2, const std::string & file, size_t line )
             {
                 bool result;
                 
@@ -94,11 +117,11 @@ namespace XS
                 
                 if( result != expected )
                 {
-                    throw Failure
+                    Boolean
                     (
-                        expression,
-                        ( expected ) ? "Equal"     : "Not equal",
-                        ( expected ) ? "Not equal" : "Equal",
+                        result,
+                        expected,
+                        ( expected ) ? expression1 + " == " + expression2 : expression1 + " != " + expression2,
                         file,
                         line
                     );
