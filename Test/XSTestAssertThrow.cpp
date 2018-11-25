@@ -45,9 +45,16 @@ XSTest( Failure, XSTestAssertThrow )
     XSTestAssertThrow( std::this_thread::sleep_for( std::chrono::milliseconds( 10 ) ), std::runtime_error );
 }
 
-XSTest( Failure, XSTestAssertThrow_BadType )
+XSTest( Failure, XSTestAssertThrow_BadType_RuntimeError )
 {
     std::this_thread::sleep_for( std::chrono::milliseconds( 10 ) );
     
     XSTestAssertThrow( throw std::runtime_error( "test" ), std::bad_cast );
+}
+
+XSTest( Failure, XSTestAssertThrow_BadType_Integer )
+{
+    std::this_thread::sleep_for( std::chrono::milliseconds( 10 ) );
+    
+    XSTestAssertThrow( throw 1, std::bad_cast );
 }

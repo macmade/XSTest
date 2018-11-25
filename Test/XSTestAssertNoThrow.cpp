@@ -38,9 +38,16 @@ XSTest( Success, XSTestAssertNoThrow )
     XSTestAssertNoThrow( std::this_thread::sleep_for( std::chrono::milliseconds( 10 ) ) );
 }
 
-XSTest( Failure, XSTestAssertNoThrow )
+XSTest( Failure, XSTestAssertNoThrow_Throws_RuntimeError )
 {
     std::this_thread::sleep_for( std::chrono::milliseconds( 10 ) );
     
     XSTestAssertNoThrow( throw std::runtime_error( "test" ) );
+}
+
+XSTest( Failure, XSTestAssertNoThrow_Throws_Integer )
+{
+    std::this_thread::sleep_for( std::chrono::milliseconds( 10 ) );
+    
+    XSTestAssertNoThrow( throw 1 );
 }
