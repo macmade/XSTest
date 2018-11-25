@@ -37,33 +37,49 @@ class XSTestFixture: public XS::Test::Case
     protected:
         
         void SetUp( void ) override
-        {}
+        {
+            this->_x = 42;
+        }
         
         void TearDown( void ) override
-        {}
+        {
+            this->_x = 0;
+        }
+        
+        int _x;
 };
 
 XSTestFixture( XSTestFixture, Test1 )
 {
     std::this_thread::sleep_for( std::chrono::milliseconds( 10 ) );
+    
+    XSTestAssertEqual( this->_x, 42 );
 }
 
 XSTestFixture( XSTestFixture, Test2 )
 {
     std::this_thread::sleep_for( std::chrono::milliseconds( 10 ) );
+    
+    XSTestAssertEqual( this->_x, 42 );
 }
 
 XSTestFixture( XSTestFixture, Test3 )
 {
     std::this_thread::sleep_for( std::chrono::milliseconds( 10 ) );
+    
+    XSTestAssertEqual( this->_x, 42 );
 }
 
 XSTestFixture( XSTestFixture, Test4 )
 {
     std::this_thread::sleep_for( std::chrono::milliseconds( 10 ) );
+    
+    XSTestAssertEqual( this->_x, 42 );
 }
 
 XSTestFixture( XSTestFixture, Test5 )
 {
     std::this_thread::sleep_for( std::chrono::milliseconds( 10 ) );
+    
+    XSTestAssertEqual( this->_x, 42 );
 }
