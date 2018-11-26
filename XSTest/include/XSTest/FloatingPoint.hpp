@@ -34,6 +34,8 @@
 #include <type_traits>
 #include <algorithm>
 #include <cmath>
+#include <cstdint>
+#include <limits>
 
 namespace XS
 {
@@ -83,6 +85,11 @@ namespace XS
                 
                 bool operator ==( const FloatingPoint< _T_ > & o )
                 {
+                    if( std::isnan( this->_value ) || std::isnan( o._value ) )
+                    {
+                        return false;
+                    }
+                    
                     return this->DistanceWith( o ) <= 4;
                 }
                 
@@ -114,16 +121,28 @@ namespace XS
                 
                 static uint32_t DistanceBetween( float v1, float v2 )
                 {
-                    return DistanceBetween( *( reinterpret_cast< int32_t * >( &v1 ) ), *( reinterpret_cast< int32_t * >( &v2 ) ) );
+                    return DistanceBetween< int32_t, uint32_t >( *( reinterpret_cast< int32_t * >( &v1 ) ), *( reinterpret_cast< int32_t * >( &v2 ) ) );
                 }
                 
                 static uint64_t DistanceBetween( double v1, double v2 )
                 {
-                    return DistanceBetween( *( reinterpret_cast< int64_t * >( &v1 ) ), *( reinterpret_cast< int64_t * >( &v2 ) ) );
+                    return DistanceBetween< int64_t, uint64_t >( *( reinterpret_cast< int64_t * >( &v1 ) ), *( reinterpret_cast< int64_t * >( &v2 ) ) );
                 }
                 
-                template< typename _U_, typename = typename std::enable_if< std::is_integral< _U_ >::value >::type >
-                static _U_ DistanceBetween( _U_ v1, _U_ v2 )
+                template
+                <
+                    typename _U_,
+                    typename _V_,
+                    typename = typename std::enable_if
+                    <
+                           std::is_integral< _U_ >::value
+                        && std::is_integral< _V_ >::value
+                        && sizeof( _U_ ) == sizeof( _V_ )
+                        && std::numeric_limits< _U_ >::is_signed == true
+                        && std::numeric_limits< _V_ >::is_signed == false
+                    >
+                >
+                static _V_ DistanceBetween( _U_ v1, _U_ v2 )
                 {
                     _U_ signMask( static_cast< _U_ >( 1 ) << ( ( sizeof( _U_ ) * 8 ) - 1 ) );
                     _U_ diff;
@@ -132,7 +151,7 @@ namespace XS
                     v2   = ( v2 >= 0 ) ? v2 : signMask - v2;
                     diff = v1 - v2;
                     
-                    return ( diff >= 0 ) ? diff : -diff;
+                    return static_cast< _V_ >( ( diff >= 0 ) ? diff : -diff );
                 }
         };
     }

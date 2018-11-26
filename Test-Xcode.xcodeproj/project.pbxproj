@@ -24,6 +24,10 @@
 		05E5730221AB26CC00D6E51C /* XSTestAssertAnyThrow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05E572F421AB26CC00D6E51C /* XSTestAssertAnyThrow.cpp */; };
 		05E5730921AB4DFD00D6E51C /* XSTestAssertGreater.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05E5730721AB4DFD00D6E51C /* XSTestAssertGreater.cpp */; };
 		05E5730A21AB4DFD00D6E51C /* XSTestAssertLess.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05E5730821AB4DFD00D6E51C /* XSTestAssertLess.cpp */; };
+		05E5733021AC7E2C00D6E51C /* XSTestAssertLessOrEqual.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05E5732F21AC7E2C00D6E51C /* XSTestAssertLessOrEqual.cpp */; };
+		05E5733221AC7E3D00D6E51C /* XSTestAssertGreaterOrEqual.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05E5733121AC7E3D00D6E51C /* XSTestAssertGreaterOrEqual.cpp */; };
+		05E5733421AC7E5600D6E51C /* XSTestAssertFloatEqual.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05E5733321AC7E5600D6E51C /* XSTestAssertFloatEqual.cpp */; };
+		05E5733621AC7E6500D6E51C /* XSTestAssertDoubleEqual.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05E5733521AC7E6500D6E51C /* XSTestAssertDoubleEqual.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -104,6 +108,10 @@
 		05E572F421AB26CC00D6E51C /* XSTestAssertAnyThrow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = XSTestAssertAnyThrow.cpp; sourceTree = "<group>"; };
 		05E5730721AB4DFD00D6E51C /* XSTestAssertGreater.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = XSTestAssertGreater.cpp; sourceTree = "<group>"; };
 		05E5730821AB4DFD00D6E51C /* XSTestAssertLess.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = XSTestAssertLess.cpp; sourceTree = "<group>"; };
+		05E5732F21AC7E2C00D6E51C /* XSTestAssertLessOrEqual.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = XSTestAssertLessOrEqual.cpp; sourceTree = "<group>"; };
+		05E5733121AC7E3D00D6E51C /* XSTestAssertGreaterOrEqual.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = XSTestAssertGreaterOrEqual.cpp; sourceTree = "<group>"; };
+		05E5733321AC7E5600D6E51C /* XSTestAssertFloatEqual.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = XSTestAssertFloatEqual.cpp; sourceTree = "<group>"; };
+		05E5733521AC7E6500D6E51C /* XSTestAssertDoubleEqual.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = XSTestAssertDoubleEqual.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -264,10 +272,14 @@
 				05E572E821AB26CB00D6E51C /* main.cpp */,
 				05E572ED21AB26CB00D6E51C /* XSTest.cpp */,
 				05E572F421AB26CC00D6E51C /* XSTestAssertAnyThrow.cpp */,
+				05E5733521AC7E6500D6E51C /* XSTestAssertDoubleEqual.cpp */,
 				05E572E921AB26CB00D6E51C /* XSTestAssertEqual.cpp */,
 				05E572F221AB26CC00D6E51C /* XSTestAssertFalse.cpp */,
+				05E5733321AC7E5600D6E51C /* XSTestAssertFloatEqual.cpp */,
 				05E5730721AB4DFD00D6E51C /* XSTestAssertGreater.cpp */,
+				05E5733121AC7E3D00D6E51C /* XSTestAssertGreaterOrEqual.cpp */,
 				05E5730821AB4DFD00D6E51C /* XSTestAssertLess.cpp */,
+				05E5732F21AC7E2C00D6E51C /* XSTestAssertLessOrEqual.cpp */,
 				05E572EE21AB26CB00D6E51C /* XSTestAssertNotEqual.cpp */,
 				05E572EF21AB26CB00D6E51C /* XSTestAssertNoThrow.cpp */,
 				05E572F021AB26CB00D6E51C /* XSTestAssertStringEqual.cpp */,
@@ -372,22 +384,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				05E5733421AC7E5600D6E51C /* XSTestAssertFloatEqual.cpp in Sources */,
 				05E572F821AB26CC00D6E51C /* XSTestAssertStringNotEqualCaseInsensitive.cpp in Sources */,
 				05E5730921AB4DFD00D6E51C /* XSTestAssertGreater.cpp in Sources */,
 				05E572FF21AB26CC00D6E51C /* XSTestAssertThrow.cpp in Sources */,
 				05E572FD21AB26CC00D6E51C /* XSTestAssertNoThrow.cpp in Sources */,
 				05E5730121AB26CC00D6E51C /* XSTestAssertStringNotEqual.cpp in Sources */,
+				05E5733021AC7E2C00D6E51C /* XSTestAssertLessOrEqual.cpp in Sources */,
 				05E572F921AB26CC00D6E51C /* XSTestFixture.cpp in Sources */,
 				05E572F621AB26CC00D6E51C /* main.cpp in Sources */,
 				05E572F721AB26CC00D6E51C /* XSTestAssertEqual.cpp in Sources */,
 				05E572FA21AB26CC00D6E51C /* XSTestAssertTrue.cpp in Sources */,
 				05E5730A21AB4DFD00D6E51C /* XSTestAssertLess.cpp in Sources */,
+				05E5733621AC7E6500D6E51C /* XSTestAssertDoubleEqual.cpp in Sources */,
 				05E5730221AB26CC00D6E51C /* XSTestAssertAnyThrow.cpp in Sources */,
 				05E572FE21AB26CC00D6E51C /* XSTestAssertStringEqual.cpp in Sources */,
 				05E572FB21AB26CC00D6E51C /* XSTest.cpp in Sources */,
 				05E572F521AB26CC00D6E51C /* XSTestAssertStringEqualCaseInsensitive.cpp in Sources */,
 				05E5730021AB26CC00D6E51C /* XSTestAssertFalse.cpp in Sources */,
 				05E572FC21AB26CC00D6E51C /* XSTestAssertNotEqual.cpp in Sources */,
+				05E5733221AC7E3D00D6E51C /* XSTestAssertGreaterOrEqual.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
