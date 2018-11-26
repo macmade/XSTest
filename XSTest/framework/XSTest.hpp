@@ -47,5 +47,6 @@
 #include <XSTest/Assert.hpp>
 #include <XSTest/Logging.hpp>
 #include <XSTest/TermColor.hpp>
+#include <XSTest/FloatingPoint.hpp>
 
 #endif /* XS_TEST_DYLIB_HPP */

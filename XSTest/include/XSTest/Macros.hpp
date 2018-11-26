@@ -57,9 +57,12 @@
 #define ASSERT_FLOAT_EQ( _v1_, _v2_ )       XSTestAssertFloatEqual( _v1_, _v2_ )
 #define ASSERT_DOUBLE_EQ( _v1_, _v2_ )      XSTestAssertDoubleEqual( _v1_, _v2_ )
 #define ASSERT_LONGDOUBLE_EQ( _v1_, _v2_ )  XSTestAssertLongDoubleEqual( _v1_, _v2_ )
+#define ASSERT_NO_FATAL_FAILURE( _e_ )      
+
+#ifdef _WIN32
 #define ASSERT_HRESULT_SUCCEEDED( _e_ )     XSTestAssertHResultSucceeded( _e_ )
 #define ASSERT_HRESULT_FAILED( _e_ )        XSTestAssertHResultFailed( _e_ )
-#define ASSERT_NO_FATAL_FAILURE( _e_ )      XSTestAssertNoFatalFailure( _e_ )
+#endif
 
 #endif
 
@@ -82,12 +85,14 @@
 #define XSTestAssertThrow( _e_, _ex_ )                          XS::Test::Assert::Throwing< _ex_ >( []() { _e_; }, XSTest_Internal_XString( _ex_ ), XSTest_Internal_XString( _e_ ), __FILE__, __LINE__ )
 #define XSTestAssertNoThrow( _e_ )                              XS::Test::Assert::Throwing( []() { _e_; }, false,  XSTest_Internal_XString( _e_ ), __FILE__, __LINE__ )
 #define XSTestAssertAnyThrow( _e_ )                             XS::Test::Assert::Throwing( []() { _e_; }, true,   XSTest_Internal_XString( _e_ ), __FILE__, __LINE__ ) 
-#define XSTestAssertFloatEqual( _v1_, _v2_ )                    
-#define XSTestAssertDoubleEqual( _v1_, _v2_ )                   
-#define XSTestAssertLongDoubleEqual( _v1_, _v2_ )               
-#define XSTestAssertHResultSucceeded( _e_ )                     
-#define XSTestAssertHResultFailed( _e_ )                        
-#define XSTestAssertNoFatalFailure( _e_ )                       
+#define XSTestAssertFloatEqual( _v1_, _v2_ )                    XS::Test::Assert::Compare( static_cast< float       >( _v1_ ), static_cast< float       >( _v2_ ), std::string( XSTest_Internal_XString( _v1_ ) ), std::string( XSTest_Internal_XString( _v2_ ) ), __FILE__, __LINE__ )
+#define XSTestAssertDoubleEqual( _v1_, _v2_ )                   XS::Test::Assert::Compare( static_cast< double      >( _v1_ ), static_cast< double      >( _v2_ ), std::string( XSTest_Internal_XString( _v1_ ) ), std::string( XSTest_Internal_XString( _v2_ ) ), __FILE__, __LINE__ )
+#define XSTestAssertLongDoubleEqual( _v1_, _v2_ )               XS::Test::Assert::Compare( static_cast< long double >( _v1_ ), static_cast< long double >( _v2_ ), std::string( XSTest_Internal_XString( _v1_ ) ), std::string( XSTest_Internal_XString( _v2_ ) ), __FILE__, __LINE__ )
+
+#ifdef _WIN32
+#define XSTestAssertHResultSucceeded( _e_ )                     XS::Test::Assert::HResult( _e_, true,  XSTest_Internal_XString( _e_ ), __FILE__, __LINE__ )
+#define XSTestAssertHResultFailed( _e_ )                        XS::Test::Assert::HResult( _e_, false, XSTest_Internal_XString( _e_ ), __FILE__, __LINE__ )
+#endif
 
 /*******************************************************************************
  * Test cases

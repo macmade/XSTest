@@ -26,6 +26,8 @@
 		05E572B621A8CE1F00D6E51C /* Logging.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 05E572B521A8C21E00D6E51C /* Logging.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
 		05E572C121AB048900D6E51C /* TermColor.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 05E572B721AA6AB300D6E51C /* TermColor.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
 		05E572C221AB04C000D6E51C /* Flags.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 05E572BE21AA748900D6E51C /* Flags.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
+		05E5731721AC469500D6E51C /* FloatingPoint.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 05E5731621AC467900D6E51C /* FloatingPoint.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
+		05E5732C21AC56EF00D6E51C /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 05E5732B21AC56EF00D6E51C /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -92,6 +94,8 @@
 		05E572B521A8C21E00D6E51C /* Logging.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Logging.hpp; sourceTree = "<group>"; };
 		05E572B721AA6AB300D6E51C /* TermColor.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TermColor.hpp; sourceTree = "<group>"; };
 		05E572BE21AA748900D6E51C /* Flags.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Flags.hpp; sourceTree = "<group>"; };
+		05E5731621AC467900D6E51C /* FloatingPoint.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = FloatingPoint.hpp; sourceTree = "<group>"; };
+		05E5732B21AC56EF00D6E51C /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +115,7 @@
 		05D5257F21A5FD520025CCEB = {
 			isa = PBXGroup;
 			children = (
+				05E5732B21AC56EF00D6E51C /* README.md */,
 				05D525AD21A604950025CCEB /* xcconfig */,
 				05D5258A21A5FD520025CCEB /* XSTest */,
 				05D5258921A5FD520025CCEB /* Products */,
@@ -159,6 +164,7 @@
 				05D525A921A5FDFF0025CCEB /* Case.hpp */,
 				05D5269421A71A9A0025CCEB /* Failure.hpp */,
 				05E572BE21AA748900D6E51C /* Flags.hpp */,
+				05E5731621AC467900D6E51C /* FloatingPoint.hpp */,
 				05D525EE21A605930025CCEB /* Functions.hpp */,
 				05D525AA21A5FE810025CCEB /* Info.hpp */,
 				05E572B521A8C21E00D6E51C /* Logging.hpp */,
@@ -318,6 +324,7 @@
 				05D526FC21A86E070025CCEB /* Functions.hpp in Headers */,
 				05D526FE21A86E070025CCEB /* Macros.hpp in Headers */,
 				05D5270021A86E070025CCEB /* Runner.hpp in Headers */,
+				05E5731721AC469500D6E51C /* FloatingPoint.hpp in Headers */,
 				05D526FB21A86E070025CCEB /* Failure.hpp in Headers */,
 				05D526FF21A86E070025CCEB /* Optional.hpp in Headers */,
 				05D5270A21A87F1B0025CCEB /* XSTest.hpp in Headers */,
@@ -388,6 +395,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				05E5732C21AC56EF00D6E51C /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

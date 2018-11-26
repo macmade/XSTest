@@ -155,8 +155,6 @@ Supported macros are:
  - `ASSERT_LONGDOUBLE_EQ`
  - `ASSERT_HRESULT_SUCCEEDED`
  - `ASSERT_HRESULT_FAILED`
- - `ASSERT_NO_FATAL_FAILURE`
-
 
 ### Documentation
 

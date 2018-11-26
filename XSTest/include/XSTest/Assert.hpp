@@ -39,6 +39,11 @@
 #include <type_traits>
 #include <XSTest/Failure.hpp>
 #include <XSTest/Utility.hpp>
+#include <XSTest/FloatingPoint.hpp>
+
+#ifdef _WIN32
+#include <winerror.h>
+#endif
 
 namespace XS
 {
@@ -87,12 +92,12 @@ namespace XS
                 } 
             }
             
-            template< typename T1, typename T2 >
-            inline auto Compare( const T1 & v1, const T2 & v2, Operator op, const std::string & expression1, const std::string & expression2, const std::string & file, size_t line )
+            template< typename _T_, typename _U_ >
+            inline auto Compare( const _T_ & v1, const _U_ & v2, Operator op, const std::string & expression1, const std::string & expression2, const std::string & file, size_t line )
                 -> typename std::enable_if
                    <
-                           ( std::is_integral< T1 >::value       && std::is_integral< T2 >::value )
-                        || ( std::is_floating_point< T1 >::value && std::is_floating_point< T2 >::value )
+                           ( std::is_integral< _T_ >::value       && std::is_integral< _U_ >::value )
+                        || ( std::is_floating_point< _T_ >::value && std::is_floating_point< _U_ >::value )
                    >
                    ::type
             {
@@ -122,9 +127,9 @@ namespace XS
                 }
             }
             
-            template< typename T1, typename T2 >
-            inline auto Compare( const T1 & v1, const T2 & v2, Operator op, const std::string & expression1, const std::string & expression2, const std::string & file, size_t line )
-                -> typename std::enable_if< ( std::is_same< T1, std::string >::value && std::is_same< T2, std::string >::value ) > ::type
+            template< typename _T_, typename _U_ >
+            inline auto Compare( const _T_ & v1, const _U_ & v2, Operator op, const std::string & expression1, const std::string & expression2, const std::string & file, size_t line )
+                -> typename std::enable_if< ( std::is_same< _T_, std::string >::value && std::is_same< _U_, std::string >::value ) > ::type
             {
                 if( op == Operator::Equal )
                 {
@@ -152,13 +157,13 @@ namespace XS
                 }
             }
             
-            template< typename T1, typename T2 >
-            inline auto Compare( const T1 & v1, const T2 & v2, Operator op, const std::string & expression1, const std::string & expression2, const std::string & file, size_t line )
+            template< typename _T_, typename _U_ >
+            inline auto Compare( const _T_ & v1, const _U_ & v2, Operator op, const std::string & expression1, const std::string & expression2, const std::string & file, size_t line )
                 -> typename std::enable_if
                    <
-                          ( !std::is_integral< T1 >::value          || !std::is_integral< T2 >::value )
-                       && ( !std::is_floating_point< T1 >::value    || !std::is_floating_point< T2 >::value )
-                       && ( !std::is_same< T1, std::string >::value || !std::is_same< T2, std::string >::value )
+                          ( !std::is_integral< _T_ >::value          || !std::is_integral< _U_ >::value )
+                       && ( !std::is_floating_point< _T_ >::value    || !std::is_floating_point< _U_ >::value )
+                       && ( !std::is_same< _T_, std::string >::value || !std::is_same< _U_, std::string >::value )
                    >
                    ::type
             {
@@ -218,9 +223,9 @@ namespace XS
                 }
             }
             
-            template< typename T >
+            template< typename _T_ >
             inline auto Throwing( const std::function< void( void ) > & f, const std::string & exception, const std::string & expression, const std::string & file, size_t line )
-                -> typename std::enable_if< !std::is_base_of< std::exception, T >::value || !std::is_same< std::exception, T >::value >::type
+                -> typename std::enable_if< !std::is_base_of< std::exception, _T_ >::value || !std::is_same< std::exception, _T_ >::value >::type
             {
                 bool        hasCaught( false );
                 bool        hasThrown( false );
@@ -234,7 +239,7 @@ namespace XS
                         f();
                     }
                 }
-                catch( const T & e )
+                catch( const _T_ & e )
                 {
                     hasCaught = true;
                     hasThrown = true;
@@ -263,9 +268,9 @@ namespace XS
                 }
             }
             
-            template< typename T >
+            template< typename _T_ >
             inline auto Throwing( const std::function< void( void ) > & f, const std::string & exception, const std::string & expression, const std::string & file, size_t line )
-                -> typename std::enable_if< !( !std::is_base_of< std::exception, T >::value || !std::is_same< std::exception, T >::value ) >::type
+                -> typename std::enable_if< !( !std::is_base_of< std::exception, _T_ >::value || !std::is_same< std::exception, _T_ >::value ) >::type
             {
                 bool hasCaught( false );
                 bool hasThrown( false );
@@ -277,7 +282,7 @@ namespace XS
                         f();
                     }
                 }
-                catch( const T & e )
+                catch( const _T_ & e )
                 {
                     hasCaught = true;
                     hasThrown = true;
@@ -336,6 +341,36 @@ namespace XS
                     );
                 }
             }
+            
+            template< typename _T_ >
+            inline auto Compare( _T_ v1, _T_ v2, const std::string & expression1, const std::string & expression2, const std::string & file, size_t line )
+                -> typename std::enable_if< std::is_same< _T_, float >::value || std::is_same< _T_, double >::value >::type
+            {
+                FloatingPoint< _T_ > fp1( v1 );
+                FloatingPoint< _T_ > fp2( v2 );
+                
+                if( fp1 != fp2 )
+                {
+                    throw Failure
+                    (
+                        expression1 + " == " + expression2,
+                        std::to_string( v1 ) + " == " + std::to_string( v2 ),
+                        "True",
+                        "False",
+                        file,
+                        line
+                    );
+                }
+            }
+            
+            #ifdef _WIN32
+            inline void HResult( HRESULT hr, bool expected, const std::string & expression, const std::string & file, size_t line )
+            {
+                bool result( ( expected == true && SUCCEEDED( hr ) ) || ( expected == false && FAILED( hr ) ) );
+                
+                Boolean( result, expected, expression, std::to_string( hr ), file, line );
+            }
+            #endif
         }
     }
 }
