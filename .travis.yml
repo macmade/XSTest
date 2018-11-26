@@ -1,0 +1,11 @@
+language: objective-c
+install:
+- gem install xcpretty
+script:
+- set -o pipefail && xcodebuild -project "XSTest.xcodeproj" -scheme "XSTest" build | xcpretty
+- set -o pipefail && xcodebuild -project "Test/Test-Standalone.xcodeproj" -scheme "Test-Standalone" build | xcpretty
+- set -o pipefail && xcodebuild -project "Test/Test-Xcode.xcodeproj" -scheme "Test-Xcode" build | xcpretty
+- set -o pipefail && xcodebuild -project "Example/Example-Standalone.xcodeproj" -scheme "Example-Standalone" build | xcpretty
+- set -o pipefail && xcodebuild -project "Example/Example-Xcode.xcodeproj" -scheme "Example-Xcode" build | xcpretty
+notifications:
+    slack: xs-labs:FXh1yLXNkpcVxKZhZU6icdhI
