@@ -24,6 +24,8 @@ About
  - Integration with IDEs such as Xcode and VisualStudio
  - Compatible with GoogleTest
 
+![XSTest Example Output](Screenshots/Terminal.png "XSTest Example Output")
+
 ### Primer
 
 XSTest is a header only library, meaning you simply need to include `XSTest/XSTest.hpp` in order to use-it.
@@ -113,6 +115,28 @@ For each test case, a new instance of the fixture class will be created.
 
 ### IDE Integration
 
+#### Xcode
+
+XSTest provides a bridge for Xcode's XCTest framework, allowing you to run your tests and see the results directly from Xcode.
+
+![Xcode](Screenshots/Xcode-1.png "Xcode")
+
+In order to use XSTest within Xcode, simply create a unit-test bundle and link with `XSTest.framework`, which is provided by the `XSTest.xcodeproj` project.
+
+Then, write your tests as usual, including XSTest's main header file:
+
+```cpp
+#include <XSTest/XSTest.hpp>
+```
+
+Note that in such a scenario, there's no need for a `main` function.
+
+You can then run your tests. Test results will be reported to Xcode and displayed as usual:
+
+![Xcode](Screenshots/Xcode-2.png "Xcode")
+
+#### VisualStudio
+
 ...
 
 ### GoogleTest Compatibility
@@ -133,32 +157,79 @@ TEST( MyTestSuite, MyTestCase )
 
 Supported macros are:
 
- - `TEST`
- - `TEST_F`
- - `ASSERT_FALSE`
- - `ASSERT_TRUE`
- - `ASSERT_EQ`
- - `ASSERT_NE`
- - `ASSERT_LT`
- - `ASSERT_LE`
- - `ASSERT_GT`
- - `ASSERT_GE`
- - `ASSERT_STREQ`
- - `ASSERT_STRNE`
- - `ASSERT_STRCASEEQ`
- - `ASSERT_STRCASENE`
- - `ASSERT_THROW`
- - `ASSERT_NO_THROW`
- - `ASSERT_ANY_THROW`
- - `ASSERT_FLOAT_EQ`
- - `ASSERT_DOUBLE_EQ`
- - `ASSERT_LONGDOUBLE_EQ`
- - `ASSERT_HRESULT_SUCCEEDED`
- - `ASSERT_HRESULT_FAILED`
+
+GoogleTest:                | Expands to:
+-------------------------- | ------
+`TEST`                     | `XSTest`
+`TEST_F`                   | `XSTestFixture`
+`ASSERT_TRUE`              | `XSTestAssertTrue`
+`ASSERT_FALSE`             | `XSTestAssertFalse`
+`ASSERT_EQ`                | `XSTestAssertEqual`
+`ASSERT_NE`                | `XSTestAssertNotEqual`
+`ASSERT_LT`                | `XSTestAssertLess`
+`ASSERT_LE`                | `XSTestAssertLessOrEqual`
+`ASSERT_GT`                | `XSTestAssertGreater`
+`ASSERT_GE`                | `XSTestAssertGreaterOrEqual`
+`ASSERT_STREQ`             | `XSTestAssertStringEqual`
+`ASSERT_STRNE`             | `XSTestAssertStringNotEqual`
+`ASSERT_STRCASEEQ`         | `XSTestAssertStringEqualCaseInsensitive`
+`ASSERT_STRCASENE`         | `XSTestAssertStringNotEqualCaseInsensitive`
+`ASSERT_THROW`             | `XSTestAssertThrow`
+`ASSERT_NO_THROW`          | `XSTestAssertNoThrow`
+`ASSERT_ANY_THROW`         | `XSTestAssertAnyThrow`
+`ASSERT_FLOAT_EQ`          | `XSTestAssertFloatEqual`
+`ASSERT_DOUBLE_EQ`         | `XSTestAssertDoubleEqual`
+`ASSERT_HRESULT_SUCCEEDED` | `XSTestAssertHResultSucceeded`
+`ASSERT_HRESULT_FAILED`    | `XSTestAssertHResultFailed`
 
 ### Documentation
 
-...
+#### Comparison assertions
+
+Assertion                                    | Verifies
+-------------------------------------------- | ----------------
+`XSTestAssertTrue( expr )`                   | `expr == true`
+`XSTestAssertFalse( expr )`                  | `expr == false`
+`XSTestAssertEqual( expr1, expr2 )`          | `expr1 == expr2`
+`XSTestAssertNotEqual( expr1, expr2 )`       | `expr1 != expr2`
+`XSTestAssertLess( expr1, expr2 )`           | `expr1 < expr2`
+`XSTestAssertLessOrEqual( expr1, expr2 )`    | `expr1 <= expr2`
+`XSTestAssertGreater( expr1, expr2 )`        | `expr1 > expr2`
+`XSTestAssertGreaterOrEqual( expr1, expr2 )` | `expr1 >= expr2`
+
+#### C string comparison assertions
+
+Assertion                                                   | Verifies
+----------------------------------------------------------- | --------------------------------------------------
+`XSTestAssertStringEqual( expr1, expr2 )`                   | If both C strings are equal (case sensitive)
+`XSTestAssertStringNotEqual( expr1, expr2 )`                | If both C strings are not equal (case sensitive)
+`XSTestAssertStringEqualCaseInsensitive( expr1, expr2 )`    | If both C strings are equal (case insensitive)
+`XSTestAssertStringNotEqualCaseInsensitive( expr1, expr2 )` | If both C strings are not equal (case insensitive)
+
+#### Exception assertions
+
+Assertion                           | Verifies
+------------------------------------| -------------------------------------------------
+`XSTestAssertThrow( expr, except )` | If `expr` throws a C++ exception of type `except`
+`XSTestAssertNoThrow( expr )`       | If `expr` doesn't any C++ exception
+`XSTestAssertAnyThrow( expr )`      | If `expr` throws a C++ exception
+
+#### Floating point comparison assertions
+
+Assertion                                 | Verifies
+------------------------------------------| -----------------------------------------------
+`XSTestAssertFloatEqual( expr1, expr2 )`  | If both `float` values can be considered equal
+`XSTestAssertDoubleEqual( expr1, expr2 )` | If both `double` values can be considered equal
+
+*Note: Floating point values are considered equal if they are within 4 ULPs from each other.*  
+*Value of 4 ULPs is used to keep compatibility with GoogleTest, which uses the same value.*
+
+#### Windows specific assertions
+
+Assertion                              | Verifies
+---------------------------------------| -------------------------------------------------
+`XSTestAssertHResultSucceeded( expr )` | If `expr` is a valid `HRESULT`
+`XSTestAssertHResultFailed( expr )`    | If `expr` is not a valid `HRESULT`
 
 License
 -------
