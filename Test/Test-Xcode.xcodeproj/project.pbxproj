@@ -47,7 +47,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		05D5264621A6C0D10025CCEB /* Test.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Test.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		05D5264621A6C0D10025CCEB /* Test-Xcode.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Test-Xcode.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		05E5734D21AC87DA00D6E51C /* XSTest.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = XSTest.xcodeproj; path = ../XSTest.xcodeproj; sourceTree = "<group>"; };
 		05E5735421AC87EA00D6E51C /* Release - ccache.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Release - ccache.xcconfig"; sourceTree = "<group>"; };
 		05E5735521AC87EA00D6E51C /* Common.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Common.xcconfig; sourceTree = "<group>"; };
@@ -138,7 +138,7 @@
 		05D5258921A5FD520025CCEB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				05D5264621A6C0D10025CCEB /* Test.xctest */,
+				05D5264621A6C0D10025CCEB /* Test-Xcode.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -301,9 +301,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		05D5264521A6C0D10025CCEB /* Test */ = {
+		05D5264521A6C0D10025CCEB /* Test-Xcode */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 05D5264B21A6C0D10025CCEB /* Build configuration list for PBXNativeTarget "Test" */;
+			buildConfigurationList = 05D5264B21A6C0D10025CCEB /* Build configuration list for PBXNativeTarget "Test-Xcode" */;
 			buildPhases = (
 				05D5264221A6C0D10025CCEB /* Sources */,
 				05D5264321A6C0D10025CCEB /* Frameworks */,
@@ -314,9 +314,9 @@
 			dependencies = (
 				05E573B821AC881C00D6E51C /* PBXTargetDependency */,
 			);
-			name = Test;
+			name = "Test-Xcode";
 			productName = Test;
-			productReference = 05D5264621A6C0D10025CCEB /* Test.xctest */;
+			productReference = 05D5264621A6C0D10025CCEB /* Test-Xcode.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -351,7 +351,7 @@
 			);
 			projectRoot = "";
 			targets = (
-				05D5264521A6C0D10025CCEB /* Test */,
+				05D5264521A6C0D10025CCEB /* Test-Xcode */,
 			);
 		};
 /* End PBXProject section */
@@ -478,7 +478,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		05D5264B21A6C0D10025CCEB /* Build configuration list for PBXNativeTarget "Test" */ = {
+		05D5264B21A6C0D10025CCEB /* Build configuration list for PBXNativeTarget "Test-Xcode" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				05D5264C21A6C0D10025CCEB /* Debug */,

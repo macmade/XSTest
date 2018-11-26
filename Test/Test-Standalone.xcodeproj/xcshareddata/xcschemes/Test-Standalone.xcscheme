@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "05D525E221A605160025CCEB"
-               BuildableName = "TestExec"
-               BlueprintName = "TestExec"
+               BuildableName = "Test-Standalone"
+               BlueprintName = "Test-Standalone"
                ReferencedContainer = "container:Test-Standalone.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -47,8 +47,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "05D525E221A605160025CCEB"
-            BuildableName = "TestExec"
-            BlueprintName = "TestExec"
+            BuildableName = "Test-Standalone"
+            BlueprintName = "Test-Standalone"
             ReferencedContainer = "container:Test-Standalone.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -65,8 +65,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "05D525E221A605160025CCEB"
-            BuildableName = "TestExec"
-            BlueprintName = "TestExec"
+            BuildableName = "Test-Standalone"
+            BlueprintName = "Test-Standalone"
             ReferencedContainer = "container:Test-Standalone.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

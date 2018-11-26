@@ -42,7 +42,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		05D525E321A605160025CCEB /* TestExec */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = TestExec; sourceTree = BUILT_PRODUCTS_DIR; };
+		05D525E321A605160025CCEB /* Test-Standalone */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Test-Standalone"; sourceTree = BUILT_PRODUCTS_DIR; };
 		05D5266921A6EC430025CCEB /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/MacOSX.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		05D5266C21A6EC7B0025CCEB /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		05D5269221A714C90025CCEB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -133,7 +133,7 @@
 		05D5258921A5FD520025CCEB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				05D525E321A605160025CCEB /* TestExec */,
+				05D525E321A605160025CCEB /* Test-Standalone */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -291,9 +291,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		05D525E221A605160025CCEB /* TestExec */ = {
+		05D525E221A605160025CCEB /* Test-Standalone */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 05D525E721A605160025CCEB /* Build configuration list for PBXNativeTarget "TestExec" */;
+			buildConfigurationList = 05D525E721A605160025CCEB /* Build configuration list for PBXNativeTarget "Test-Standalone" */;
 			buildPhases = (
 				05D525DF21A605160025CCEB /* Sources */,
 				05D525E021A605160025CCEB /* Frameworks */,
@@ -303,9 +303,9 @@
 			);
 			dependencies = (
 			);
-			name = TestExec;
+			name = "Test-Standalone";
 			productName = Test;
-			productReference = 05D525E321A605160025CCEB /* TestExec */;
+			productReference = 05D525E321A605160025CCEB /* Test-Standalone */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
@@ -334,7 +334,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				05D525E221A605160025CCEB /* TestExec */,
+				05D525E221A605160025CCEB /* Test-Standalone */,
 			);
 		};
 /* End PBXProject section */
@@ -420,7 +420,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		05D525E721A605160025CCEB /* Build configuration list for PBXNativeTarget "TestExec" */ = {
+		05D525E721A605160025CCEB /* Build configuration list for PBXNativeTarget "Test-Standalone" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				05D525E821A605160025CCEB /* Debug */,
