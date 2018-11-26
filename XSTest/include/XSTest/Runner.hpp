@@ -136,15 +136,16 @@ namespace XS
                         Logging::Log( os, Utility::Numbered( "test case", cases ) + " from " + Utility::Numbered( "test suite", suites ) + " ran (" + time.GetString() + " total)", {}, Logging::Style::None, Logging::Options::NewLineBefore );
                         Logging::Log( os, Utility::Numbered( "test", passed.size() ) + " passed:", ( ( passed.size() > 0 ) ? TermColor::Green() : TermColor::Red() ) );
                         
+                        std::sort( passed.begin(), passed.end(), []( const Info & o1, const Info & o2 ) { return o1.GetName() < o2.GetName(); } );
+                        
+                        for( const auto & info: passed )
+                        {
+                            Logging::Log( os, info.GetSuiteName(), info.GetCaseName(), "  - ✅ " );
+                        }
+                        
                         if( failed.size() > 0 )
                         {
-                            std::sort( passed.begin(), passed.end(), []( const Info & o1, const Info & o2 ) { return o1.GetName() < o2.GetName(); } );
                             std::sort( failed.begin(), failed.end(), []( const Info & o1, const Info & o2 ) { return o1.GetName() < o2.GetName(); } );
-                            
-                            for( const auto & info: passed )
-                            {
-                                Logging::Log( os, info.GetSuiteName(), info.GetCaseName(), "  - ✅ " );
-                            }
                             
                             Logging::Log( os, Utility::Numbered( "test", failed.size() ) + " failed:", TermColor::Red() );
                             
