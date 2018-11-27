@@ -66,6 +66,7 @@ namespace XS
         }
         
         #endif
+
         class Info
         {
             public:

@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\XSTest">
+      <UniqueIdentifier>{472e280e-b5c8-4d65-aa43-c1c76e396fb6}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="source\XSTestAssertLess.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\XSTestAssertLessOrEqual.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\XSTestAssertNotEqual.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\XSTestAssertNoThrow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\XSTestAssertStringEqual.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\XSTestAssertStringEqualCaseInsensitive.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\XSTestAssertStringNotEqual.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\XSTestAssertStringNotEqualCaseInsensitive.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\XSTestAssertThrow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\XSTestAssertTrue.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\XSTestFixture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\XSTest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\XSTestAssertAnyThrow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\XSTestAssertDoubleEqual.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\XSTestAssertEqual.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\XSTestAssertFalse.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\XSTestAssertFloatEqual.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\XSTestAssertGreater.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\XSTestAssertGreaterOrEqual.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\XSTest\include\XSTest\Optional.hpp">
+      <Filter>Header Files\XSTest</Filter>
+    </ClInclude>
+    <ClInclude Include="..\XSTest\include\XSTest\Runner.hpp">
+      <Filter>Header Files\XSTest</Filter>
+    </ClInclude>
+    <ClInclude Include="..\XSTest\include\XSTest\StopWatch.hpp">
+      <Filter>Header Files\XSTest</Filter>
+    </ClInclude>
+    <ClInclude Include="..\XSTest\include\XSTest\Suite.hpp">
+      <Filter>Header Files\XSTest</Filter>
+    </ClInclude>
+    <ClInclude Include="..\XSTest\include\XSTest\TermColor.hpp">
+      <Filter>Header Files\XSTest</Filter>
+    </ClInclude>
+    <ClInclude Include="..\XSTest\include\XSTest\Utility.hpp">
+      <Filter>Header Files\XSTest</Filter>
+    </ClInclude>
+    <ClInclude Include="..\XSTest\include\XSTest\XSTest.hpp">
+      <Filter>Header Files\XSTest</Filter>
+    </ClInclude>
+    <ClInclude Include="..\XSTest\include\XSTest\Assert.hpp">
+      <Filter>Header Files\XSTest</Filter>
+    </ClInclude>
+    <ClInclude Include="..\XSTest\include\XSTest\Case.hpp">
+      <Filter>Header Files\XSTest</Filter>
+    </ClInclude>
+    <ClInclude Include="..\XSTest\include\XSTest\Failure.hpp">
+      <Filter>Header Files\XSTest</Filter>
+    </ClInclude>
+    <ClInclude Include="..\XSTest\include\XSTest\Flags.hpp">
+      <Filter>Header Files\XSTest</Filter>
+    </ClInclude>
+    <ClInclude Include="..\XSTest\include\XSTest\FloatingPoint.hpp">
+      <Filter>Header Files\XSTest</Filter>
+    </ClInclude>
+    <ClInclude Include="..\XSTest\include\XSTest\Functions.hpp">
+      <Filter>Header Files\XSTest</Filter>
+    </ClInclude>
+    <ClInclude Include="..\XSTest\include\XSTest\Info.hpp">
+      <Filter>Header Files\XSTest</Filter>
+    </ClInclude>
+    <ClInclude Include="..\XSTest\include\XSTest\Logging.hpp">
+      <Filter>Header Files\XSTest</Filter>
+    </ClInclude>
+    <ClInclude Include="..\XSTest\include\XSTest\Macros.hpp">
+      <Filter>Header Files\XSTest</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

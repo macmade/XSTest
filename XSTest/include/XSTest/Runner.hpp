@@ -42,6 +42,10 @@
 #include <XSTest/Logging.hpp>
 #include <XSTest/TermColor.hpp>
 
+#ifdef _WIN32
+#include <Windows.h>
+#endif
+
 namespace XS
 {
     namespace Test
@@ -140,7 +144,11 @@ namespace XS
                         
                         for( const auto & info: passed )
                         {
+                            #ifdef _WIN32
+                            Logging::Log( os, info.GetSuiteName(), info.GetCaseName(), "  - " );
+                            #else
                             Logging::Log( os, info.GetSuiteName(), info.GetCaseName(), "  - ✅ " );
+                            #endif
                         }
                         
                         if( failed.size() > 0 )
@@ -151,7 +159,11 @@ namespace XS
                             
                             for( const auto & info: failed )
                             {
+                                #ifdef _WIN32
+                                Logging::Log( os, info.GetSuiteName(), info.GetCaseName(), "  - " );
+                                #else
                                 Logging::Log( os, info.GetSuiteName(), info.GetCaseName(), "  - ❌ " );
+                                #endif
                             }
                         }
                     }

@@ -203,7 +203,11 @@ namespace XS
                 }
                 else if( caseInsensitive )
                 {
+                    #ifdef _WIN32
+                    result = _stricmp( cp1, cp2 ) == 0;
+                    #else
                     result = strcasecmp( cp1, cp2 ) == 0;
+                    #endif
                 }
                 else
                 {
@@ -241,6 +245,8 @@ namespace XS
                 }
                 catch( const _T_ & e )
                 {
+                    ( void )e;
+
                     hasCaught = true;
                     hasThrown = true;
                 }

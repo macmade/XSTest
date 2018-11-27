@@ -36,8 +36,11 @@
 #include <iostream>
 #include <cstdio>
 #include <cstdlib>
+#include <XSTest/Optional.hpp>
 
-#ifndef _WIN32
+#ifdef _WIN32
+#include <Windows.h>
+#else
 #include <unistd.h>
 #endif
 
@@ -49,93 +52,74 @@ namespace XS
         {
             public:
                 
+                enum class Foreground
+                {
+                    None,
+                    Gray,
+                    Red,
+                    Green,
+                    Yellow,
+                    Blue,
+                    Magenta,
+                    Cyan,
+                    White
+                };
+
                 static TermColor None( void )
                 {
-                    #ifdef _WIN32
-                    return { nullptr };
-                    #else
-                    return { []( std::ostream & os ) { os << "\033[00m"; } };
-                    #endif
+                    return Foreground::None;
                 }
                 
                 static TermColor Gray( void )
                 {
-                    #ifdef _WIN32
-                    return { nullptr };
-                    #else
-                    return { []( std::ostream & os ) { os << "\033[30m"; } };
-                    #endif
+                    return Foreground::Gray;
                 }
                 
                 static TermColor Red( void )
                 {
-                    #ifdef _WIN32
-                    return { nullptr };
-                    #else
-                    return { []( std::ostream & os ) { os << "\033[31m"; } };
-                    #endif
+                    return Foreground::Red;
                 }
                 
                 static TermColor Green( void )
                 {
-                    #ifdef _WIN32
-                    return { nullptr };
-                    #else
-                    return { []( std::ostream & os ) { os << "\033[32m"; } };
-                    #endif
+                    return Foreground::Green;
                 }
                 
                 static TermColor Yellow( void )
                 {
-                    #ifdef _WIN32
-                    return { nullptr };
-                    #else
-                    return { []( std::ostream & os ) { os << "\033[33m"; } };
-                    #endif
+                    return Foreground::Yellow;
                 }
                 
                 static TermColor Blue( void )
                 {
-                    #ifdef _WIN32
-                    return { nullptr };
-                    #else
-                    return { []( std::ostream & os ) { os << "\033[34m"; } };
-                    #endif
+                    return Foreground::Blue;
                 }
                 
                 static TermColor Magenta( void )
                 {
-                    #ifdef _WIN32
-                    return { nullptr };
-                    #else
-                    return { []( std::ostream & os ) { os << "\033[35m"; } };
-                    #endif
+                    return Foreground::Magenta;
                 }
                 
                 static TermColor Cyan( void )
                 {
-                    #ifdef _WIN32
-                    return { nullptr };
-                    #else
-                    return { []( std::ostream & os ) { os << "\033[36m"; } };
-                    #endif
+                    return Foreground::Cyan;
                 }
                 
                 static TermColor White( void )
                 {
-                    #ifdef _WIN32
-                    return { nullptr };
-                    #else
-                    return { []( std::ostream & os ) { os << "\033[37m"; } };
-                    #endif
+                    return Foreground::White;
                 }
+
+                TermColor( Foreground foreground ):
+                    _foreground( foreground )
+                {}
                 
                 TermColor( const TermColor & o ):
-                    _f( o._f )
+                    _foreground( o._foreground )
                 {}
                 
                 TermColor( TermColor && o ) noexcept:
-                    _f( std::move( o._f ) )
+                    _foreground( std::move( o._foreground ) )
                 {}
                 
                 ~TermColor( void )
@@ -152,24 +136,168 @@ namespace XS
                 {
                     using std::swap;
                     
-                    swap( o1._f, o2._f );
+                    swap( o1._foreground, o2._foreground );
                 }
-                
+
+                friend std::ostream & operator <<( std::ostream & os, Foreground foreground )
+                {
+                    return os << TermColor( foreground );
+                }
+
                 friend std::ostream & operator <<( std::ostream & os, const TermColor & color )
                 {
-                    if( IsTerm( os ) && color._f != nullptr )
+                    if( SupportsANSISequences( os ) )
                     {
-                        color._f( os );
+                        os << ANSISequence( color._foreground );
                     }
-                    
+
+                    #ifdef _WIN32
+
+                    else if( SupportsWindowsConsoleAttributes( os ) )
+                    {
+                        SetWindowsConsoleAttributes( os, color._foreground );
+                    }
+
+                    #endif
+
                     return os;
                 }
                 
             private:
                 
-                static bool IsTerm( std::ostream & os )
+                #ifdef _WIN32
+
+                static Optional< WORD > DefaultConsoleAttributes( std::ostream & os )
+                {
+                    static CONSOLE_SCREEN_BUFFER_INFO * infos[ 2 ] = { nullptr, nullptr };
+                    size_t                              index;
+
+                    if( std::addressof( os ) == std::addressof( std::cout ) )
+                    {
+                        index = 0;
+                    }
+                    else if( std::addressof( os ) == std::addressof( std::cout ) )
+                    {
+                        index = 1;
+                    }
+                    else
+                    {
+                        return {};
+                    }
+
+                    if( infos[ index ] == nullptr )
+                    {
+                        Optional< CONSOLE_SCREEN_BUFFER_INFO > info( CurrentConsoleInfo( os ) );
+
+                        if( info.HasValue() == false )
+                        {
+                            return {};
+                        }
+
+                        infos[ index ] = new CONSOLE_SCREEN_BUFFER_INFO( *( info ) );
+                    }
+
+                    return infos[ index ]->wAttributes;
+                }
+                
+                static HANDLE GetWindowsConsoleHandle( std::ostream & os )
+                {
+                    if( std::addressof( os ) == std::addressof( std::cout ) )
+                    {
+                        return GetStdHandle( STD_OUTPUT_HANDLE );
+                    }
+                    else if( std::addressof( os ) == std::addressof( std::cerr ) )
+                    {
+                        return GetStdHandle( STD_ERROR_HANDLE );
+                    }
+
+                    return nullptr;
+                }
+
+                static Optional< CONSOLE_SCREEN_BUFFER_INFO > CurrentConsoleInfo( std::ostream & os )
+                {
+                    HANDLE h( GetWindowsConsoleHandle( os ) );
+
+                    if( h == nullptr )
+                    {
+                        return {};
+                    }
+
+                    {
+                        CONSOLE_SCREEN_BUFFER_INFO info;
+
+                        if( GetConsoleScreenBufferInfo( h, &info ) )
+                        {
+                            return info;
+                        }
+                    }
+
+                    return {};
+                }
+                
+                static bool SupportsWindowsConsoleAttributes( std::ostream & os )
+                {
+                    if
+                    (
+                           std::addressof( os ) != std::addressof( std::cout )
+                        && std::addressof( os ) != std::addressof( std::cerr )
+                    )
+                    {
+                        return false;
+                    }
+
+                    return GetConsoleWindow() != nullptr;
+                }
+
+                static void SetWindowsConsoleAttributes( std::ostream & os, Foreground foreground )
+                {
+                    HANDLE           h( GetWindowsConsoleHandle( os ) );
+                    Optional< WORD > attributes;
+
+                    switch( foreground )
+                    {
+                        case Foreground::None:    attributes = DefaultConsoleAttributes( os ); break;
+                        case Foreground::Gray:    attributes =  8; break;
+                        case Foreground::Red:     attributes = 12; break;
+                        case Foreground::Green:   attributes = 10; break;
+                        case Foreground::Yellow:  attributes = 14; break;
+                        case Foreground::Blue:    attributes =  9; break;
+                        case Foreground::Magenta: attributes = 13; break;
+                        case Foreground::Cyan:    attributes = 11; break;
+                        case Foreground::White:   attributes = 15; break;
+                    }
+
+                    if( attributes.HasValue() && h != nullptr )
+                    {
+                        SetConsoleTextAttribute( h, *( attributes ) );
+                    }
+                }
+
+                #endif
+
+                static bool SupportsANSISequences( std::ostream & os )
                 {
                     #ifdef _WIN32
+                    
+                    char      * cp( nullptr );
+                    size_t      s( 0 );
+                    std::string term;
+
+                    if( _dupenv_s( &cp, &s, "TERM" ) == 0 && cp != nullptr )
+                    {
+                        term = cp;
+
+                        free( cp );
+                    }
+
+                    if
+                    (
+                           std::addressof( os ) == std::addressof( std::cout )
+                        || std::addressof( os ) == std::addressof( std::cerr )
+                    )
+                    {
+                        return term == "xterm";
+                    }
                     
                     return false;
                     
@@ -193,12 +321,28 @@ namespace XS
                     
                     #endif
                 }
-                
-                TermColor( const std::function< void( std::ostream & ) > & f ):
-                    _f( f )
-                {}
-                
-                std::function< void( std::ostream & ) > _f;
+
+                static std::string ANSISequence( Foreground foreground )
+                {
+                    switch( foreground )
+                    {
+                        case Foreground::None:    return "\033[00m";
+                        case Foreground::Gray:    return "\033[30m";
+                        case Foreground::Red:     return "\033[31m";
+                        case Foreground::Green:   return "\033[32m";
+                        case Foreground::Yellow:  return "\033[33m";
+                        case Foreground::Blue:    return "\033[34m";
+                        case Foreground::Magenta: return "\033[35m";
+                        case Foreground::Cyan:    return "\033[36m";
+                        case Foreground::White:   return "\033[37m";
+                    }
+
+                    #ifndef __clang__
+                    return "";
+                    #endif
+                }
+
+                Foreground _foreground;
         };
     }
 }
