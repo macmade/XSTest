@@ -28,6 +28,7 @@
 		05E572C221AB04C000D6E51C /* Flags.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 05E572BE21AA748900D6E51C /* Flags.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
 		05E5731721AC469500D6E51C /* FloatingPoint.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 05E5731621AC467900D6E51C /* FloatingPoint.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
 		05E5732C21AC56EF00D6E51C /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 05E5732B21AC56EF00D6E51C /* README.md */; };
+		05E5743F21ADE2A900D6E51C /* Arguments.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 05E5743E21ADE2A900D6E51C /* Arguments.hpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -96,6 +97,7 @@
 		05E572BE21AA748900D6E51C /* Flags.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Flags.hpp; sourceTree = "<group>"; };
 		05E5731621AC467900D6E51C /* FloatingPoint.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = FloatingPoint.hpp; sourceTree = "<group>"; };
 		05E5732B21AC56EF00D6E51C /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		05E5743E21ADE2A900D6E51C /* Arguments.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Arguments.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -160,6 +162,7 @@
 		05D5259821A5FD6F0025CCEB /* XSTest */ = {
 			isa = PBXGroup;
 			children = (
+				05E5743E21ADE2A900D6E51C /* Arguments.hpp */,
 				05D526DB21A792920025CCEB /* Assert.hpp */,
 				05D525A921A5FDFF0025CCEB /* Case.hpp */,
 				05D5269421A71A9A0025CCEB /* Failure.hpp */,
@@ -321,6 +324,7 @@
 			files = (
 				05E572C121AB048900D6E51C /* TermColor.hpp in Headers */,
 				05E572C221AB04C000D6E51C /* Flags.hpp in Headers */,
+				05E5743F21ADE2A900D6E51C /* Arguments.hpp in Headers */,
 				05D526FC21A86E070025CCEB /* Functions.hpp in Headers */,
 				05D526FE21A86E070025CCEB /* Macros.hpp in Headers */,
 				05D5270021A86E070025CCEB /* Runner.hpp in Headers */,

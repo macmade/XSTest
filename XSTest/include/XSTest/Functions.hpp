@@ -36,14 +36,15 @@
 #include <XSTest/Runner.hpp>
 #include <XSTest/Info.hpp>
 #include <XSTest/Suite.hpp>
+#include <XSTest/Arguments.hpp>
 
 namespace XS
 {
     namespace Test
     {
-        inline int RunAll( Optional< std::reference_wrapper< std::ostream > > os = { std::cout } )
+        inline int RunAll( const Arguments & args, Optional< std::reference_wrapper< std::ostream > > os = { std::cout } )
         {
-            Runner runner( Suite::All() );
+            Runner runner( Suite::All( args ) );
             
             return ( runner.Run( os ) ) ? 0 : -1;
         }
@@ -52,9 +53,9 @@ namespace XS
 
 #ifdef XS_TEST_MAIN
 
-int main( void )
+int main( int argc, char * argv[] )
 {
-    return XS::Test::RunAll();
+    return XS::Test::RunAll( { argc, argv } );
 }
 
 #endif

@@ -46,5 +46,6 @@
 #include <XSTest/Logging.hpp>
 #include <XSTest/TermColor.hpp>
 #include <XSTest/FloatingPoint.hpp>
+#include <XSTest/Arguments.hpp>
 
 #endif /* XS_TEST_HPP */

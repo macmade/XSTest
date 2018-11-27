@@ -42,6 +42,7 @@
 #include <XSTest/Info.hpp>
 #include <XSTest/Logging.hpp>
 #include <XSTest/TermColor.hpp>
+#include <XSTest/Arguments.hpp>
 
 namespace XS
 {
@@ -53,14 +54,17 @@ namespace XS
         {
             public:
                 
-                static std::vector< Suite > All( void )
+                static std::vector< Suite > All( const Arguments & args )
                 {
                     std::map< std::string, std::vector< Info > > all;
                     std::vector< Suite >                         suites;
                     
                     for( auto & i: Info::All() )
                     {
-                        all[ i.GetSuiteName() ].push_back( i );
+                        if( args.ShouldRun( i.GetSuiteName(), i.GetCaseName() ) )
+                        {
+                            all[ i.GetSuiteName() ].push_back( i );
+                        }
                     }
                     
                     for( const auto & p: all )

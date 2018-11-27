@@ -94,6 +94,8 @@ namespace XS
                     
                     if( this->_suites.size() == 0 )
                     {
+                        Logging::Log( os, "No test to run...", {}, Logging::Style::Failure );
+                        
                         return false;
                     }
                     

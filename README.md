@@ -68,7 +68,7 @@ You can define a `main` function that will run all registered tests using:
 
 int main( int argc, char * argv[] )
 {
-    return XS::Test::RunAll();
+    return XS::Test::RunAll( { argc, argv } );
 }
 ```
 
@@ -112,6 +112,16 @@ XSTestFixture( MyFixture, MyTestCase )
 
 For each test case, a new instance of the fixture class will be created.  
 `SetUp` and `TearDown` will be automatically called, allowing you to add custom behaviours to your test suite.
+
+#### Running selected tests
+
+When XSTest is run as an executable, you can specify which test you want to run by providing the names as command-line arguments:
+
+```sh
+./MyTestExecutable Foo Bar.Test1 Bar.Test2
+```
+
+In the example above, all tests from the `Foo` suite will run, as well as `Test1` and `Test2` from the `Bar` suite.
 
 ### IDE Integration
 
