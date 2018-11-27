@@ -61,7 +61,7 @@ static std::vector< std::shared_ptr< XS::Test::Info > > * allInfos = nullptr;
 {
     allInfos = new std::vector< std::shared_ptr< XS::Test::Info > >();
     
-    for( const auto & suite: XS::Test::Suite::All() )
+    for( const auto & suite: XS::Test::Suite::All( { 0, nullptr } ) )
     {
         [ self createTestSuite: suite ];
     }
