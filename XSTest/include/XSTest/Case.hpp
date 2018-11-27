@@ -28,8 +28,8 @@
  * @copyright   (c) 2018, Jean-David Gadina - www.xs-labs.com
  */
 
-#ifndef XS_TEST_BASE_HPP
-#define XS_TEST_BASE_HPP
+#ifndef XS_TEST_CASE_HPP
+#define XS_TEST_CASE_HPP
 
 namespace XS
 {
@@ -63,4 +63,4 @@ namespace XS
     }
 }
 
-#endif /* XS_TEST_BASE_HPP */
+#endif /* XS_TEST_CASE_HPP */
