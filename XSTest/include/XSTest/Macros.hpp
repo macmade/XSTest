@@ -57,7 +57,7 @@
 #define ASSERT_FLOAT_EQ( _v1_, _v2_ )       XSTestAssertFloatEqual( _v1_, _v2_ )
 #define ASSERT_DOUBLE_EQ( _v1_, _v2_ )      XSTestAssertDoubleEqual( _v1_, _v2_ )
 #define ASSERT_LONGDOUBLE_EQ( _v1_, _v2_ )  XSTestAssertLongDoubleEqual( _v1_, _v2_ )
-#define ASSERT_NO_FATAL_FAILURE( _e_ )      
+#define ASSERT_NO_FATAL_FAILURE( _e_ )      _e_
 
 #ifdef _WIN32
 #define ASSERT_HRESULT_SUCCEEDED( _e_ )     XSTestAssertHResultSucceeded( _e_ )
