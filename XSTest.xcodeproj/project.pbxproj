@@ -28,7 +28,7 @@
 		05E572C221AB04C000D6E51C /* Flags.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 05E572BE21AA748900D6E51C /* Flags.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
 		05E5731721AC469500D6E51C /* FloatingPoint.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 05E5731621AC467900D6E51C /* FloatingPoint.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
 		05E5732C21AC56EF00D6E51C /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 05E5732B21AC56EF00D6E51C /* README.md */; };
-		05E5743F21ADE2A900D6E51C /* Arguments.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 05E5743E21ADE2A900D6E51C /* Arguments.hpp */; };
+		05E5743F21ADE2A900D6E51C /* Arguments.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 05E5743E21ADE2A900D6E51C /* Arguments.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */

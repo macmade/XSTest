@@ -51,16 +51,6 @@ namespace XS
     {
         namespace Assert
         {
-            enum class Operator
-            {
-                Equal,
-                NotEqual,
-                Less,
-                LessOrEqual,
-                Greater,
-                GreaterOrEqual
-            };
-            
             inline void Boolean( bool value, bool expected, const std::string & expression, const std::string & file, size_t line )
             {
                 if( value != expected )
@@ -93,7 +83,7 @@ namespace XS
             }
             
             template< typename _T_, typename _U_ >
-            inline auto Compare( const _T_ & v1, const _U_ & v2, Operator op, const std::string & expression1, const std::string & expression2, const std::string & file, size_t line )
+            inline auto CompareEqual( const _T_ & v1, const _U_ & v2, const std::string & expression1, const std::string & expression2, const std::string & file, size_t line )
                 -> typename std::enable_if
                    <
                            ( std::is_integral< _T_ >::value       && std::is_integral< _U_ >::value )
@@ -101,64 +91,113 @@ namespace XS
                    >
                    ::type
             {
-                if( op == Operator::Equal )
-                {
-                    Boolean( v1 == v2, true, expression1 + " == " + expression2, std::to_string( v1 ) + " == " + std::to_string( v2 ), file, line );
-                }
-                else if( op == Operator::NotEqual )
-                {
-                    Boolean( v1 != v2, true, expression1 + " != " + expression2, std::to_string( v1 ) + " != " + std::to_string( v2 ), file, line );
-                }
-                else if( op == Operator::Less )
-                {
-                    Boolean( v1 < v2, true, expression1 + " < " + expression2, std::to_string( v1 ) + " < " + std::to_string( v2 ), file, line );
-                }
-                else if( op == Operator::LessOrEqual )
-                {
-                    Boolean( v1 <= v2, true, expression1 + " <= " + expression2, std::to_string( v1 ) + " <= " + std::to_string( v2 ), file, line );
-                }
-                else if( op == Operator::Greater )
-                {
-                    Boolean( v1 > v2, true, expression1 + " > " + expression2, std::to_string( v1 ) + " > " + std::to_string( v2 ), file, line );
-                }
-                else if( op == Operator::GreaterOrEqual )
-                {
-                    Boolean( v1 >= v2, true, expression1 + " >= " + expression2, std::to_string( v1 ) + " >= " + std::to_string( v2 ), file, line );
-                }
+                Boolean( v1 == v2, true, expression1 + " == " + expression2, std::to_string( v1 ) + " == " + std::to_string( v2 ), file, line );
             }
             
             template< typename _T_, typename _U_ >
-            inline auto Compare( const _T_ & v1, const _U_ & v2, Operator op, const std::string & expression1, const std::string & expression2, const std::string & file, size_t line )
+            inline auto CompareNotEqual( const _T_ & v1, const _U_ & v2, const std::string & expression1, const std::string & expression2, const std::string & file, size_t line )
+                -> typename std::enable_if
+                   <
+                           ( std::is_integral< _T_ >::value       && std::is_integral< _U_ >::value )
+                        || ( std::is_floating_point< _T_ >::value && std::is_floating_point< _U_ >::value )
+                   >
+                   ::type
+            {
+                Boolean( v1 != v2, true, expression1 + " != " + expression2, std::to_string( v1 ) + " != " + std::to_string( v2 ), file, line );
+            }
+            
+            template< typename _T_, typename _U_ >
+            inline auto CompareLess( const _T_ & v1, const _U_ & v2, const std::string & expression1, const std::string & expression2, const std::string & file, size_t line )
+                -> typename std::enable_if
+                   <
+                           ( std::is_integral< _T_ >::value       && std::is_integral< _U_ >::value )
+                        || ( std::is_floating_point< _T_ >::value && std::is_floating_point< _U_ >::value )
+                   >
+                   ::type
+            {
+                Boolean( v1 < v2, true, expression1 + " < " + expression2, std::to_string( v1 ) + " < " + std::to_string( v2 ), file, line );
+            }
+            
+            template< typename _T_, typename _U_ >
+            inline auto CompareLessOrEqual( const _T_ & v1, const _U_ & v2, const std::string & expression1, const std::string & expression2, const std::string & file, size_t line )
+                -> typename std::enable_if
+                   <
+                           ( std::is_integral< _T_ >::value       && std::is_integral< _U_ >::value )
+                        || ( std::is_floating_point< _T_ >::value && std::is_floating_point< _U_ >::value )
+                   >
+                   ::type
+            {
+                Boolean( v1 <= v2, true, expression1 + " <= " + expression2, std::to_string( v1 ) + " <= " + std::to_string( v2 ), file, line );
+            }
+            
+            template< typename _T_, typename _U_ >
+            inline auto CompareGreater( const _T_ & v1, const _U_ & v2, const std::string & expression1, const std::string & expression2, const std::string & file, size_t line )
+                -> typename std::enable_if
+                   <
+                           ( std::is_integral< _T_ >::value       && std::is_integral< _U_ >::value )
+                        || ( std::is_floating_point< _T_ >::value && std::is_floating_point< _U_ >::value )
+                   >
+                   ::type
+            {
+                Boolean( v1 > v2, true, expression1 + " > " + expression2, std::to_string( v1 ) + " > " + std::to_string( v2 ), file, line );
+            }
+            
+            template< typename _T_, typename _U_ >
+            inline auto CompareGreaterOrEqual( const _T_ & v1, const _U_ & v2, const std::string & expression1, const std::string & expression2, const std::string & file, size_t line )
+                -> typename std::enable_if
+                   <
+                           ( std::is_integral< _T_ >::value       && std::is_integral< _U_ >::value )
+                        || ( std::is_floating_point< _T_ >::value && std::is_floating_point< _U_ >::value )
+                   >
+                   ::type
+            {
+                Boolean( v1 >= v2, true, expression1 + " >= " + expression2, std::to_string( v1 ) + " >= " + std::to_string( v2 ), file, line );
+            }
+            
+            template< typename _T_, typename _U_ >
+            inline auto CompareEqual( const _T_ & v1, const _U_ & v2, const std::string & expression1, const std::string & expression2, const std::string & file, size_t line )
                 -> typename std::enable_if< ( std::is_same< _T_, std::string >::value && std::is_same< _U_, std::string >::value ) > ::type
             {
-                if( op == Operator::Equal )
-                {
-                    Boolean( v1 == v2, true, expression1 + " == " + expression2, "\"" + v1 + "\" == \"" + v2 + "\"", file, line );
-                }
-                else if( op == Operator::NotEqual )
-                {
-                    Boolean( v1 != v2, true, expression1 + " != " + expression2, "\"" + v1 + "\" != \"" + v2 + "\"", file, line );
-                }
-                else if( op == Operator::Less )
-                {
-                    Boolean( v1 < v2, true, expression1 + " < " + expression2, "\"" + v1 + "\" < \"" + v2 + "\"", file, line );
-                }
-                else if( op == Operator::LessOrEqual )
-                {
-                    Boolean( v1 <= v2, true, expression1 + " <= " + expression2, "\"" + v1 + "\" <= \"" + v2 + "\"", file, line );
-                }
-                else if( op == Operator::Greater )
-                {
-                    Boolean( v1 > v2, true, expression1 + " > " + expression2, "\"" + v1 + " \"> \"" + v2 + "\"", file, line );
-                }
-                else if( op == Operator::GreaterOrEqual )
-                {
-                    Boolean( v1 >= v2, true, expression1 + " >= " + expression2, "\"" + v1 + "\" >= \"" + v2 + "\"", file, line );
-                }
+                Boolean( v1 == v2, true, expression1 + " == " + expression2, "\"" + v1 + "\" == \"" + v2 + "\"", file, line );
             }
             
             template< typename _T_, typename _U_ >
-            inline auto Compare( const _T_ & v1, const _U_ & v2, Operator op, const std::string & expression1, const std::string & expression2, const std::string & file, size_t line )
+            inline auto CompareNotEqual( const _T_ & v1, const _U_ & v2, const std::string & expression1, const std::string & expression2, const std::string & file, size_t line )
+                -> typename std::enable_if< ( std::is_same< _T_, std::string >::value && std::is_same< _U_, std::string >::value ) > ::type
+            {
+                Boolean( v1 != v2, true, expression1 + " != " + expression2, "\"" + v1 + "\" != \"" + v2 + "\"", file, line );
+            }
+            
+            template< typename _T_, typename _U_ >
+            inline auto CompareLess( const _T_ & v1, const _U_ & v2, const std::string & expression1, const std::string & expression2, const std::string & file, size_t line )
+                -> typename std::enable_if< ( std::is_same< _T_, std::string >::value && std::is_same< _U_, std::string >::value ) > ::type
+            {
+                Boolean( v1 < v2, true, expression1 + " < " + expression2, "\"" + v1 + "\" < \"" + v2 + "\"", file, line );
+            }
+            
+            template< typename _T_, typename _U_ >
+            inline auto CompareLessOrEqual( const _T_ & v1, const _U_ & v2, const std::string & expression1, const std::string & expression2, const std::string & file, size_t line )
+                -> typename std::enable_if< ( std::is_same< _T_, std::string >::value && std::is_same< _U_, std::string >::value ) > ::type
+            {
+                Boolean( v1 <= v2, true, expression1 + " <= " + expression2, "\"" + v1 + "\" <= \"" + v2 + "\"", file, line );
+            }
+            
+            template< typename _T_, typename _U_ >
+            inline auto CompareGreater( const _T_ & v1, const _U_ & v2, const std::string & expression1, const std::string & expression2, const std::string & file, size_t line )
+                -> typename std::enable_if< ( std::is_same< _T_, std::string >::value && std::is_same< _U_, std::string >::value ) > ::type
+            {
+                Boolean( v1 > v2, true, expression1 + " > " + expression2, "\"" + v1 + " \"> \"" + v2 + "\"", file, line );
+            }
+            
+            template< typename _T_, typename _U_ >
+            inline auto CompareGreaterOrEqual( const _T_ & v1, const _U_ & v2, const std::string & expression1, const std::string & expression2, const std::string & file, size_t line )
+                -> typename std::enable_if< ( std::is_same< _T_, std::string >::value && std::is_same< _U_, std::string >::value ) > ::type
+            {
+                Boolean( v1 >= v2, true, expression1 + " >= " + expression2, "\"" + v1 + "\" >= \"" + v2 + "\"", file, line );
+            }
+            
+            template< typename _T_, typename _U_ >
+            inline auto CompareEqual( const _T_ & v1, const _U_ & v2, const std::string & expression1, const std::string & expression2, const std::string & file, size_t line )
                 -> typename std::enable_if
                    <
                           ( !std::is_integral< _T_ >::value          || !std::is_integral< _U_ >::value )
@@ -167,30 +206,72 @@ namespace XS
                    >
                    ::type
             {
-                if( op == Operator::Equal )
-                {
-                    Boolean( v1 == v2, true, expression1 + " == " + expression2, file, line );
-                }
-                else if( op == Operator::NotEqual )
-                {
-                    Boolean( v1 != v2, true, expression1 + " != " + expression2, file, line );
-                }
-                else if( op == Operator::Less )
-                {
-                    Boolean( v1 < v2, true, expression1 + " < " + expression2, file, line );
-                }
-                else if( op == Operator::LessOrEqual )
-                {
-                    Boolean( v1 <= v2, true, expression1 + " <= " + expression2, file, line );
-                }
-                else if( op == Operator::Greater )
-                {
-                    Boolean( v1 > v2, true, expression1 + " > " + expression2, file, line );
-                }
-                else if( op == Operator::GreaterOrEqual )
-                {
-                    Boolean( v1 >= v2, true, expression1 + " >= " + expression2, file, line );
-                }
+                Boolean( v1 == v2, true, expression1 + " == " + expression2, file, line );
+            }
+            
+            template< typename _T_, typename _U_ >
+            inline auto CompareNotEqual( const _T_ & v1, const _U_ & v2, const std::string & expression1, const std::string & expression2, const std::string & file, size_t line )
+                -> typename std::enable_if
+                   <
+                          ( !std::is_integral< _T_ >::value          || !std::is_integral< _U_ >::value )
+                       && ( !std::is_floating_point< _T_ >::value    || !std::is_floating_point< _U_ >::value )
+                       && ( !std::is_same< _T_, std::string >::value || !std::is_same< _U_, std::string >::value )
+                   >
+                   ::type
+            {
+                Boolean( v1 != v2, true, expression1 + " != " + expression2, file, line );
+            }
+            
+            template< typename _T_, typename _U_ >
+            inline auto CompareLess( const _T_ & v1, const _U_ & v2, const std::string & expression1, const std::string & expression2, const std::string & file, size_t line )
+                -> typename std::enable_if
+                   <
+                          ( !std::is_integral< _T_ >::value          || !std::is_integral< _U_ >::value )
+                       && ( !std::is_floating_point< _T_ >::value    || !std::is_floating_point< _U_ >::value )
+                       && ( !std::is_same< _T_, std::string >::value || !std::is_same< _U_, std::string >::value )
+                   >
+                   ::type
+            {
+                Boolean( v1 < v2, true, expression1 + " < " + expression2, file, line );
+            }
+            
+            template< typename _T_, typename _U_ >
+            inline auto CompareLessOrEqual( const _T_ & v1, const _U_ & v2, const std::string & expression1, const std::string & expression2, const std::string & file, size_t line )
+                -> typename std::enable_if
+                   <
+                          ( !std::is_integral< _T_ >::value          || !std::is_integral< _U_ >::value )
+                       && ( !std::is_floating_point< _T_ >::value    || !std::is_floating_point< _U_ >::value )
+                       && ( !std::is_same< _T_, std::string >::value || !std::is_same< _U_, std::string >::value )
+                   >
+                   ::type
+            {
+                Boolean( v1 <= v2, true, expression1 + " <= " + expression2, file, line );
+            }
+            
+            template< typename _T_, typename _U_ >
+            inline auto CompareGreater( const _T_ & v1, const _U_ & v2, const std::string & expression1, const std::string & expression2, const std::string & file, size_t line )
+                -> typename std::enable_if
+                   <
+                          ( !std::is_integral< _T_ >::value          || !std::is_integral< _U_ >::value )
+                       && ( !std::is_floating_point< _T_ >::value    || !std::is_floating_point< _U_ >::value )
+                       && ( !std::is_same< _T_, std::string >::value || !std::is_same< _U_, std::string >::value )
+                   >
+                   ::type
+            {
+                Boolean( v1 > v2, true, expression1 + " > " + expression2, file, line );
+            }
+            
+            template< typename _T_, typename _U_ >
+            inline auto CompareGreaterOrEqual( const _T_ & v1, const _U_ & v2, const std::string & expression1, const std::string & expression2, const std::string & file, size_t line )
+                -> typename std::enable_if
+                   <
+                          ( !std::is_integral< _T_ >::value          || !std::is_integral< _U_ >::value )
+                       && ( !std::is_floating_point< _T_ >::value    || !std::is_floating_point< _U_ >::value )
+                       && ( !std::is_same< _T_, std::string >::value || !std::is_same< _U_, std::string >::value )
+                   >
+                   ::type
+            {
+                Boolean( v1 >= v2, true, expression1 + " >= " + expression2, file, line );
             }
             
             inline void StringEquality( const char * cp1, const char * cp2, bool expected, bool caseInsensitive, const std::string & expression1, const std::string & expression2, const std::string & file, size_t line )
