@@ -290,6 +290,8 @@ namespace XS
                 }
                 catch( const _T_ & e )
                 {
+                    ( void )e;
+
                     hasCaught = true;
                     hasThrown = true;
                 }
