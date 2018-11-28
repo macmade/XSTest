@@ -37,6 +37,14 @@
 
 #ifdef XSTEST_GTEST_COMPAT
 
+namespace XS
+{
+    namespace Test
+    {
+        class Case;
+    }
+}
+
 namespace testing
 {
     using test = XS::Test::Case;
