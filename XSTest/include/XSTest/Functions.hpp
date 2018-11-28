@@ -51,7 +51,7 @@ namespace XS
     }
 }
 
-#ifdef XS_TEST_MAIN
+#ifdef XSTEST_MAIN
 
 int main( int argc, char * argv[] )
 {

@@ -37,6 +37,11 @@
 
 #ifdef XSTEST_GTEST_COMPAT
 
+namespace testing
+{
+    using test = XS::Test::Case;
+}
+
 #define TEST( _case_, _name_ )              XSTest( _case_, _name_ )
 #define TEST_F( _case_, _name_ )            XSTestFixture( _case_, _name_ )
 #define ASSERT_FALSE( _e_ )                 XSTestAssertFalse( _e_ )

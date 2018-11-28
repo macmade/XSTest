@@ -72,10 +72,10 @@ int main( int argc, char * argv[] )
 }
 ```
 
-As an alternative, you can define the `XS_TEST_MAIN` macro.  
+As an alternative, you can define the `XSTEST_MAIN` macro.  
 This will automatically generate a `main` function for you.
 ```cpp
-#define XS_TEST_MAIN
+#define XSTEST_MAIN
 #include <XSTest/XSTest.hpp>
 ```
 
