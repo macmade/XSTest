@@ -18,8 +18,8 @@ for:
       only:
         - platform: x86
     test_script:
-      - '%APPVEYOR_BUILD_FOLDER%\Build\32\%CONFIGURATION%\Test-Standalone.exe'
-      - '%APPVEYOR_BUILD_FOLDER%\Build\32\%CONFIGURATION%\Example-Standalone.exe'
+      - '%APPVEYOR_BUILD_FOLDER%\Build\32\%CONFIGURATION%\Test-Standalone.exe & (exit 0)'
+      - '%APPVEYOR_BUILD_FOLDER%\Build\32\%CONFIGURATION%\Example-Standalone.exe & (exit 0)'
   -
     matrix:
       only:
