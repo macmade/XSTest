@@ -1,0 +1,29 @@
+image:
+  - Visual Studio 2017
+platform:
+  - x86
+  - x64
+configuration:
+  - Debug
+  - Release
+install:
+  - git submodule update --init --recursive
+build:
+  project: XSTest.sln
+before_build:
+  - nuget restore
+for:
+  -
+    matrix:
+      only:
+        - platform: x86
+    test_script:
+      - '%APPVEYOR_BUILD_FOLDER%\Build\32\%CONFIGURATION%\Test-Standalone.exe'
+      - '%APPVEYOR_BUILD_FOLDER%\Build\32\%CONFIGURATION%\Example-Standalone.exe'
+  -
+    matrix:
+      only:
+        - platform: x64
+    test_script:
+      - '%APPVEYOR_BUILD_FOLDER%\Build\64\%CONFIGURATION%\Test-Standalone.exe & (exit 0)'
+      - '%APPVEYOR_BUILD_FOLDER%\Build\64\%CONFIGURATION%\Example-Standalone.exe & (exit 0)'
