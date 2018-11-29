@@ -53,7 +53,11 @@ namespace XS
 
 #ifdef XSTEST_MAIN
 
+#ifdef _WIN32
+int __cdecl main( int argc, char * argv[] )
+#else
 int main( int argc, char * argv[] )
+#endif
 {
     return XS::Test::RunAll( { argc, argv } );
 }
