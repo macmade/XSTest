@@ -138,7 +138,7 @@ namespace XS
                                 }
                             }
                         }
-                    
+                        
                         Logging::Log( os, Utility::Numbered( "test case", cases ) + " from " + Utility::Numbered( "test suite", suites ) + " ran (" + time.GetString() + " total)", {}, Logging::Style::None, Logging::Options::NewLineBefore );
                         Logging::Log( os, Utility::Numbered( "test", passed.size() ) + " passed:", ( ( passed.size() > 0 ) ? TermColor::Green() : TermColor::Red() ) );
                         
@@ -167,6 +167,12 @@ namespace XS
                                 Logging::Log( os, info.GetSuiteName(), info.GetCaseName(), "  - ❌ " );
                                 #endif
                             }
+                            
+                            Logging::Log( os, "TESTING FAILED", TermColor::Red(), Logging::Style::None, Logging::Options::NewLineBefore );
+                        }
+                        else
+                        {
+                            Logging::Log( os, "TESTING PASSED", TermColor::Green(), Logging::Style::None, Logging::Options::NewLineBefore );
                         }
                     }
                     
