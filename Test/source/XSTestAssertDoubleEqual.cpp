@@ -39,7 +39,7 @@ XSTest( Success, XSTestAssertDoubleEqual )
     XSTestAssertDoubleEqual( 0.1, 0.1 );
 }
 
-XSTest( Success, XSTestAssertFloatNotEqual )
+XSTest( Success, XSTestAssertDoubleNotEqual )
 {
     std::this_thread::sleep_for( std::chrono::milliseconds( 10 ) );
     
@@ -91,7 +91,7 @@ XSTest( Success, XSTestAssertDoubleEqual_INF )
     XSTestAssertDoubleEqual( std::numeric_limits< double >::infinity(), std::numeric_limits< double >::infinity() );
 }
 
-XSTest( Failure, XSTestAssertFloatNotEqual )
+XSTest( Failure, XSTestAssertDoubleNotEqual )
 {
     std::this_thread::sleep_for( std::chrono::milliseconds( 10 ) );
     
