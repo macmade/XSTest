@@ -28,7 +28,15 @@
  * @copyright   (c) 2018, Jean-David Gadina - www.xs-labs.com
  */
 
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wreserved-id-macro"
+#endif
 #import <XCTest/XCTest.h>
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+
 #import <XSTest/XSTest.hpp>
 #import <objc/message.h>
 
@@ -155,7 +163,15 @@ static id runTestCase( XCTestCase * self, SEL _cmd )
                 line = info.GetLine();
             }
             
-            [ self recordFailureWithDescription: [ NSString stringWithUTF8String: failure->GetDescription().c_str() ] inFile: [ NSString stringWithUTF8String: file.c_str() ] atLine: line expected: YES ];
+            {
+                NSString * objcDescription = [ NSString stringWithUTF8String: failure->GetDescription().c_str() ];
+                NSString * objcFile        = [ NSString stringWithUTF8String: file.c_str() ];
+                
+                if( objcDescription != nil && objcFile != nil )
+                {
+                    [ self recordFailureWithDescription: objcDescription inFile: objcFile atLine: line expected: YES ];
+                }
+            }
         }
     }
     

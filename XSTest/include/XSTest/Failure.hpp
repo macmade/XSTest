@@ -99,8 +99,8 @@ namespace XS
                 }
                 
                 Failure( const std::string & description, const std::string & file, size_t line ):
-                    _description( description ),
                     _file(       file ),
+                    _description( description ),
                     _line(       line )
                 {}
                 
@@ -109,8 +109,8 @@ namespace XS
                     _evaluated(   o._evaluated ),
                     _expected(    o._expected ),
                     _actual(      o._actual ),
-                    _description( o._description ),
                     _file(        o._file ),
+                    _description( o._description ),
                     _line(        o._line )
                 {}
                 
@@ -119,12 +119,12 @@ namespace XS
                     _evaluated(   std::move( o._evaluated ) ),
                     _expected(    std::move( o._expected ) ),
                     _actual(      std::move( o._actual ) ),
-                    _description( std::move( o._description ) ),
                     _file(        std::move( o._file ) ),
+                    _description( std::move( o._description ) ),
                     _line(        std::move( o._line ) )
                 {}
                 
-                ~Failure( void )
+                ~Failure( void ) override
                 {}
                 
                 Failure & operator =( Failure o )

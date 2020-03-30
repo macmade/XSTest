@@ -77,7 +77,7 @@ namespace XS
                 {
                     int s( 0 );
                     
-                    name = abi::__cxa_demangle( name.c_str(), 0, 0, &s );
+                    name = abi::__cxa_demangle( name.c_str(), nullptr, nullptr, &s );
                 }
                 #endif
                 

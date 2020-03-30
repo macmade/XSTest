@@ -61,8 +61,8 @@ XSTest( Success, XSTestAssertFloatEqual_NextAfter )
 XSTest( Success, XSTestAssertFloatEqual_NextToward )
 {
     float   f1( static_cast< float >( 0.1 ) );
-    float   f2( std::nexttoward( f1, static_cast< float >( 0.2 ) ) );
-    float   f3( std::nexttoward( f1, static_cast< float >( 0.0 ) ) );
+    float   f2( std::nexttowardf( f1, static_cast< long double >( 0.2 ) ) );
+    float   f3( std::nexttowardf( f1, static_cast< long double >( 0.0 ) ) );
     int32_t i1( *( reinterpret_cast< int32_t * >( &f1 ) ) );
     int32_t i2( *( reinterpret_cast< int32_t * >( &f2 ) ) );
     int32_t i3( *( reinterpret_cast< int32_t * >( &f3 ) ) );
@@ -102,5 +102,5 @@ XSTest( Failure, XSTestAssertFloatEqual_Epsilon )
 {
     std::this_thread::sleep_for( std::chrono::milliseconds( 10 ) );
     
-    XSTestAssertFloatEqual( 0.1, 0.1 + std::numeric_limits< float >::epsilon() );
+    XSTestAssertFloatEqual( 0.1f, 0.1f + std::numeric_limits< float >::epsilon() );
 }

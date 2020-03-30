@@ -61,8 +61,8 @@ XSTest( Success, XSTestAssertDoubleEqual_NextAfter )
 XSTest( Success, XSTestAssertDoubleEqual_NextToward )
 {
     double  f1( static_cast< double >( 0.1 ) );
-    double  f2( std::nexttoward( f1, static_cast< double >( 0.2 ) ) );
-    double  f3( std::nexttoward( f1, static_cast< double >( 0.0 ) ) );
+    double  f2( std::nexttoward( f1, static_cast< long double >( 0.2 ) ) );
+    double  f3( std::nexttoward( f1, static_cast< long double >( 0.0 ) ) );
     int64_t i1( *( reinterpret_cast< int64_t * >( &f1 ) ) );
     int64_t i2( *( reinterpret_cast< int64_t * >( &f2 ) ) );
     int64_t i3( *( reinterpret_cast< int64_t * >( &f3 ) ) );

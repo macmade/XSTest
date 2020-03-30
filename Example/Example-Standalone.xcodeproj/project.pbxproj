@@ -263,7 +263,7 @@
 		05D5258021A5FD520025CCEB /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1010;
+				LastUpgradeCheck = 1140;
 				ORGANIZATIONNAME = "XS-Labs";
 				TargetAttributes = {
 					05D525E221A605160025CCEB = {
@@ -277,6 +277,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = 05D5257F21A5FD520025CCEB;
 			productRefGroup = 05D5258921A5FD520025CCEB /* Products */;

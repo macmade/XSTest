@@ -116,6 +116,10 @@ namespace testing
 #define XSTest_Internal_XString( _s_ )              XSTest_Internal_String( _s_ )
 #define XSTest_Internal_String( _s_ )               #_s_
 
+#ifdef __clang__
+#pragma clang diagnostic ignored "-Wglobal-constructors"
+#endif
+
 #define XSTest_Internal_TestSetup( _case_, _name_, _class_, _base_ )    \
                                                                         \
     class _class_: public _base_                                        \

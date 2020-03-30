@@ -144,7 +144,7 @@ namespace XS
                 >
                 static _V_ DistanceBetween( _U_ v1, _U_ v2 )
                 {
-                    _U_ signMask( static_cast< _U_ >( 1 ) << ( ( sizeof( _U_ ) * 8 ) - 1 ) );
+                    _U_ signMask( static_cast< _U_ >( static_cast< _V_ >( 1 ) << ( ( sizeof( _V_ ) * 8 ) - 1 ) ) );
                     _U_ diff;
                     
                     v1   = ( v1 >= 0 ) ? v1 : signMask - v1;

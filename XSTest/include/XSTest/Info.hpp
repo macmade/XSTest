@@ -230,9 +230,9 @@ namespace XS
                     _suiteName( suiteName ),
                     _caseName( caseName ),
                     _createTest( createTest ),
+                    _status( Status::Unknown ),
                     _file( file ),
-                    _line( line ),
-                    _status( Status::Unknown )
+                    _line( line )
                 {}
                 
                 std::string                                      _suiteName;
