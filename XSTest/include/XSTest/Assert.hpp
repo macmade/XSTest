@@ -84,26 +84,58 @@ namespace XS
             
             template< typename _T_, typename _U_ >
             inline auto CompareEqual( const _T_ & v1, const _U_ & v2, const std::string & expression1, const std::string & expression2, const std::string & file, size_t line )
-                -> typename std::enable_if
-                   <
-                           ( std::is_integral< _T_ >::value       && std::is_integral< _U_ >::value )
-                        || ( std::is_floating_point< _T_ >::value && std::is_floating_point< _U_ >::value )
-                   >
-                   ::type
+                -> typename std::enable_if< ( std::is_integral< _T_ >::value && std::is_integral< _U_ >::value ) >::type
             {
                 Boolean( v1 == v2, true, expression1 + " == " + expression2, std::to_string( v1 ) + " == " + std::to_string( v2 ), file, line );
             }
             
             template< typename _T_, typename _U_ >
             inline auto CompareNotEqual( const _T_ & v1, const _U_ & v2, const std::string & expression1, const std::string & expression2, const std::string & file, size_t line )
-                -> typename std::enable_if
-                   <
-                           ( std::is_integral< _T_ >::value       && std::is_integral< _U_ >::value )
-                        || ( std::is_floating_point< _T_ >::value && std::is_floating_point< _U_ >::value )
-                   >
-                   ::type
+                -> typename std::enable_if< ( std::is_integral< _T_ >::value && std::is_integral< _U_ >::value ) >::type
             {
                 Boolean( v1 != v2, true, expression1 + " != " + expression2, std::to_string( v1 ) + " != " + std::to_string( v2 ), file, line );
+            }
+            
+            template< typename _T_, typename _U_ >
+            inline auto CompareEqual( const _T_ & v1, const _U_ & v2, const std::string & expression1, const std::string & expression2, const std::string & file, size_t line )
+                -> typename std::enable_if< ( std::is_floating_point< _T_ >::value && std::is_floating_point< _U_ >::value ) >::type
+            {
+                FloatingPoint< _T_ > fp1( v1 );
+                FloatingPoint< _T_ > fp2( v2 );
+                
+                if( fp1 != fp2 )
+                {
+                    throw Failure
+                    (
+                        expression1 + " == " + expression2,
+                        std::to_string( v1 ) + " == " + std::to_string( v2 ),
+                        "True",
+                        "False",
+                        file,
+                        line
+                    );
+                }
+            }
+            
+            template< typename _T_, typename _U_ >
+            inline auto CompareNotEqual( const _T_ & v1, const _U_ & v2, const std::string & expression1, const std::string & expression2, const std::string & file, size_t line )
+                -> typename std::enable_if< ( std::is_floating_point< _T_ >::value && std::is_floating_point< _U_ >::value ) >::type
+            {
+                FloatingPoint< _T_ > fp1( v1 );
+                FloatingPoint< _T_ > fp2( v2 );
+                
+                if( fp1 == fp2 )
+                {
+                    throw Failure
+                    (
+                        expression1 + " != " + expression2,
+                        std::to_string( v1 ) + " != " + std::to_string( v2 ),
+                        "True",
+                        "False",
+                        file,
+                        line
+                    );
+                }
             }
             
             template< typename _T_, typename _U_ >
@@ -425,27 +457,6 @@ namespace XS
                         expression,
                         ( throws ) ? "Throws an exception"    : "Doesn't throw any exception",
                         ( throws ) ? "Doesn't throw anything" : ( ( thrown.length() == 0 ) ? "Throws an exception" : "Throws " + thrown ),
-                        file,
-                        line
-                    );
-                }
-            }
-            
-            template< typename _T_ >
-            inline auto Compare( _T_ v1, _T_ v2, const std::string & expression1, const std::string & expression2, const std::string & file, size_t line )
-                -> typename std::enable_if< std::is_same< _T_, float >::value || std::is_same< _T_, double >::value >::type
-            {
-                FloatingPoint< _T_ > fp1( v1 );
-                FloatingPoint< _T_ > fp2( v2 );
-                
-                if( fp1 != fp2 )
-                {
-                    throw Failure
-                    (
-                        expression1 + " == " + expression2,
-                        std::to_string( v1 ) + " == " + std::to_string( v2 ),
-                        "True",
-                        "False",
                         file,
                         line
                     );

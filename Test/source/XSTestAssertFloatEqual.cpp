@@ -39,6 +39,13 @@ XSTest( Success, XSTestAssertFloatEqual )
     XSTestAssertFloatEqual( 0.1, 0.1 );
 }
 
+XSTest( Success, XSTestAssertFloatNotEqual )
+{
+    std::this_thread::sleep_for( std::chrono::milliseconds( 10 ) );
+    
+    XSTestAssertFloatNotEqual( 0.1, 0.2 );
+}
+
 XSTest( Success, XSTestAssertFloatEqual_NextAfter )
 {
     float   f1( static_cast< float >( 0.1 ) );
@@ -82,6 +89,13 @@ XSTest( Success, XSTestAssertFloatEqual_INF )
     std::this_thread::sleep_for( std::chrono::milliseconds( 10 ) );
     
     XSTestAssertFloatEqual( std::numeric_limits< float >::infinity(), std::numeric_limits< float >::infinity() );
+}
+
+XSTest( Failure, XSTestAssertFloatNotEqual )
+{
+    std::this_thread::sleep_for( std::chrono::milliseconds( 10 ) );
+    
+    XSTestAssertFloatNotEqual( static_cast< float >( 0.1 ), static_cast< float >( 0.1 ) );
 }
 
 XSTest( Failure, XSTestAssertFloatEqual_NAN )
