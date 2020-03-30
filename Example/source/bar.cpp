@@ -33,6 +33,7 @@
 #include <chrono>
 #include <exception>
 
+[[ noreturn ]]
 static void ThrowException( const std::string & reason )
 {
     throw std::runtime_error( reason ); 
