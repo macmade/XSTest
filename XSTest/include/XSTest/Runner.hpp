@@ -70,7 +70,7 @@ namespace XS
                     _suites( std::move( o._suites ) )
                 {}
                 
-                ~Runner( void )
+                ~Runner()
                 {}
                 
                 Runner & operator =( Runner o )
@@ -80,7 +80,7 @@ namespace XS
                     return *( this );
                 }
                 
-                std::vector< Suite > GetSuites( void ) const
+                std::vector< Suite > GetSuites() const
                 {
                     return this->_suites;
                 }

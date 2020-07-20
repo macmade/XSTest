@@ -128,12 +128,12 @@ namespace testing
     {                                                                   \
         public:                                                         \
                                                                         \
-            _class_( void ) = default;                                  \
+            _class_() = default;                                        \
                                                                         \
         protected:                                                      \
                                                                         \
-            const XS::Test::Info & Info( void ) override;               \
-            void                   Test( void ) override;               \
+            const XS::Test::Info & Info() override;                     \
+            void                   Test() override;                     \
                                                                         \
         private:                                                        \
                                                                         \
@@ -144,16 +144,16 @@ namespace testing
     (                                                                   \
         XSTest_Internal_XString( _case_ ),                              \
         XSTest_Internal_XString( _name_ ),                              \
-        []( void ) { return std::make_shared< _class_ >(); },           \
+        []() { return std::make_shared< _class_ >(); },                 \
         __FILE__,                                                       \
         __LINE__                                                        \
     );                                                                  \
                                                                         \
-    const XS::Test::Info & _class_::Info( void )                        \
+    const XS::Test::Info & _class_::Info()                              \
     {                                                                   \
         return _InfoRef;                                                \
     }                                                                   \
                                                                         \
-    void _class_::Test( void )                                          \
+    void _class_::Test()                                                \
 
 #endif /* XS_TEST_MACROS_HPP */

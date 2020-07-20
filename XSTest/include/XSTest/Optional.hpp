@@ -49,7 +49,7 @@ namespace XS
                 class BadAccessException: public std::exception
                 {};
                 
-                Optional( void )
+                Optional()
                 {}
                 
                 Optional( const _T_ & value ):
@@ -67,7 +67,7 @@ namespace XS
                     }
                 }
                 
-                ~Optional( void )
+                ~Optional()
                 {
                     if( this->_hasValue )
                     {
@@ -96,7 +96,7 @@ namespace XS
                     return this->HasValue();
                 }
                 
-                const _T_ * operator ->( void ) const
+                const _T_ * operator ->() const
                 {
                     if( this->_hasValue == false )
                     {
@@ -106,7 +106,7 @@ namespace XS
                     return reinterpret_cast< const _T_ * >( this->_data );
                 }
                 
-                _T_ * operator ->( void )
+                _T_ * operator ->()
                 {
                     if( this->_hasValue == false )
                     {
@@ -116,27 +116,27 @@ namespace XS
                     return reinterpret_cast< _T_ * >( this->_data );
                 }
                 
-                const _T_ & operator *( void ) const &
+                const _T_ & operator *() const &
                 {
                     return this->Value();
                 }
                 
-                _T_ & operator *( void ) &
+                _T_ & operator *() &
                 {
                     return this->Value();
                 }
                 
-                bool HasValue( void ) const
+                bool HasValue() const
                 {
                     return this->_hasValue;
                 }
                 
-                _T_ & Value( void ) &
+                _T_ & Value() &
                 {
                     return *( this->operator->() );
                 }
                 
-                const _T_ & Value( void ) const &
+                const _T_ & Value() const &
                 {
                     return *( this->operator->() );
                 }
@@ -151,7 +151,7 @@ namespace XS
                     return ( this->HasValue() ) ? this->Value() : defaultValue;
                 }
                 
-                void Reset( void )
+                void Reset()
                 {
                     Optional< _T_ > o;
                     

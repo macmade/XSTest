@@ -45,22 +45,22 @@ namespace XS
         {
             public:
                 
-                StopWatch( void ): _status( Status::Unknown )
+                StopWatch(): _status( Status::Unknown )
                 {}
                 
-                ~StopWatch( void )
+                ~StopWatch()
                 {}
                 
                 StopWatch( const StopWatch & o )              = delete;
                 StopWatch & operator =( const StopWatch & o ) = delete;
                 
-                void Start( void )
+                void Start()
                 {
                     this->_start  = std::chrono::system_clock::now();
                     this->_status = Status::Started;
                 }
                 
-                void Stop( void )
+                void Stop()
                 {
                     if( this->_status != Status::Started )
                     {
@@ -71,7 +71,7 @@ namespace XS
                     this->_status = Status::Stopped;
                 }
                 
-                int64_t GetSeconds( void ) const
+                int64_t GetSeconds() const
                 {
                     std::chrono::duration< double > duration;
                     
@@ -85,7 +85,7 @@ namespace XS
                     return std::chrono::duration_cast< std::chrono::seconds >( duration ).count();
                 }
                 
-                int64_t GetMilliseconds( void ) const
+                int64_t GetMilliseconds() const
                 {
                     std::chrono::duration< double > duration;
                     
@@ -99,7 +99,7 @@ namespace XS
                     return std::chrono::duration_cast< std::chrono::milliseconds >( duration ).count();
                 }
                 
-                std::string GetString( void ) const
+                std::string GetString() const
                 {
                     return std::to_string( this->GetMilliseconds() ) + " ms";
                 }

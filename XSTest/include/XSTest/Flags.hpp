@@ -46,7 +46,7 @@ namespace XS
                 
                 typedef typename std::underlying_type< _T_ >::type Type;
                 
-                Flags( void ):
+                Flags():
                     _value( 0 )
                 {}
                 
@@ -112,7 +112,7 @@ namespace XS
                     this->_value &= ~( static_cast< Type >( flag ) );
                 }
                 
-                void Clear( void )
+                void Clear()
                 {
                     this->_value = 0;
                 }

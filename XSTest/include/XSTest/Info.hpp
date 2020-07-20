@@ -54,11 +54,11 @@ namespace XS
         
         #ifdef XS_TEST_DYLIB
         
-        extern std::vector< std::shared_ptr< Info > > & GetAllInfos( void );
+        extern std::vector< std::shared_ptr< Info > > & GetAllInfos();
         
         #else
         
-        inline std::vector< std::shared_ptr< Info > > & GetAllInfos( void )
+        inline std::vector< std::shared_ptr< Info > > & GetAllInfos()
         {
             static auto infos = new std::vector< std::shared_ptr< Info > >();
             
@@ -79,7 +79,7 @@ namespace XS
                     Failed
                 };
                 
-                static Info & Register( const std::string & testCaseName, const std::string & testName, const std::function< std::shared_ptr< Case >( void ) > createTest, const std::string & file, size_t line )
+                static Info & Register( const std::string & testCaseName, const std::string & testName, const std::function< std::shared_ptr< Case >() > createTest, const std::string & file, size_t line )
                 {
                     Info * i = new Info( testCaseName, testName, createTest, file, line );
                                         
@@ -88,7 +88,7 @@ namespace XS
                     return *( i );
                 }
                 
-                static std::vector< Info > All( void )
+                static std::vector< Info > All()
                 {
                     std::vector< Info > all;
                     
@@ -120,7 +120,7 @@ namespace XS
                     _failure(    std::move( o._failure ) )
                 {}
                 
-                ~Info( void )
+                ~Info()
                 {}
                 
                 Info & operator =( Info o )
@@ -130,37 +130,37 @@ namespace XS
                     return *( this );
                 }
                 
-                std::string GetName( void ) const
+                std::string GetName() const
                 {
                     return this->_suiteName + "." + this->_caseName;
                 }
                 
-                std::string GetSuiteName( void ) const
+                std::string GetSuiteName() const
                 {
                     return this->_suiteName;
                 }
                 
-                std::string GetCaseName( void ) const
+                std::string GetCaseName() const
                 {
                     return this->_caseName;
                 }
                 
-                Status GetStatus( void ) const noexcept
+                Status GetStatus() const noexcept
                 {
                     return this->_status;
                 }
                 
-                std::string GetFile( void ) const
+                std::string GetFile() const
                 {
                     return this->_file;
                 }
                 
-                size_t GetLine( void ) const noexcept
+                size_t GetLine() const noexcept
                 {
                     return this->_line;
                 }
                 
-                Optional< Failure > GetFailure( void ) const
+                Optional< Failure > GetFailure() const
                 {
                     return this->_failure;
                 }
@@ -221,12 +221,12 @@ namespace XS
                 
             private:
                 
-                static std::vector< std::shared_ptr< Info > > & GetInfos( void )
+                static std::vector< std::shared_ptr< Info > > & GetInfos()
                 {
                     return GetAllInfos();
                 }
                 
-                Info( const std::string & suiteName, const std::string & caseName, const std::function< std::shared_ptr< Case >( void ) > createTest, const std::string & file, size_t line ):
+                Info( const std::string & suiteName, const std::string & caseName, const std::function< std::shared_ptr< Case >() > createTest, const std::string & file, size_t line ):
                     _suiteName( suiteName ),
                     _caseName( caseName ),
                     _createTest( createTest ),
@@ -235,13 +235,13 @@ namespace XS
                     _line( line )
                 {}
                 
-                std::string                                      _suiteName;
-                std::string                                      _caseName;
-                std::function< std::shared_ptr< Case >( void ) > _createTest;
-                Status                                           _status;
-                std::string                                      _file;
-                size_t                                           _line;
-                Optional< Failure >                              _failure;
+                std::string                                _suiteName;
+                std::string                                _caseName;
+                std::function< std::shared_ptr< Case >() > _createTest;
+                Status                                     _status;
+                std::string                                _file;
+                size_t                                     _line;
+                Optional< Failure >                        _failure;
         };
     }
 }

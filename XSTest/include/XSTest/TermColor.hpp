@@ -65,47 +65,47 @@ namespace XS
                     White
                 };
 
-                static TermColor None( void )
+                static TermColor None()
                 {
                     return Foreground::None;
                 }
                 
-                static TermColor Gray( void )
+                static TermColor Gray()
                 {
                     return Foreground::Gray;
                 }
                 
-                static TermColor Red( void )
+                static TermColor Red()
                 {
                     return Foreground::Red;
                 }
                 
-                static TermColor Green( void )
+                static TermColor Green()
                 {
                     return Foreground::Green;
                 }
                 
-                static TermColor Yellow( void )
+                static TermColor Yellow()
                 {
                     return Foreground::Yellow;
                 }
                 
-                static TermColor Blue( void )
+                static TermColor Blue()
                 {
                     return Foreground::Blue;
                 }
                 
-                static TermColor Magenta( void )
+                static TermColor Magenta()
                 {
                     return Foreground::Magenta;
                 }
                 
-                static TermColor Cyan( void )
+                static TermColor Cyan()
                 {
                     return Foreground::Cyan;
                 }
                 
-                static TermColor White( void )
+                static TermColor White()
                 {
                     return Foreground::White;
                 }
@@ -122,7 +122,7 @@ namespace XS
                     _foreground( std::move( o._foreground ) )
                 {}
                 
-                ~TermColor( void )
+                ~TermColor()
                 {}
                 
                 TermColor & operator =( TermColor o )

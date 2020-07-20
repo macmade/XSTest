@@ -58,7 +58,7 @@ namespace XS
                     _value( std::move( o._value ) )
                 {}
                 
-                ~FloatingPoint( void )
+                ~FloatingPoint()
                 {}
                 
                 FloatingPoint & operator =( FloatingPoint o )
@@ -68,7 +68,7 @@ namespace XS
                     return *( this );
                 }
                 
-                _T_ Value( void ) const
+                _T_ Value() const
                 {
                     return this->_value;
                 }

@@ -91,7 +91,7 @@ namespace XS
                     _infos( std::move( o._infos ) )
                 {}
                 
-                ~Suite( void )
+                ~Suite()
                 {}
                 
                 Suite & operator =( Suite o )
@@ -101,12 +101,12 @@ namespace XS
                     return *( this );
                 }
                 
-                std::string GetName( void )  const
+                std::string GetName()  const
                 {
                     return this->_name;
                 }
                 
-                std::vector< Info > GetInfos( void ) const
+                std::vector< Info > GetInfos() const
                 {
                     return this->_infos;
                 }

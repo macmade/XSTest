@@ -341,7 +341,7 @@ namespace XS
             }
             
             template< typename _T_ >
-            inline auto Throwing( const std::function< void( void ) > & f, const std::string & exception, const std::string & expression, const std::string & file, size_t line )
+            inline auto Throwing( const std::function< void() > & f, const std::string & exception, const std::string & expression, const std::string & file, size_t line )
                 -> typename std::enable_if< !std::is_base_of< std::exception, _T_ >::value || !std::is_same< std::exception, _T_ >::value >::type
             {
                 bool        hasCaught( false );
@@ -388,7 +388,7 @@ namespace XS
             }
             
             template< typename _T_ >
-            inline auto Throwing( const std::function< void( void ) > & f, const std::string & exception, const std::string & expression, const std::string & file, size_t line )
+            inline auto Throwing( const std::function< void() > & f, const std::string & exception, const std::string & expression, const std::string & file, size_t line )
                 -> typename std::enable_if< !( !std::is_base_of< std::exception, _T_ >::value || !std::is_same< std::exception, _T_ >::value ) >::type
             {
                 bool hasCaught( false );
@@ -426,7 +426,7 @@ namespace XS
                 }
             }
             
-            inline void Throwing( const std::function< void( void ) > & f, bool throws, const std::string & expression, const std::string & file, size_t line )
+            inline void Throwing( const std::function< void() > & f, bool throws, const std::string & expression, const std::string & file, size_t line )
             {
                 bool        hasThrown( false );
                 std::string thrown;

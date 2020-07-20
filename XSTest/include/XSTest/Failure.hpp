@@ -124,7 +124,7 @@ namespace XS
                     _line(        std::move( o._line ) )
                 {}
                 
-                ~Failure( void ) override
+                ~Failure() override
                 {}
                 
                 Failure & operator =( Failure o )
@@ -134,42 +134,42 @@ namespace XS
                     return *( this );
                 }
                 
-                std::string GetExpression( void ) const
+                std::string GetExpression() const
                 {
                     return this->_expression;
                 }
                 
-                std::string GetEvaluated( void ) const
+                std::string GetEvaluated() const
                 {
                     return this->_evaluated;
                 }
                 
-                std::string GetExpected( void ) const
+                std::string GetExpected() const
                 {
                     return this->_expected;
                 }
                 
-                std::string GetActual( void ) const
+                std::string GetActual() const
                 {
                     return this->_actual;
                 }
                 
-                std::string GetDescription( void ) const
+                std::string GetDescription() const
                 {
                     return this->_description;
                 }
                 
-                std::string GetFile( void ) const
+                std::string GetFile() const
                 {
                     return this->_file;
                 }
                 
-                size_t GetLine( void ) const noexcept
+                size_t GetLine() const noexcept
                 {
                     return this->_line;
                 }
                 
-                const char * what( void ) const noexcept override
+                const char * what() const noexcept override
                 {
                     return this->_description.c_str();
                 }

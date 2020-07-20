@@ -63,7 +63,7 @@ namespace XS
                     _tests( std::move( o._tests ) )
                 {}
                 
-                ~Arguments( void )
+                ~Arguments()
                 {}
                 
                 Arguments & operator =( Arguments o )

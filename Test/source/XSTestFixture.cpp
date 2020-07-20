@@ -36,12 +36,12 @@ class XSTestFixture: public XS::Test::Case
 {
     protected:
         
-        void SetUp( void ) override
+        void SetUp() override
         {
             this->_x = 42;
         }
         
-        void TearDown( void ) override
+        void TearDown() override
         {
             this->_x = 0;
         }
