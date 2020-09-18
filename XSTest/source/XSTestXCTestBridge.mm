@@ -169,7 +169,18 @@ static id runTestCase( XCTestCase * self, SEL _cmd )
                 
                 if( objcDescription != nil && objcFile != nil )
                 {
+                    #if defined( XCODE_VERSION_MAJOR ) && XCODE_VERSION_MAJOR >= 1200
+                    
+                    XCTSourceCodeLocation * location = [ [ XCTSourceCodeLocation alloc ] initWithFilePath: objcFile lineNumber: static_cast< NSInteger >( line ) ];
+                    XCTSourceCodeContext  * context  = [ [ XCTSourceCodeContext alloc ] initWithLocation: location ];
+                    
+                    [ self recordIssue: [ [ XCTIssue alloc ] initWithType: XCTIssueTypeAssertionFailure compactDescription: objcDescription detailedDescription: nil sourceCodeContext: context associatedError: nil attachments: @[] ] ];
+                    
+                    #else
+                    
                     [ self recordFailureWithDescription: objcDescription inFile: objcFile atLine: line expected: YES ];
+                    
+                    #endif
                 }
             }
         }
