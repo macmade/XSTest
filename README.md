@@ -1,7 +1,7 @@
 XSTest
 ======
 
-[![Build Status](https://img.shields.io/travis/macmade/XSTest.svg?branch=master&logo=travis&style=flat)](https://travis-ci.org/macmade/XSTest)
+[![Build Status](https://img.shields.io/travis/com/macmade/XSTest.svg?branch=master&logo=travis&style=flat)](https://travis-ci.com/macmade/XSTest)
 [![Build-AppVeyor](https://ci.appveyor.com/api/projects/status/github/macmade/XSTest?svg=true)](https://ci.appveyor.com/project/macmade/XSTest)
 [![Coverage Status](https://img.shields.io/coveralls/macmade/XSTest.svg?branch=master&style=flat)](https://coveralls.io/r/macmade/XSTest?branch=master)
 [![Issues](http://img.shields.io/github/issues/macmade/XSTest.svg?style=flat)](https://github.com/macmade/XSTest/issues)
