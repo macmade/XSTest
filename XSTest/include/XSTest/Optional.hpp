@@ -168,8 +168,8 @@ namespace XS
                 
             private:
                 
-                uint8_t _data[ sizeof( _T_ ) ] = {};
-                bool    _hasValue              = false;
+                alignas( alignof( _T_ ) ) uint8_t _data[ sizeof( _T_ ) ] = {};
+                bool                              _hasValue              = false;
         };
         
         template< class _T_, class _U_ > 
