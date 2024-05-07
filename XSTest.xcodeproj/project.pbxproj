@@ -10,7 +10,6 @@
 		05D526F121A864F20025CCEB /* XSTestXCTestBridge.mm in Sources */ = {isa = PBXBuildFile; fileRef = 05D5267721A6FF260025CCEB /* XSTestXCTestBridge.mm */; };
 		05D526F621A865820025CCEB /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05D5266921A6EC430025CCEB /* XCTest.framework */; };
 		05D526F721A865860025CCEB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05D5269221A714C90025CCEB /* Foundation.framework */; };
-		05D526F821A8658C0025CCEB /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 05D5266C21A6EC7B0025CCEB /* libc++.tbd */; };
 		05D526F921A86E070025CCEB /* Assert.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 05D526DB21A792920025CCEB /* Assert.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
 		05D526FA21A86E070025CCEB /* Case.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 05D525A921A5FDFF0025CCEB /* Case.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
 		05D526FB21A86E070025CCEB /* Failure.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 05D5269421A71A9A0025CCEB /* Failure.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -105,7 +104,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				05D526F821A8658C0025CCEB /* libc++.tbd in Frameworks */,
 				05D526F721A865860025CCEB /* Foundation.framework in Frameworks */,
 				05D526F621A865820025CCEB /* XCTest.framework in Frameworks */,
 			);
@@ -369,7 +367,7 @@
 		05D5258021A5FD520025CCEB /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1010;
+				LastUpgradeCheck = 1530;
 				ORGANIZATIONNAME = "XS-Labs";
 				TargetAttributes = {
 					05D526E621A864BC0025CCEB = {
