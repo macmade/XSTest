@@ -45,6 +45,17 @@
 #include <XSTest/Logging.hpp>
 #include <XSTest/TermColor.hpp>
 
+#define XS_TEST_GET_ALL_INFOS_DECLARATION                                   \
+    std::vector< std::shared_ptr< Info > > & GetAllInfos();
+
+#define XS_TEST_GET_ALL_INFOS_DEFINITION                                    \
+    std::vector< std::shared_ptr< Info > > & GetAllInfos()                  \
+    {                                                                       \
+        static auto infos = new std::vector< std::shared_ptr< Info > >();   \
+                                                                            \
+        return *( infos );                                                  \
+    }
+
 namespace XS
 {
     namespace Test
@@ -54,16 +65,11 @@ namespace XS
         
         #if defined( XSTEST_MAIN ) || defined( XSTEST_MAIN_RUN )
         
-        inline std::vector< std::shared_ptr< Info > > & GetAllInfos()
-        {
-            static auto infos = new std::vector< std::shared_ptr< Info > >();
-            
-            return *( infos );
-        }
+        inline XS_TEST_GET_ALL_INFOS_DEFINITION
         
         #else
         
-        extern std::vector< std::shared_ptr< Info > > & GetAllInfos();
+        extern XS_TEST_GET_ALL_INFOS_DECLARATION
         
         #endif
 

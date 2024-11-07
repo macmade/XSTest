@@ -37,8 +37,6 @@
 #pragma clang diagnostic pop
 #endif
 
-#define XSTEST_MAIN
-
 #import <XSTest/XSTest.hpp>
 #import <objc/message.h>
 
@@ -194,3 +192,12 @@ static id runTestCase( XCTestCase * self, SEL _cmd )
 #ifdef __clang__
 #pragma clang diagnostic pop
 #endif
+
+namespace XS
+{
+    namespace Test
+    {
+        XS_TEST_GET_ALL_INFOS_DECLARATION
+        XS_TEST_GET_ALL_INFOS_DEFINITION
+    }
+}

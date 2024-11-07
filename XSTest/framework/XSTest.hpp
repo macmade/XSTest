@@ -31,8 +31,6 @@
 #ifndef XS_TEST_DYLIB_HPP
 #define XS_TEST_DYLIB_HPP
 
-#define XS_TEST_DYLIB
-
 #include <XSTest/Macros.hpp>
 #include <XSTest/Case.hpp>
 #include <XSTest/Info.hpp>
