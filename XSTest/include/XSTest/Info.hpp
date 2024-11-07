@@ -52,11 +52,7 @@ namespace XS
         class Suite;
         class Case;
         
-        #ifdef XS_TEST_DYLIB
-        
-        extern std::vector< std::shared_ptr< Info > > & GetAllInfos();
-        
-        #else
+        #if defined( XSTEST_MAIN ) || defined( XSTEST_MAIN_RUN )
         
         inline std::vector< std::shared_ptr< Info > > & GetAllInfos()
         {
@@ -64,6 +60,10 @@ namespace XS
             
             return *( infos );
         }
+        
+        #else
+        
+        extern std::vector< std::shared_ptr< Info > > & GetAllInfos();
         
         #endif
 

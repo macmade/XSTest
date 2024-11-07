@@ -37,6 +37,8 @@
 #pragma clang diagnostic pop
 #endif
 
+#define XSTEST_MAIN
+
 #import <XSTest/XSTest.hpp>
 #import <objc/message.h>
 

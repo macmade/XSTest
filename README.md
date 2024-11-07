@@ -62,6 +62,7 @@ Usually, the unit tests are packaged into an executable.
 You can define a `main` function that will run all registered tests using:
 
 ```cpp
+#define XSTEST_MAIN
 #include <XSTest/XSTest.hpp>
 
 int main( int argc, char * argv[] )
@@ -70,10 +71,13 @@ int main( int argc, char * argv[] )
 }
 ```
 
-As an alternative, you can define the `XSTEST_MAIN` macro.  
+Please note the `XSTEST_MAIN` macro which is required in the `main` file before including the XSTest header.
+
+As an alternative, you can define the `XSTEST_MAIN_RUN` macro.  
 This will automatically generate a `main` function for you.
+
 ```cpp
-#define XSTEST_MAIN
+#define XSTEST_MAIN_RUN
 #include <XSTest/XSTest.hpp>
 ```
 

@@ -51,7 +51,7 @@ namespace XS
     }
 }
 
-#ifdef XSTEST_MAIN
+#ifdef XSTEST_MAIN_RUN
 
 #ifdef _WIN32
 int __cdecl main( int argc, char * argv[] )
