@@ -28,5 +28,5 @@
  * @copyright   (c) 2018, Jean-David Gadina - www.xs-labs.com
  */
 
-#define XSTEST_MAIN
+#define XSTEST_MAIN_RUN
 #include <XSTest/XSTest.hpp>
